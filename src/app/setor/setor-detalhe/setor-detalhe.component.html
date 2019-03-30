@@ -1,0 +1,54 @@
+<nav class="mb-4">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+    <li class="breadcrumb-item active">Detalhe</li>
+  </ol>
+</nav>
+
+<div class="row mb-3">
+  <div class="col-md">
+    <h1 class="h2 border-left pl-2">
+      Setor
+    </h1>
+  </div>
+
+  <div class="col-md">
+    <a routerLink="/setor/lista" class="btn btn-success float-right">+ Listar Setores</a>
+  </div>
+</div>
+
+<form (ngSubmit)="onSubmit()" #setorForm="ngForm">
+
+    <div class="form-group">
+      <label for="id">Setor</label>
+
+      <input type="text" name="id"
+        [ngClass]="{'form-control': true, 'is-valid': id.valid, 'is-invalid': !id.valid}"
+        required
+        [(ngModel)]="setor.id"
+        #id="ngModel">
+
+      <div [class.invalid-feedback]="idd">
+        Campo Setor Obrigatório!
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="title">Endereço</label>
+
+      <input type="text" name="title"
+      [ngClass]="{'form-control': true, 'is-valid': title.valid, 'is-invalid': !title.valid}"
+      [(ngModel)]="setor.title"
+      required
+      #title="ngModel">
+      
+      <div [class.invalid-feedback]="title">
+        Campo Endereço Obrigatório!
+      </div>
+    </div>
+
+    <button (click)="teste()" class="btn btn-primary" [disabled]="!setorForm.form.valid" >Alterar</button>
+  </form>
+
+
+  

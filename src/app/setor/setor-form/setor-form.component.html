@@ -1,0 +1,47 @@
+<nav class="mb-4">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+    <li class="breadcrumb-item active">Salvar</li>
+  </ol>
+</nav>
+
+<div class="row mb-3">
+  <div class="col-md">
+    <h1 class="h2 border-left pl-2">
+      Cadastrar Novo Setor
+    </h1>
+  </div>
+
+  <div class="col-md">
+    <a routerLink="/setor/lista" class="btn btn-success float-right">+ Listar Setores</a>
+  </div>
+</div>
+
+<form>
+  <div class="form-group">
+    <label for="formGroupExampleInput">Setor</label>
+    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Nome do setor">
+  </div>
+  <div class="form-group">
+    <label for="formGroupExampleInput2">Endereço</label>
+    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Endereço do setor">
+  </div>
+  <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputCity">Cidade</label>
+        <input type="text" class="form-control" id="inputCity">
+      </div>
+      <div class="form-group col-md-4">
+        <label for="inputState">Estado</label>
+        <select id="inputState" class="form-control">
+          <option selected>Choose...</option>
+          <option>...</option>
+        </select>
+      </div>
+      <div class="form-group col-md-2">
+        <label for="inputZip">C.E.P.</label>
+        <input type="text" class="form-control" id="inputZip">
+      </div>
+    </div>
+  <button type="submit" class="btn btn-primary">Salvar</button>
+</form>

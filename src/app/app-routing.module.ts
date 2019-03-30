@@ -1,10 +1,23 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: '',
+    redirectTo: 'setor/lista',
+    pathMatch: 'full'
+  },
+  {
+    path: 'setor',
+    loadChildren: './setor/setor.module#SetorModule'
+  }
+];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  declarations:[],
+  imports: [
+    RouterModule.forRoot(routes),
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
