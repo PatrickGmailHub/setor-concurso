@@ -8,23 +8,29 @@ import { SetorFormComponent } from './setor-form/setor-form.component';
 
 const setorRoutes: Routes = [
     {
-        path: 'setor/lista',
-        component: SetorComponent
-    },
-    {
-        path: 'setor/detalhe',
-        component: SetorDetalheComponent
-    },
-    {
-        path: 'setor/new',
-        component: SetorFormComponent
-    },
-    {
-        path: 'setor/:id/edit',
-        component: SetorDetalheComponent
+        path: 'setor',
+        component: SetorComponent,
+        children: [
+            {
+                path: 'lista',
+                component: SetorComponent
+            },
+            {
+                path: 'detalhe',
+                component: SetorDetalheComponent
+            },
+            {
+                path: 'new',
+                component: SetorFormComponent
+            },
+            {
+                path: ':id/edit',
+                component: SetorDetalheComponent
+            }
+        ]
     }
 
-]
+];
 
 @NgModule({
   imports: [

@@ -1,42 +1,49 @@
-<nav class="mb-4">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-    <li class="breadcrumb-item active">Setor</li>
-  </ol>
-</nav>
+<div class="row">
+  <div class="col-md-7">
+    <nav class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+        <li class="breadcrumb-item active">Setor</li>
+      </ol>
+    </nav>
 
-<div class="row mb-3">
-  <div class="col-md">
-    <h1 class="h2 border-left pl-2">
-      Setores
-    </h1>
+  <div class="row mb-3">
+    <div class="col-md">
+      <h1 class="h2 border-left pl-2">
+        Setores
+      </h1>
+    </div>
   </div>
 
-  <div class="col-md">
+<div class="col-md">
     <a routerLink="/setor/new" class="btn btn-primary float-right">+ Adicionar Setor</a>
-  </div>
 </div>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Id</th>
-      <th scope="col">Nome</th>
-      <th scope="col">Endereço</th>
-      <th scope="col" class="text-center">Ações</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let setor of setores">
-      <th scope="row">{{setor.id}}</th>
-      <td>{{setor.userId}}</td>
-      <td>{{setor.title}}</td>
-      <td>{{setor.title}}</td>
-      <td class="text-center">
-        <a [routerLink] = "['/setor/', setor.id, 'edit']" class="btn btn-success" role="button">Editar</a>&nbsp;
-        <a href="#" class="btn btn-danger" role="button">Deletar</a>
-      </td>
-    </tr>
-  </tbody>
-</table>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Endereço</th>
+        <th scope="col" class="text-center">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let setor of setores">
+        <th scope="row">{{setor.id}}</th>
+        <td>{{setor.userId}}</td>
+        <td>{{setor.title}}</td>
+        <td class="text-center">
+          <a [routerLink] = "[setor.id, 'edit']" class="btn btn-success" role="button">Editar</a>&nbsp;
+          <a href="#" class="btn btn-danger" role="button">Deletar</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="col-md-5">
+  <router-outlet></router-outlet>
+</div>
+
+</div>
