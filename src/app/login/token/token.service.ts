@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { TOKEN_STORAGE } from '../../../environments/environment.prod';
+import { TOKEN_STORAGE } from '../../../environments/environment';
   
 @Injectable({
   providedIn: 'root'

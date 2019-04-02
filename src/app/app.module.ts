@@ -1,3 +1,6 @@
+import { SetorGuard } from './guards/setor.guard';
+import { AuthGuard } from './guards/auth.guard';
+import { AuthService } from './login/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
@@ -21,10 +24,13 @@ import { LoginComponent } from './login/login.component';
     SetorModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    AuthGuard,
+    SetorGuard
+  ],
   bootstrap: [
-    AppComponent,
-    LoginService
+    AppComponent
   ]
 })
 export class AppModule { }
