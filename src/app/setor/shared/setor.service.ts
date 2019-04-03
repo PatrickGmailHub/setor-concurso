@@ -3,7 +3,11 @@ import { HttpClient, HttpHeaders, HttpHeaderResponse } from '@angular/common/htt
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
+<<<<<<< HEAD
 //import 'rxjs/add/operator/toPromise';
+=======
+import 'rxjs/add/operator/toPromise';
+>>>>>>> c6795257d2a4d76f984819cecb93b36b43f50a36
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +29,7 @@ export class SetorService {
     //return this.getSetores().forEach(id => setor == Setor.id);
   }
 
+<<<<<<< HEAD
   salvarSetor(setor: Setor): Observable<Setor> {
     return this.http.post<Setor>('./../api/direct_request_v2/teste/setor/salvar', JSON.stringify(setor), {headers: this.headers});
   }
@@ -36,5 +41,8 @@ export class SetorService {
   deletarSetor(setor: Setor): Observable<number> {
     return this.http.delete<number>('');
   }
+=======
+
+>>>>>>> c6795257d2a4d76f984819cecb93b36b43f50a36
 
 }
