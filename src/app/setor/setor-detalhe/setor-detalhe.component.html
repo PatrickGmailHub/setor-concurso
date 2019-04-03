@@ -36,13 +36,13 @@
     <div class="form-group">
       <label for="title">Endereço</label>
 
-      <input type="text" name="title"
-      [ngClass]="{'form-control': true, 'is-valid': title.valid, 'is-invalid': !title.valid}"
-      [(ngModel)]="setor.title"
+      <input type="text" name="endereco"
+      [ngClass]="{'form-control': true, 'is-valid': endereco.valid, 'is-invalid': !endereco.valid}"
+      [(ngModel)]="setor.endereco"
       required
       #title="ngModel">
       
-      <div [class.invalid-feedback]="title">
+      <div [class.invalid-feedback]="endereco">
         Campo Endereço Obrigatório!
       </div>
     </div>

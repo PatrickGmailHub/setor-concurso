@@ -14,11 +14,11 @@ export class SetorService {
   constructor(private http: HttpClient) { }
 
   getSetores(): Observable<Setor[]> {
-    return this.http.get<Setor[]>('https://jsonplaceholder.typicode.com/posts');
+    return this.http.get<Setor[]>('./../api/direct_request_v2/teste/setor/buscar');
   }
 
   getSetor(id: number): Observable<Setor> {
-    return this.http.get<Setor>(`https://jsonplaceholder.typicode.com/posts/${id}`);
+    return this.http.get<Setor>(`./../api/direct_request_v2/teste/setor/buscar/${id}`);
     //return this.getSetores().forEach(id => setor == Setor.id);
   }
 

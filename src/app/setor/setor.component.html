@@ -30,9 +30,9 @@
   <tbody>
     <tr *ngFor="let setor of setores">
       <th scope="row">{{setor.id}}</th>
-      <td>{{setor.userId}}</td>
-      <td>{{setor.title}}</td>
-      <td>{{setor.title}}</td>
+      <td>{{setor.nome}}</td>
+      <td>{{setor.endereco}}</td>
+      <td>{{setor.bairro}}</td>
       <td class="text-center">
         <a [routerLink] = "['/setor/', setor.id, 'edit']" class="btn btn-success" role="button">Editar</a>&nbsp;
         <a href="#" class="btn btn-danger" role="button">Deletar</a>
