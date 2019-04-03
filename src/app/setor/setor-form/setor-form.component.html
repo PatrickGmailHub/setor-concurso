@@ -17,31 +17,93 @@
   </div>
 </div>
 
-<form>
+<form (ngSubmit)="onSubmit()">
+
   <div class="form-group">
     <label for="formGroupExampleInput">Setor</label>
-    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Nome do setor">
+    <input type="text" class="form-control" name="nome" id="formGroupExampleInput" placeholder="Nome do setor"
+      [(ngModel)]="setor.nome"
+    >
   </div>
   <div class="form-group">
     <label for="formGroupExampleInput2">Endereço</label>
-    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Endereço do setor">
+    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Endereço do setor"
+      [(ngModel)]="setor.endereco"
+    >
   </div>
+  
+  <!--Em Linha-->
+
   <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="inputCity">Cidade</label>
-        <input type="text" class="form-control" id="inputCity">
+      <div class="form-group col-md-5">
+        <label for="cidade">Cidade</label>
+        <input type="text" class="form-control" name="cidade" id="cidade" placeholder="Cidade do setor"
+          [(ngModel)]="setor.cidade"
+        >
       </div>
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-3">
+          <label for="bairro">Bairro</label>
+          <input type="text" class="form-control" name="bairro" id="bairro" placeholder="Bairro do setor"
+            [(ngModel)]="setor.bairro"
+          >
+        </div>
+      <div class="form-group col-md-2">
         <label for="inputState">Estado</label>
         <select id="inputState" class="form-control">
-          <option selected>Choose...</option>
+          <option selected>...</option>
           <option>...</option>
         </select>
       </div>
       <div class="form-group col-md-2">
-        <label for="inputZip">C.E.P.</label>
-        <input type="text" class="form-control" id="inputZip">
+        <label for="cep">C.E.P.</label>
+        <input type="text" class="form-control" name="cep" id="cep" placeholder="C.E.P do setor"
+          [(ngModel)]="setor.cep"
+        >
       </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-5">
+      <label for="responsavel">Responsável</label>
+      <input type="text" class="form-control" id="responsavel" placeholder="Nome do responsável"
+        [(ngModel)]="setor.nome_responsavel"
+      >
     </div>
+    <div class="form-group col-md-5">
+      <label for="email">Email</label>
+      <input type="text" class="form-control" name="email" id="email" placeholder="E-mail do responsável"
+        [(ngModel)]="setor.email_responsavel"
+      >
+    </div>
+    <div class="form-group col-md-2">
+      <label for="celular">Celular</label>
+      <input type="text" class="form-control" name="celular" id="celular" placeholder="Celular do resposnsável"
+        [(ngModel)]="setor.celular_responsavel"
+      >
+    </div>
+  </div>
+
+  <div class="form-row">
+      <div class="form-group col-md-2">
+        <label for="qtd_salas">Quant. de salas</label>
+        <input class="form-control" type="text" name="qtd_salas"id="qtd_salas" value="0"
+          [(ngModel)]="setor.qtd_salas"
+        >
+      </div>
+      
+      <div class="form-group col-md-5">
+          <label for="email">Latitude</label>
+          <input type="text" class="form-control" name="latitude" id="latitude" placeholder="Digite a latitude"
+            [(ngModel)]="setor.latitude"
+          >
+        </div>
+        <div class="form-group col-md-5">
+          <label for="celular">Longitude</label>
+          <input type="text" class="form-control" name="longitude" id="longitude" placeholder="Digite a longitude"
+          [(ngModel)]="setor.longitude"
+          >
+        </div>
+      </div>
+
   <button type="submit" class="btn btn-primary">Salvar</button>
 </form>
