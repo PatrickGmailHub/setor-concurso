@@ -20,28 +20,63 @@
 <form>
   <div class="form-group">
     <label for="formGroupExampleInput">Setor</label>
-    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Nome do setor">
+    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Digite o nome">
   </div>
   <div class="form-group">
     <label for="formGroupExampleInput2">Endereço</label>
-    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Endereço do setor">
+    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Digite  o endereço">
   </div>
   <div class="form-row">
       <div class="form-group col-md-6">
         <label for="inputCity">Cidade</label>
-        <input type="text" class="form-control" id="inputCity">
+        <input type="text" class="form-control" id="inputCity" placeholder="Digite a cidade">
       </div>
       <div class="form-group col-md-4">
         <label for="inputState">Estado</label>
         <select id="inputState" class="form-control">
-          <option selected>Choose...</option>
+          <option selected>...</option>
           <option>...</option>
         </select>
       </div>
       <div class="form-group col-md-2">
         <label for="inputZip">C.E.P.</label>
-        <input type="text" class="form-control" id="inputZip">
+        <input type="text" class="form-control" id="inputZip" placeholder="Digite o C.E.P">
       </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-5">
+      <label for="responsavel">Responsável</label>
+      <input type="text" class="form-control" id="responsavel" placeholder="Digite o responsavel">
     </div>
+    <div class="form-group col-md-5">
+      <label for="email">Email</label>
+      <input type="text" class="form-control" id="email" placeholder="Digite o e-mail">
+    </div>
+    <div class="form-group col-md-2">
+      <label for="celular">Celular</label>
+      <input type="text" class="form-control" id="celular" placeholder="Celular do resposnsável">
+    </div>
+  </div>
+
+  <div class="form-row">
+      <div class="form-group col-md-2">
+        <!--label for="formControlRange">Quantidades de salas</label>
+          <input type="range" class="form-control-range" min="0" max="40" value="0" id="formControlRange"
+          oninput="display.value=value" onchange="display.value=value"-->
+          <label for="formControlRange">Quantidades de salas</label>
+          <input class="form-control" type="text" id="display" value="0">
+      </div>
+      
+      <div class="form-group col-md-5">
+          <label for="email">Latitude</label>
+          <input type="text" class="form-control" id="email" placeholder="Digite a latitude">
+        </div>
+        <div class="form-group col-md-5">
+          <label for="celular">Longitude</label>
+          <input type="text" class="form-control" id="celular" placeholder="Digite a longitude">
+        </div>
+      </div>
+
   <button type="submit" class="btn btn-primary">Salvar</button>
 </form>
