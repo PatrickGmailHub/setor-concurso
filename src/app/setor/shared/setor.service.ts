@@ -3,9 +3,6 @@ import { HttpClient, HttpHeaders, HttpHeaderResponse } from '@angular/common/htt
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-//import 'rxjs/add/operator/toPromise';
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -37,6 +34,5 @@ export class SetorService {
   deletarSetor(setor: Setor): Observable<number> {
     return this.http.delete<number>('');
   }
-
 
 }
