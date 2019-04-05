@@ -1,11 +1,13 @@
+import { LocalDeProva } from './local-de-prova';
+
 export class Setor {
 
     constructor(
-        public id_setor?: number,
-        public id_local_de_prova?: number,
+        public id?: number,
         public nome?: string,
         public endereco?: string,
         public bairro?: string,
+        public localDeProva?: LocalDeProva,
         public cep?: string,
         public qtd_sala?: number,
         public nome_responsavel?: string,

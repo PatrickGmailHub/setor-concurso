@@ -21,26 +21,35 @@
   </div>
 </div>
 
-<form (ngSubmit)="onSubmit(setorForm)" #setorForm="ngForm">
+<form (ngSubmit)="onSubmit()" #setorForm="ngForm">
 
   <div class="form-group">
     <label for="nome">Setor</label>
-    <input type="text" class="form-control"
-      name="nome" placeholder="Nome do setor"
-      required
+    <input type="text"
+      name="nome" required placeholder="Nome do setor"
+      [ngClass]="getFormControlClass(nome.valid, nome.pristine)"
       [(ngModel)]="setor.nome"
       #nome="ngModel"
       >
 
+    <div [class.invalid-feedback]="setor.nome">
+      Campo Setor Obrigatório!
+    </div>     
+
   </div>
   <div class="form-group">
     <label for="endereco">Endereço</label>
-    <input type="text" class="form-control"
-      name="endereco" placeholder="Endereço do setor"
-      required
+    <input type="text"
+      name="endereco" required placeholder="Endereço do setor"
+      [ngClass]="getFormControlClass(endereco.valid, endereco.pristine)"
       [(ngModel)]="setor.endereco"
       #endereco="ngModel"
       >
+
+      <div [class.invalid-feedback]="endereco.valid || endereco.pristine">
+        Campo Endereço Obrigatório!
+      </div>
+
   </div>
   
   <!--Em Linha-->
@@ -49,24 +58,32 @@
 
       <div class="form-group col-md-5">
         <label for="cidade">Cidade</label>
-        <input type="text" class="form-control"
-          name="cidade" id="cidade" placeholder="Cidade do setor"
-          required
+        <input type="text"
+          name="cidade" id="cidade" required placeholder="Cidade do setor" required
+          [ngClass]="getFormControlClass(cidade.valid, cidade.pristine)"
           [(ngModel)]="setor.localDeProva.nome"
           #cidade="ngModel"
           >
+          <div [class.invalid-feedback]="cidade.valid || cidade.pristine">
+            Campo Endereço Obrigatório!
+          </div>
       </div>
       <div class="form-group col-md-3">
           <label for="bairro">Bairro</label>
-          <input type="text" class="form-control"
+          <input type="text"
             name="bairro" id="bairro" placeholder="Bairro do setor" required
+            [ngClass]="getFormControlClass(bairro.valid, bairro.pristine)"
             [(ngModel)]="setor.bairro"
             #bairro="ngModel">
 
-      </div>
+            <div [class.invalid-feedback]="bairro.valid || bairro.pristine">
+              Campo Endereço Obrigatório!
+            </div>
+
+        </div>
       <div class="form-group col-md-2">
-        <label for="estado">Estado</label>
-        <select id="estado" class="form-control" name="estado">
+        <label for="inputState">Estado</label>
+        <select id="inputState" class="form-control" name="Estado">
           <option selected>...</option>
           <option>...</option>
         </select>
@@ -74,9 +91,9 @@
       <div class="form-group col-md-2">
 
         <label for="cep">C.E.P.</label>
-        <input type="text" class="form-control"
-          name="cep" id="cep" placeholder="C.E.P do setor"
-          required
+        <input type="text" 
+          name="cep" id="cep" placeholder="C.E.P do setor" required
+          [ngClass]="getFormControlClass(cep.valid, cep.pristine)"
           [(ngModel)]="setor.cep"
           #cep="ngModel"
         >
@@ -87,23 +104,25 @@
   <div class="form-row">
     <div class="form-group col-md-5">
       <label for="responsavel">Responsável</label>
-      <input type="text" class="form-control"
-        name="responsavel" id="responsavel" placeholder="Nome do responsável"
-        required
+      <input type="text"
+        name="responsavel" id="responsavel" placeholder="Nome do responsável" required
+        [ngClass]="getFormControlClass(responsavel.valid, responsavel.pristine)"
         [(ngModel)]="setor.nome_responsavel"
       >
     </div>
     <div class="form-group col-md-5">
       <label for="email">Email</label>
-      <input type="text" class="form-control"
+      <input type="text"
       name="email" id="email" placeholder="E-mail do responsável"
+      [ngClass]="getFormControlClass(email.valid, email.pristine)"
       [(ngModel)]="setor.email_responsavel"
       >
     </div>
     <div class="form-group col-md-2">
       <label for="celular">Celular</label>
-      <input type="text" class="form-control"
+      <input type="text"
         name="celular" id="celular" placeholder="Celular do resposnsável"
+        [ngClass]="getFormControlClass(celular.valid, celular.pristine)"
         [(ngModel)]="setor.celular_responsavel"
       >
     </div>

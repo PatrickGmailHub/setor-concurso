@@ -18,13 +18,18 @@ export class SetorService {
     return this.http.get<Setor[]>('./../api/direct_request_v2/teste/setor/buscar');
   }
 
+  getSetoresP(): Promise<Setor[]> {
+    return this.http.get('./../api/direct_request_v2/teste/setor/buscar').toPromise()
+      .then(response => response as Setor[]);
+  }
+
   getSetor(id: number): Observable<Setor> {
     return this.http.get<Setor>(`./../api/direct_request_v2/teste/setor/buscar/${id}`);
     //return this.getSetores().forEach(id => setor == Setor.id);
   }
 
   salvarSetor(setor: Setor): Observable<Setor> {
-    return this.http.post<Setor>('./../api/direct_request_v2/teste/setor/salvar', JSON.stringify(setor), {headers: this.headers});
+    return this.http.post<Setor>('./../api/direct_request_v2/teste/setor/salvar', setor, {headers: this.headers});
   }
 
   atualizarSetor(setor: Setor): Observable<Setor> {

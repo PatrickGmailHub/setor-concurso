@@ -17,7 +17,7 @@
   </div>
 </div>
 
-<form (ngSubmit)="onSubmit()" #setorForm="ngForm">
+<form (ngSubmit)="onSubmit()" #setorFormd="ngForm">
 
     <div class="form-group">
       <label for="id">Setor</label>
@@ -47,7 +47,7 @@
       </div>
     </div>
 
-    <button (click)="teste()" class="btn btn-primary" [disabled]="!setorForm.form.valid" >Alterar</button>
+    <button (click)="teste()" class="btn btn-primary" [disabled]="!setorFormd.form.valid" >Alterar</button>
   </form>
 
 
