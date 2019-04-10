@@ -26,7 +26,7 @@
   <div class="form-group">
     <label for="nome">Setor</label>
     <input type="text"
-      name="nome" required placeholder="Nome do setor"
+      [name]="nome" required placeholder="Nome do setor"
       [ngClass]="getFormControlClass(nome.valid, nome.pristine)"
       [(ngModel)]="setor.nome"
       #nome="ngModel"
@@ -40,7 +40,7 @@
   <div class="form-group">
     <label for="endereco">Endereço</label>
     <input type="text"
-      name="endereco" required placeholder="Endereço do setor"
+      [name]="endereco" required placeholder="Endereço do setor"
       [ngClass]="getFormControlClass(endereco.valid, endereco.pristine)"
       [(ngModel)]="setor.endereco"
       #endereco="ngModel"
@@ -59,7 +59,7 @@
       <div class="form-group col-md-5">
         <label for="cidade">Cidade</label>
         <input type="text"
-          name="cidade" id="cidade" required placeholder="Cidade do setor" required
+          [name]="cidade" id="cidade" required placeholder="Cidade do setor" required
           [ngClass]="getFormControlClass(cidade.valid, cidade.pristine)"
           [(ngModel)]="setor.localDeProva.nome"
           #cidade="ngModel"
@@ -71,7 +71,7 @@
       <div class="form-group col-md-3">
           <label for="bairro">Bairro</label>
           <input type="text"
-            name="bairro" id="bairro" placeholder="Bairro do setor" required
+            [name]="bairro" id="bairro" placeholder="Bairro do setor" required
             [ngClass]="getFormControlClass(bairro.valid, bairro.pristine)"
             [(ngModel)]="setor.bairro"
             #bairro="ngModel">
@@ -92,7 +92,7 @@
 
         <label for="cep">C.E.P.</label>
         <input type="text" 
-          name="cep" id="cep" placeholder="C.E.P do setor" required
+          [name]="cep" id="cep" placeholder="C.E.P do setor" required
           [ngClass]="getFormControlClass(cep.valid, cep.pristine)"
           [(ngModel)]="setor.cep"
           #cep="ngModel"
@@ -105,7 +105,7 @@
     <div class="form-group col-md-5">
       <label for="responsavel">Responsável</label>
       <input type="text"
-        name="responsavel" id="responsavel" placeholder="Nome do responsável" required
+        [name]="responsavel" id="responsavel" placeholder="Nome do responsável" required
         [ngClass]="getFormControlClass(responsavel.valid, responsavel.pristine)"
         [(ngModel)]="setor.nome_responsavel"
       >
@@ -113,7 +113,7 @@
     <div class="form-group col-md-5">
       <label for="email">Email</label>
       <input type="text"
-      name="email" id="email" placeholder="E-mail do responsável"
+      [name]="email" id="email" placeholder="E-mail do responsável"
       [ngClass]="getFormControlClass(email.valid, email.pristine)"
       [(ngModel)]="setor.email_responsavel"
       >
@@ -121,7 +121,7 @@
     <div class="form-group col-md-2">
       <label for="celular">Celular</label>
       <input type="text"
-        name="celular" id="celular" placeholder="Celular do resposnsável"
+        [name]="celular" id="celular" placeholder="Celular do resposnsável"
         [ngClass]="getFormControlClass(celular.valid, celular.pristine)"
         [(ngModel)]="setor.celular_responsavel"
       >
@@ -132,7 +132,7 @@
   <div class="form-row">
       <div class="form-group col-md-2">
         <label for="salas">Qtd. de salas</label>
-        <input class="form-control" type="text" name="salas" id="salas" value="0"
+        <input class="form-control" type="text" [name]="salas" id="salas" value="0"
           [(ngModel)]="setor.qtd_sala"
         >
 
@@ -141,13 +141,13 @@
       <div class="form-group col-md-5">
           <label for="latitude">Latitude</label>
 
-          <input type="text" class="form-control" name="latitude" id="latitude" placeholder="Digite a latitude"
+          <input type="text" class="form-control" [name]="latitude" id="latitude" placeholder="Digite a latitude"
             [(ngModel)]="setor.latitude"
           >
         </div>
         <div class="form-group col-md-5">
           <label for="longitude">Longitude</label>
-          <input type="text" class="form-control" name="longitude" id="longitude" placeholder="Digite a longitude"
+          <input type="text" class="form-control" [name]="longitude" id="longitude" placeholder="Digite a longitude"
           [(ngModel)]="setor.longitude"
           >
 

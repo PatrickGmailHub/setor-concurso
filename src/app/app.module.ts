@@ -6,16 +6,18 @@ import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { SetorModule } from './setor/setor.module';
 import { RodapeComponent } from './rodape/rodape.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
-    RodapeComponent
+    RodapeComponent,
   ],
   imports: [
     BrowserModule,
     SetorModule,
+    ReactiveFormsModule,
     AppRoutingModule
   ],
   providers: [],

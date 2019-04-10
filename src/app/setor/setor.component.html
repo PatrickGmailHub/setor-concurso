@@ -21,9 +21,9 @@
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Id</th>
-      <th scope="col">Nome</th>
-      <th scope="col">Endereço</th>
+      <th scope="col">Setor</th>
+      <th scope="col">Cidade</th>
+      <th scope="col">Bairro</th>
       <th scope="col" class="text-center">Ações</th>
     </tr>
   </thead>
@@ -31,7 +31,7 @@
     <tr *ngFor="let setor of setores">
       <th scope="row">{{setor.id}}</th>
       <td>{{setor.nome}}</td>
-      <td>{{setor.endereco}}</td>
+      <td>{{setor.localDeProva.nome}}</td>
       <td>{{setor.bairro}}</td>
       <td class="text-center">
         <a [routerLink] = "['/setor/', setor.id, 'edit']" class="btn btn-success" role="button">Editar</a>&nbsp;
@@ -39,5 +39,4 @@
       </td>
     </tr>
   </tbody>
-  <button class="btn btn-danger" (click)="teste()">Teste</button>
 </table>
