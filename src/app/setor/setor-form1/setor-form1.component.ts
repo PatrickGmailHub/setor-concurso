@@ -1,32 +1,38 @@
 import { LocalDeProva } from './../shared/local-de-prova';
-import { SetorService } from './../shared/setor.service';
-import { Setor } from './../shared/setor';
-import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Location } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { SetorService } from '../shared/setor.service';
+import { Setor } from '../shared/setor';
+import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-setor-form',
-  templateUrl: './setor-form.component.html',
-  styleUrls: ['./setor-form.component.css']
+  selector: 'app-setor-form1',
+  templateUrl: './setor-form1.component.html',
+  styleUrls: ['./setor-form1.component.css']
 })
-export class SetorFormComponent implements OnInit {
+export class SetorForm1Component implements OnInit {
+
+  formulario: FormGroup;
 
   isNew: boolean = true;
   setor: Setor;
   setorAux: any;
+  dados: any;
+
   locaisDeProva: LocalDeProva[];
-  localAux: any;
+  localDeProva: LocalDeProva;
   locaisAux: any;
+  localAux: any;
+  //setores: Setor[];
   inscricao: Subscription;
 
   constructor(
+    private formBuilder: FormBuilder,
     private setorService: SetorService,
     private route: ActivatedRoute,
-    private location: Location
-
-    ) { }
+    //private location: Location
+  ) { }
 
   ngOnInit() {
 
@@ -43,7 +49,6 @@ export class SetorFormComponent implements OnInit {
         this.setorAux = JSON.stringify(this.setor);
         this.setorAux = JSON.parse(this.setorAux);
 
-          delete this.setorAux.created_at;
           delete this.setorAux.version;
           delete this.setorAux.deleted
           delete this.setorAux.localDeProva.version
@@ -54,6 +59,7 @@ export class SetorFormComponent implements OnInit {
           delete this.setorAux.updated_at
         
         this.setor = this.setorAux;
+        this.setor.id = +id;
 
         this.setorService.getLocaisDeProva().subscribe(
           (locaisDeProva: LocalDeProva[]) => {
@@ -69,9 +75,15 @@ export class SetorFormComponent implements OnInit {
 
             this.locaisDeProva = this.locaisAux;
 
-            console.log(JSON.stringify(this.locaisDeProva));
-
           });
+
+          
+
+        //this.setor.localDeProva.id
+        this.criarSetorForm(this.setor);
+
+        /* this.localDeProva = this.setor.localDeProva;
+        this.setor.localDeProva = this.localDeProva; */
 
         console.log('###############');
         console.log(this.setor);
@@ -99,49 +111,66 @@ export class SetorFormComponent implements OnInit {
             console.log(JSON.stringify(this.locaisDeProva));
 
         });
+        
+
+        this.criarSetorForm(this.setor);
+
+        console.log('###############');
+        console.log(this.setor);
+        console.log(this.setor.id);
 
       }
 
     });
 
+    /* 
+      this.formulario = new FormGroup({
+        id: new FormControl(null),
+        nome: new FormControl(null),
+      })
+    */
+
   }
 
-  onSubmit(form): void {
+  onSubmit(){
     if(this.isNew) {
+      console.log(JSON.stringify(this.formulario.value));
+      console.log('###################################')
+      console.log(this.formulario.value);
+      delete this.setor.localDeProva.nome;
       +this.setor.localDeProva.id;
       this.setorService.salvarSetor(this.setor).subscribe(dados => console.log(dados));
-      console.log('1 - #####');
-      console.log(this.setor);
-      console.log('2 - #####');
-      console.log(form);
+      //this.criarSetorForm.reset(new Setor());
     } else {
+      console.log(JSON.stringify(this.formulario.value));
+      console.log('###################################')
+      console.log(this.formulario.value);
+      delete this.setor.localDeProva.nome;
       +this.setor.localDeProva.id;
       this.setorService.atualizarSetor(this.setor).subscribe(dados => console.log(dados));
-      console.log('1 - #####');
-      console.log(this.setor);
-      console.log('2 - #####');
-      console.log(form);
     }
   }
 
-  ngOnDestroy(): void {
-    this.inscricao.unsubscribe();
-  }
-
-  getFormGroup(isValid: boolean, isPristine: boolean) {
-    return {
-      'form-group': true,
-      'has-danger': !isValid && !isPristine,
-      'has-success': isValid && !isPristine
-    };
-  }
-
-  getFormControlClass(isValid: boolean, isPristine: boolean) {
-    return {
-      'form-control': true,
-      'form-control-danger': !isValid && !isPristine,
-      'form-control-success': isValid && !isPristine
-    };
+  criarSetorForm(setor: Setor) {
+    this.formulario = this.formBuilder.group({
+      id: [this.setor.id],
+      nome: [this.setor.nome],
+      endereco: [this.setor.endereco],
+      bairro: [this.setor.bairro],
+      localDeProva: [this.setor.localDeProva],
+      /* localDeProva: this.formBuilder.group({
+        id: [this.setor.localDeProva.id],
+        nome: [this.setor.localDeProva.nome]
+      }), */
+      cep: [this.setor.cep],
+      qtd_sala: [this.setor.qtd_sala],
+      nome_responsavel: [this.setor.nome_responsavel],
+      celular_responsavel: [this.setor.celular_responsavel],
+      email_responsavel: [this.setor.email_responsavel],
+      latitude: [this.setor.latitude],
+      longitude: [this.setor.longitude],
+      locaisDeProva: [this.locaisDeProva]
+    });
   }
 
 }

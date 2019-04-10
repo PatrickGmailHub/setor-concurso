@@ -1,0 +1,144 @@
+<nav class="mb-4">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+    <li class="breadcrumb-item active" *ngIf="!isNew">Detalhes</li>
+    <li class="breadcrumb-item active" *ngIf="isNew">Salvar</li>
+  </ol>
+</nav>
+  
+  <div class="row mb-3">
+    <div class="col-md">
+      <h1 *ngIf="!isNew" class="h2 border-left pl-2">
+        Detalhes do Setor
+      </h1>
+      <h1 *ngIf="isNew" class="h2 border-left pl-2">
+        Cadastrar Novo Setor
+      </h1>
+    </div>
+  
+    <div class="col-md">
+      <a routerLink="/setor/lista" class="btn btn-success float-right">+ Listar Setores</a>
+    </div>
+  </div>
+  
+  <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+  
+    <div class="form-group">
+      <label for="nome">Setor</label>
+  
+      <input type="text" class="form-control"
+        formControlName="nome" placeholder="Nome do setor"
+        >
+  
+    </div>
+    <div class="form-group">
+      <label for="endereco">Endereço</label>
+  
+      <input type="text" class="form-control"
+        formControlName="endereco" placeholder="Endereço do setor"
+        >
+    </div>
+    
+    <!--Em Linha-->
+  
+    <div class="form-row">
+  
+        <div class="form-group col-md-5">
+          <label for="cidade">Cidade</label>
+  
+          <!-- <input type="text" class="form-control"
+            formControlName="localDeProva" id="cidade" placeholder="Cidade do setor"
+          > -->
+
+          <select id="cidade" class="form-control" formControlName="localDeProva">
+            <!-- <option selected>...</option> -->
+            <!-- <div *ngIf="isNew"> -->
+              <option *ngFor="let cidade of locaisDeProva" [value]="cidade.id">{{ cidade.nome }}</option>
+            <!-- </div> -->
+          </select>
+        </div>
+
+        <div class="form-group col-md-3">
+            <label for="bairro">Bairro</label>
+            <input type="text" class="form-control"
+              formControlName="bairro" id="bairro" placeholder="Bairro do setor" required
+            >
+  
+        </div>
+        <!-- <div class="form-group col-md-2">
+          <label for="estado">Estado</label>
+  
+          <select id="estado" class="form-control" formControlName="estado">
+            <option selected>...</option>
+            <option>...</option>
+          </select>
+        </div> -->
+  
+        <div class="form-group col-md-2">
+          <label for="cep">C.E.P.</label>
+  
+          <input type="text" class="form-control"
+            formControlName="cep" id="cep" placeholder="C.E.P do setor"
+          >
+  
+        </div>
+        
+    </div>
+  
+    <div class="form-row">
+      <div class="form-group col-md-5">
+        <label for="nome_responsavel">Responsável</label>
+  
+        <input type="text" class="form-control"
+          formControlName="nome_responsavel" id="responsavel" placeholder="Nome do responsável"
+        >
+      </div>
+      <div class="form-group col-md-5">
+        <label for="email_responsavel">Email</label>
+  
+        <input type="text" class="form-control"
+        formControlName="email_responsavel" id="email" placeholder="E-mail do responsável"
+        >
+      </div>
+      <div class="form-group col-md-2">
+        <label for="celular_responsavel">Celular</label>
+  
+        <input type="text" class="form-control"
+          formControlName="celular_responsavel" id="celular_responsavel" placeholder="Celular do resposnsável"
+        >
+      </div>
+  
+    </div>
+  
+    <div class="form-row">
+        <div class="form-group col-md-2">
+          <label for="qtd_sala">Qtd. de salas</label>
+  
+          <input class="form-control" type="text"
+            formControlName="qtd_sala" id="qtd_sala" placeholder="Nº de salas"
+          >
+  
+        </div>
+        
+        <div class="form-group col-md-5">
+            <label for="latitude">Latitude</label>
+  
+            <input type="text" class="form-control"
+              formControlName="latitude" id="latitude" placeholder="Digite a latitude"
+            >
+          </div>
+          <div class="form-group col-md-5">
+            <label for="longitude">Longitude</label>
+  
+            <input type="text" class="form-control"
+              formControlName="longitude" id="longitude" placeholder="Digite a longitude"
+            >
+  
+          </div>
+        </div>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+  
+    <app-form-debug [form]="formulario"></app-form-debug>
+  
+  </form>
+  

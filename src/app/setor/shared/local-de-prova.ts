@@ -1,8 +1,8 @@
 
 export class LocalDeProva {
     constructor(
-        id: number,
-        nome: string
+        public id?: number,
+        public nome?: string
     ) {
         
     }

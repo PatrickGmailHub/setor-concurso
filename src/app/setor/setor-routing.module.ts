@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { SetorComponent } from './setor.component';
 import { SetorDetalheComponent } from './setor-detalhe/setor-detalhe.component';
 import { SetorFormComponent } from './setor-form/setor-form.component';
+import { SetorForm1Component } from './setor-form1/setor-form1.component';
 
 const setorRoutes: Routes = [
     {
