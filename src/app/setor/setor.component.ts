@@ -22,6 +22,13 @@ export class SetorComponent implements OnInit {
 
   ngOnInit() {
 
+
+    //this.setorService.getSetores().subscribe((setores: Setor[]) => {this.setores = setores}), () => 'Falha';
+    //this.setorService.getSetores().toPromise().then((setores: Setor[]) => {this.setores = setores});
+
+    //this.setores = [];
+    //this.setoresAux = [];
+
     this.setorService.getSetores().toPromise()
       .then((setores: Setor[]) => {
         this.setoresAux = setores;
@@ -42,6 +49,7 @@ export class SetorComponent implements OnInit {
   }
 
   teste() {
+
     console.log(JSON.stringify(this.setores));
     console.log(JSON.stringify(this.setoresAux));
   }
