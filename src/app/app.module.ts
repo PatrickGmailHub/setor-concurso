@@ -7,6 +7,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { SetorModule } from './setor/setor.module';
 import { RodapeComponent } from './rodape/rodape.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SetorConcursoProvaModule } from './setor-concurso-prova/setor-concurso-prova.module';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     SetorModule,
+    SetorConcursoProvaModule,
     ReactiveFormsModule,
     AppRoutingModule
   ],

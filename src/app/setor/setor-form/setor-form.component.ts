@@ -14,113 +14,64 @@ import { Location } from '@angular/common';
 export class SetorFormComponent implements OnInit {
 
   isNew: boolean = true;
-  setor: Setor;
-  setorAux: any;
-  locaisDeProva: LocalDeProva[];
-  localAux: any;
-  locaisAux: any;
+  setor: Setor = new Setor();
+  locaisDeProva: LocalDeProva[] = [];
   inscricao: Subscription;
 
   constructor(
     private setorService: SetorService,
     private route: ActivatedRoute,
     private location: Location
-
     ) { }
 
   ngOnInit() {
 
-    this.inscricao = this.route.params.subscribe((params: Params) => {
-      let id: number = params['id'];
+    this.inscricao = this.route.params.subscribe(async ({id}) => {
+      
+      try {
 
-      if(id){
-      this.isNew = false;
-      this.setorService.getSetor(id).toPromise()
-        .then((setor: Setor) => {
-          this.setor = setor;
-          console.log(this.setor);
+        console.time("setor");
 
-        this.setorAux = JSON.stringify(this.setor);
-        this.setorAux = JSON.parse(this.setorAux);
-
-          delete this.setorAux.created_at;
-          delete this.setorAux.version;
-          delete this.setorAux.deleted
-          delete this.setorAux.localDeProva.version
-          delete this.setorAux.localDeProva.deleted
-          delete this.setorAux.localDeProva.created_at
-          delete this.setorAux.localDeProva.updated_at
-          delete this.setorAux.created_at
-          delete this.setorAux.updated_at
+        // const id: number = params['id'];
         
-        this.setor = this.setorAux;
+        this.locaisDeProva = await this.setorService.getLocaisDeProva().toPromise();
 
-        this.setorService.getLocaisDeProva().subscribe(
-          (locaisDeProva: LocalDeProva[]) => {
-            this.locaisDeProva = locaisDeProva;
+        if (id){
 
-            this.locaisAux = JSON.stringify(this.locaisDeProva);
-            this.locaisAux = JSON.parse(this.locaisAux);
+          this.isNew = false;
+          this.setor = await this.setorService.getSetor(id).toPromise();
+          this.setor.localDeProva = this.locaisDeProva.find((localDeProva) => localDeProva.id == this.setor.localDeProva.id);
+          
+          // TODO: Forma com destruct do Javascript. Doc: https://basarat.gitbooks.io/typescript/docs/destructuring.html 
+          // const {id: localDeProvaId} = this.setor.localDeProva;
+          // this.setor.localDeProva = this.locaisDeProva.find(({id}) => id == localDeProvaId) as LocalDeProva;
+          
+        } 
 
-            this.locaisAux.forEach(element => delete element.created_at);
-            this.locaisAux.forEach(element => delete element.version);
-            this.locaisAux.forEach(element => delete element.deleted);
-            this.locaisAux.forEach(element => delete element.updated_at);
-
-            this.locaisDeProva = this.locaisAux;
-
-            console.log(JSON.stringify(this.locaisDeProva));
-
-          });
-
-        console.log('###############');
-        console.log(this.setor);
-        console.log(this.setor.id);
-        });
-      } else {
-        
-        this.setor = new Setor();
-
-        this.setorService.getLocaisDeProva().subscribe(
-          (locaisDeProva: LocalDeProva[]) => {
-            this.locaisDeProva = locaisDeProva;
-            console.log(this.locaisDeProva);
-
-            this.locaisAux = JSON.stringify(this.locaisDeProva);
-            this.locaisAux = JSON.parse(this.locaisAux);
-
-            this.locaisAux.forEach(element => delete element.created_at);
-            this.locaisAux.forEach(element => delete element.version);
-            this.locaisAux.forEach(element => delete element.deleted);
-            this.locaisAux.forEach(element => delete element.updated_at);
-
-            this.locaisDeProva = this.locaisAux;
-
-            console.log(JSON.stringify(this.locaisDeProva));
-
-        });
-
+      } catch (error) {
+        console.log(error);
+      } finally {
+        console.timeEnd("setor");
       }
 
     });
 
   }
 
-  onSubmit(form): void {
+  async onSubmit(form): Promise<void> {
+
     if(this.isNew) {
-      +this.setor.localDeProva.id;
-      this.setorService.salvarSetor(this.setor).subscribe(dados => console.log(dados));
-      console.log('1 - #####');
-      console.log(this.setor);
+      const dados = await this.setorService.salvarSetor(this.setor).toPromise();
+      console.log(dados);
+      /* console.log('1 - #####');
       console.log('2 - #####');
-      console.log(form);
+      console.log(form); */
     } else {
-      +this.setor.localDeProva.id;
-      this.setorService.atualizarSetor(this.setor).subscribe(dados => console.log(dados));
-      console.log('1 - #####');
-      console.log(this.setor);
+      const dados = await this.setorService.atualizarSetor(this.setor).toPromise();
+      console.log(dados);
+      /* console.log('1 - #####');
       console.log('2 - #####');
-      console.log(form);
+      console.log(form); */
     }
   }
 

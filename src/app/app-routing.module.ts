@@ -10,6 +10,10 @@ const routes: Routes = [
   {
     path: 'setor',
     loadChildren: './setor/setor.module#SetorModule'
+  },
+  {
+    path: 'setor-prova',
+    loadChildren: './setor-concurso-prova/setor-concurso-prova.module#SetorConcursoProvaModule'
   }
 ];
 

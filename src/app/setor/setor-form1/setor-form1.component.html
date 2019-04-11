@@ -44,16 +44,16 @@
     <div class="form-row">
   
         <div class="form-group col-md-5">
-          <label for="cidade">Cidade</label>
+          <label for="localDeProva.id">Cidade</label>
   
           <!-- <input type="text" class="form-control"
             formControlName="localDeProva" id="cidade" placeholder="Cidade do setor"
           > -->
 
-          <select id="cidade" class="form-control" formControlName="localDeProva">
+          <select id="localDeProva" class="form-control" formControlName="localDeProva" [compareWith]="compararLocal">
             <!-- <option selected>...</option> -->
             <!-- <div *ngIf="isNew"> -->
-              <option *ngFor="let cidade of locaisDeProva" [value]="cidade.id">{{ cidade.nome }}</option>
+              <option *ngFor="let localDeProva of locaisDeProva" [ngValue]="localDeProva">{{ localDeProva.nome }}</option>
             <!-- </div> -->
           </select>
         </div>
@@ -137,6 +137,7 @@
           </div>
         </div>
     <button type="submit" class="btn btn-primary">Salvar</button>
+    <button type="button" class="btn btn-primary" (click)="teste()">Formulário</button>
   
     <app-form-debug [form]="formulario"></app-form-debug>
   

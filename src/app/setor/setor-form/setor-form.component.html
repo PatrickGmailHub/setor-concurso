@@ -27,7 +27,7 @@
     <label for="nome">Setor</label>
 
     <input type="text" class="form-control" name="nome" placeholder="Nome do setor" required
-      [(ngModel)]="setor.nome"
+      [(ngModel)]="setor.nome" 
       #nome="ngModel">
 
   </div>
@@ -43,13 +43,14 @@
 
   <div class="form-row">
 
-    <div class="form-group col-md-7">
-      <label for="cidade">Cidade</label>
+    <div class="form-group col-md-5">
+      <label for="localDeProva">Cidade</label>
 
-      <select id="cidade" class="form-control" name="cidade"
+      <select id="localDeProva" class="form-control" name="localDeProva"
+        required
         [(ngModel)]="setor.localDeProva">
-        <option value="" disabled>...</option>
-        <option *ngFor="let cidade of locaisDeProva" selected="cidade" [ngValue]="cidade">{{ cidade.nome }}</option>
+        <option value="" selected>...</option>
+        <option *ngFor="let cidade of locaisDeProva" [ngValue]="cidade">{{ cidade.nome }}</option>
       </select>
     </div>
 
@@ -89,7 +90,8 @@
     <div class="form-group col-md-5">
       <label for="email">Email</label>
 
-      <input type="email" class="form-control" name="email" placeholder="E-mail do responsável" required
+      <input type="email" class="form-control" name="email" placeholder="E-mail do responsável"
+        pattern="^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" required
         [(ngModel)]="setor.email_responsavel" #email="ngModel">
     </div>
     <div class="form-group col-md-2">
@@ -104,7 +106,7 @@
     <div class="form-group col-md-2">
       <label for="salas">Qtd. de salas</label>
 
-      <input class="form-control" type="text" name="salas" value="0" required
+      <input class="form-control" type="text" name="salas" [value]=0 required
         [(ngModel)]="setor.qtd_sala"
         #salas="ngModel">
 
@@ -125,7 +127,7 @@
     </div>
   </div>
   <button type="submit" class="btn btn-primary" [disabled]="!setorForm.valid">Salvar</button>
-
-  <app-form-debug [form]="setorForm"></app-form-debug>
+<!-- 
+  <app-form-debug [form]="setorForm"></app-form-debug> -->
 
 </form>
