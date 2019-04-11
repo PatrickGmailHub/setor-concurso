@@ -14,8 +14,13 @@ import { Location } from '@angular/common';
 export class SetorFormComponent implements OnInit {
 
   isNew: boolean = true;
+
   setor: Setor = new Setor();
   locaisDeProva: LocalDeProva[] = [];
+
+  setorAux: any;
+  localAux: any;
+  locaisAux: any;
 
   inscricao: Subscription;
 
@@ -38,7 +43,7 @@ export class SetorFormComponent implements OnInit {
         
         this.locaisDeProva = await this.setorService.getLocaisDeProva().toPromise();
 
-        if (id){
+        if (id) {
 
           this.isNew = false;
           this.setor = await this.setorService.getSetor(id).toPromise();
@@ -48,17 +53,15 @@ export class SetorFormComponent implements OnInit {
           // const {id: localDeProvaId} = this.setor.localDeProva;
           // this.setor.localDeProva = this.locaisDeProva.find(({id}) => id == localDeProvaId) as LocalDeProva;
           
-        } 
+        }
 
       } catch (error) {
         console.log(error);
       } finally {
         console.timeEnd("setor");
-
       }
 
-    });
-
+    }
   }
 
   async onSubmit(form): Promise<void> {
@@ -66,16 +69,9 @@ export class SetorFormComponent implements OnInit {
     if(this.isNew) {
       const dados = await this.setorService.salvarSetor(this.setor).toPromise();
       console.log(dados);
-      /* console.log('1 - #####');
-      console.log('2 - #####');
-      console.log(form); */
     } else {
       const dados = await this.setorService.atualizarSetor(this.setor).toPromise();
       console.log(dados);
-      /* console.log('1 - #####');
-      console.log('2 - #####');
-      console.log(form); */
-
     }
   }
 
