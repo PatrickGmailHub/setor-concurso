@@ -44,27 +44,18 @@
     <div class="form-row">
   
         <div class="form-group col-md-5">
-<<<<<<< HEAD
           <label for="localDeProva.id">Cidade</label>
-=======
-          <label for="cidade">Cidade</label>
->>>>>>> 3acd846fd497ff375c284fb009d1eb808587932b
+
   
           <!-- <input type="text" class="form-control"
             formControlName="localDeProva" id="cidade" placeholder="Cidade do setor"
           > -->
 
-<<<<<<< HEAD
           <select id="localDeProva" class="form-control" formControlName="localDeProva" [compareWith]="compararLocal">
             <!-- <option selected>...</option> -->
             <!-- <div *ngIf="isNew"> -->
               <option *ngFor="let localDeProva of locaisDeProva" [ngValue]="localDeProva">{{ localDeProva.nome }}</option>
-=======
-          <select id="cidade" class="form-control" formControlName="localDeProva">
-            <!-- <option selected>...</option> -->
-            <!-- <div *ngIf="isNew"> -->
-              <option *ngFor="let cidade of locaisDeProva" [value]="cidade.id">{{ cidade.nome }}</option>
->>>>>>> 3acd846fd497ff375c284fb009d1eb808587932b
+
             <!-- </div> -->
           </select>
         </div>
@@ -148,10 +139,8 @@
           </div>
         </div>
     <button type="submit" class="btn btn-primary">Salvar</button>
-<<<<<<< HEAD
     <button type="button" class="btn btn-primary" (click)="teste()">Formulário</button>
-=======
->>>>>>> 3acd846fd497ff375c284fb009d1eb808587932b
+
   
     <app-form-debug [form]="formulario"></app-form-debug>
   
