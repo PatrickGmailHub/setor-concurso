@@ -6,4 +6,5 @@ export class LocalDeProva {
     public equals(obj: LocalDeProva) : boolean { 
         return this.id == obj.id;
     } 
+
 }

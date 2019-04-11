@@ -16,12 +16,14 @@ export class SetorFormComponent implements OnInit {
   isNew: boolean = true;
   setor: Setor = new Setor();
   locaisDeProva: LocalDeProva[] = [];
+
   inscricao: Subscription;
 
   constructor(
     private setorService: SetorService,
     private route: ActivatedRoute,
     private location: Location
+
     ) { }
 
   ngOnInit() {
@@ -52,6 +54,7 @@ export class SetorFormComponent implements OnInit {
         console.log(error);
       } finally {
         console.timeEnd("setor");
+
       }
 
     });
@@ -72,6 +75,7 @@ export class SetorFormComponent implements OnInit {
       /* console.log('1 - #####');
       console.log('2 - #####');
       console.log(form); */
+
     }
   }
 
