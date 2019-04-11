@@ -61,7 +61,7 @@ export class SetorFormComponent implements OnInit {
         console.timeEnd("setor");
       }
 
-    }
+    });
   }
 
   async onSubmit(form): Promise<void> {
@@ -84,7 +84,7 @@ export class SetorFormComponent implements OnInit {
       'form-group': true,
       'has-danger': !isValid && !isPristine,
       'has-success': isValid && !isPristine
-    };
+    }
   }
 
   getFormControlClass(isValid: boolean, isPristine: boolean) {
@@ -92,7 +92,7 @@ export class SetorFormComponent implements OnInit {
       'form-control': true,
       'form-control-danger': !isValid && !isPristine,
       'form-control-success': isValid && !isPristine
-    };
+    }
   }
 
 }
