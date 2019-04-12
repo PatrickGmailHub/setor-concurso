@@ -20,7 +20,6 @@ import { SetorConcursoProvaModule } from './setor-concurso-prova/setor-concurso-
     BrowserModule,
     SetorModule,
     SetorConcursoProvaModule,
-
     ReactiveFormsModule,
     AppRoutingModule
   ],

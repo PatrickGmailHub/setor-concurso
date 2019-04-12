@@ -15,7 +15,7 @@ export class SetorFormComponent implements OnInit {
 
   isNew: boolean = true;
 
-  setor: Setor = new Setor();
+  setor: Setor;
   locaisDeProva: LocalDeProva[] = [];
 
   setorAux: any;
@@ -32,6 +32,8 @@ export class SetorFormComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+
+    this.setor = new Setor();
 
     this.inscricao = this.route.params.subscribe(async ({id}) => {
       
