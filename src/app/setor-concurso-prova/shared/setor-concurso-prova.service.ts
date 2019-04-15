@@ -12,16 +12,31 @@ import { Observable } from 'rxjs';
 export class SetorConcursoProvaService {
 
   constructor(
-    private setorService: SetorConcursoProvaService,
+    private setorService: SetorService,
     private http: HttpClient
   ) { }
 
   getAll() {
 
+    return this.setorService.getLocaisDeProva().toPromise()
+      .then(async locaisDeProva => {
+        // TODO
+
+        
+
+    }).catch(
+
+    );
+
+    /* this.setorService.getLocaisDeProva().toPromise()
+    .then(
+      this.setorService.getSetores();
+    ); */
+    
   }
 
-  getById() {
-
+  getById(id: number) {
+    return null;
   }
 
   update() {

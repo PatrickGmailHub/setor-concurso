@@ -1,3 +1,96 @@
-<p>
-  setor-concurso-prova works!
-</p>
+<nav class="mb-4">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+    <li class="breadcrumb-item active" *ngIf="!isNew">Detalhes</li>
+    <li class="breadcrumb-item active" *ngIf="isNew">Salvar</li>
+  </ol>
+</nav>
+
+<div class="row mb-3">
+  <div class="col-md">
+    <h2 *ngIf="!isNew" class="h2 border-left pl-2">
+      Detalhes Concurso Prova
+    </h2>
+    <h2 *ngIf="isNew" class="h2 border-left pl-2">
+      Cadastrar Novo Concurso Prova
+    </h2>
+  </div>
+
+  <div class="col-md">
+    <a routerLink="/setor/lista" class="btn btn-success float-right">+ Listar Setores</a>
+  </div>
+</div>
+
+<form (ngSubmit)>
+
+  <div class="form-row">
+
+    <div class="form-group col-md-5">
+      <label for="localDeProva">Cidade</label>
+
+      <select id="localDeProva" class="form-control" name="localDeProva"
+        required
+        [(ngModel)]="setor.localDeProva">
+        <option value="" selected>...</option>
+        <option *ngFor="let cidade of locaisDeProva" >TODO: fazer lógica do bind: Setores-Concurso-Prova...</option>
+      </select>
+    </div>
+
+    <div class="form-group col-md-3">
+      <label for="cidade">Cidade</label>
+      <input type="text" class="form-control" name="cidade" placeholder="..." readonly required
+        [(ngModel)]="setor.cidade" #cidade="ngModel">
+
+    </div>
+
+    <div class="form-group col-md-4">
+      <label for="bairro">Bairro</label>
+      <input type="text" class="form-control" name="bairro" placeholder="..." readonly required
+        [(ngModel)]="setor.bairro" #bairro="ngModel">
+
+    </div>
+
+  </div>
+
+  <button type="button" class="btn btn-success">Editar</button>
+  <button type="submit">Salvar</button>
+
+</form>
+
+<!-- ################################# -->
+
+<div class="row mb-3">
+  <div class="col-md">
+    <h1 class="h2 border-left pl-2">
+      Setores Efetivados
+    </h1>
+  </div>
+
+  <div class="col-md">
+    <a routerLink="/setor/new" class="btn btn-primary float-right">+ Adicionar Setor</a>
+  </div>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Setor</th>
+      <th scope="col">Cidade</th>
+      <th scope="col">Bairro</th>
+      <th scope="col" class="text-center">Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let setor of setores">
+      <th scope="row">{{setor.id}}</th>
+      <td>{{setor.nome}}</td>
+      <td>{{setor.localDeProva.nome}}</td>
+      <td>{{setor.bairro}}</td>
+      <td class="text-center">
+        <a [routerLink] = "['/setor/', setor.id, 'edit']" class="btn btn-success" role="button">Editar</a>&nbsp;
+        <a href="#" class="btn btn-danger" role="button">Deletar</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
