@@ -35,7 +35,11 @@ export class SetorConcursoProvaComponent implements OnInit {
 
         // const id: number = params['id'];
         
+<<<<<<< HEAD
         //this.setores = await this.setorConcursoProvaService.getAll().toPromise(); -------TODO ATUAL
+=======
+        this.setores = await this.setorConcursoProvaService.getAll().toPromise();
+>>>>>>> bd794d415a874a4bb4c80d6b0628bfed3b68ce1c
 
         if (id) {
 
