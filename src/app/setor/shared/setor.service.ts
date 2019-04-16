@@ -1,3 +1,4 @@
+import { LocalDeProvaService } from './../../shared/services/local-de-prova.service';
 import { LocalDeProva } from './local-de-prova';
 import { Setor } from './setor';
 import { HttpClient, HttpHeaders, HttpHeaderResponse } from '@angular/common/http';
@@ -16,7 +17,10 @@ export class SetorService {
 
   private headers: HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'})
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private localDeProvaService: LocalDeProvaService
+    ) { }
 
   getSetores(): Observable<Setor[]> {
     return this.http.get<Setor[]>('./../api/direct_request_v2/gerencial/supervisor/distribuicao_salas/setor/buscar');
@@ -33,11 +37,13 @@ export class SetorService {
   }
 
   getLocaisDeProva(): Observable<LocalDeProva[]> {
-    return this.http.get<LocalDeProva[]>('./../api/direct_request_v2/local_prova');
+    // return this.http.get<LocalDeProva[]>('./../api/direct_request_v2/local_prova');
+    return this.localDeProvaService.getAll();
   }
 
   getLocalDeProva(id: number): Observable<LocalDeProva> {
-    return this.http.get<LocalDeProva>(`./../api/direct_request_v2/local_prova/${id}`);
+    // return this.http.get<LocalDeProva>(`./../api/direct_request_v2/local_prova/${id}`);
+    return this.localDeProvaService.getById(id);
   }
 
   salvarSetor(setor: Setor): Observable<Setor> {
