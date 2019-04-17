@@ -1,6 +1,6 @@
-import { LocalDeProva } from './../shared/local-de-prova';
-import { SetorService } from './../shared/setor.service';
-import { Setor } from './../shared/setor';
+import { LocalDeProva } from '../../shared/local-de-prova';
+import { SetorService } from '../../shared/services/setor.service';
+import { Setor } from '../../shared/setor';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Params } from '@angular/router';

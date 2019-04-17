@@ -1,6 +1,6 @@
-import { LocalDeProva } from '../../setor/shared/local-de-prova';
-import { Setor } from '../../setor/shared/setor';
-import { Concurso } from 'src/app/shared/services/concurso';
+import { LocalDeProva } from '../../shared/local-de-prova';
+import { Setor } from '../../shared/setor';
+import { Concurso } from 'src/app/shared/concurso';
 import { EtapaProva } from 'src/app/shared/etapa-prova';
 
 export class SetorConcursoProva {

@@ -1,6 +1,6 @@
-import { SetorService } from './../../setor/shared/setor.service';
-import { LocalDeProva } from '../../setor/shared/local-de-prova';
-import { Setor } from '../../setor/shared/setor';
+import { SetorService } from '../../shared/services/setor.service';
+import { LocalDeProva } from '../../shared/local-de-prova';
+import { Setor } from '../../shared/setor';
 import { HttpClient, HttpHeaders, HttpHeaderResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';

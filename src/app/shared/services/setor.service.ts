@@ -1,9 +1,9 @@
-import { LocalDeProvaService } from './../../shared/services/local-de-prova.service';
-import { LocalDeProva } from './local-de-prova';
-import { Setor } from './setor';
+import { LocalDeProva } from '../local-de-prova';
+import { Setor } from '../setor';
 import { HttpClient, HttpHeaders, HttpHeaderResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { LocalDeProvaService } from '../services/local-de-prova.service';
 
 @Injectable({
   providedIn: 'root'

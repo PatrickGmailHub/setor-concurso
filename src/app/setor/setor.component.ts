@@ -1,9 +1,9 @@
 import { element } from 'protractor';
-import { LocalDeProva } from './shared/local-de-prova';
-import { SetorService } from './shared/setor.service';
+import { LocalDeProva } from '../shared/local-de-prova';
+import { SetorService } from '../shared/services/setor.service';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Setor } from './shared/setor';
+import { Setor } from '../shared/setor';
 
 @Component({
   selector: 'app-setor',
