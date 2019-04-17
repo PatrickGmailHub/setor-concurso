@@ -1,8 +1,8 @@
-import { SetorService } from './../shared/setor.service';
+import { SetorService } from '../../shared/services/setor.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
-import { Setor } from '../shared/setor'
+import { Setor } from '../../shared/setor'
 import { Subscription } from 'rxjs';
 
 @Component({

@@ -1,5 +1,4 @@
 import { Concurso } from './concurso';
-import { LocalDeProva } from './../../setor/shared/local-de-prova';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 

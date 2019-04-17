@@ -1,7 +1,7 @@
 import { ActivatedRoute } from '@angular/router';
 import { SetorConcursoProvaService } from './shared/setor-concurso-prova.service';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { Setor } from './../setor/shared/setor';
+import { Setor } from '../shared/setor';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
@@ -35,11 +35,7 @@ export class SetorConcursoProvaComponent implements OnInit {
 
         // const id: number = params['id'];
         
-<<<<<<< HEAD
-        //this.setores = await this.setorConcursoProvaService.getAll().toPromise(); -------TODO ATUAL
-=======
         this.setores = await this.setorConcursoProvaService.getAll().toPromise();
->>>>>>> bd794d415a874a4bb4c80d6b0628bfed3b68ce1c
 
         if (id) {
 

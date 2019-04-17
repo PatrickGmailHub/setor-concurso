@@ -1,9 +1,9 @@
-import { LocalDeProva } from './../shared/local-de-prova';
+import { LocalDeProva } from '../../shared/local-de-prova';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { SetorService } from '../shared/setor.service';
-import { Setor } from '../shared/setor';
+import { SetorService } from '../../shared/services/setor.service';
+import { Setor } from '../../shared/setor';
 import { Subscription } from 'rxjs';
 
 @Component({

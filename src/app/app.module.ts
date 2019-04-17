@@ -1,3 +1,4 @@
+import { SetorConcursoProvaService } from './setor-concurso-prova/shared/setor-concurso-prova.service';
 import { ConcursoService } from './shared/services/concurso.service';
 import { LocalDeProvaService } from './shared/services/local-de-prova.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -10,7 +11,7 @@ import { SetorModule } from './setor/setor.module';
 import { RodapeComponent } from './rodape/rodape.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SetorConcursoProvaModule } from './setor-concurso-prova/setor-concurso-prova.module';
-import { SetorService } from './setor/shared/setor.service';
+import { SetorService } from './shared/services/setor.service';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { SetorService } from './setor/shared/setor.service';
   providers: [
     SetorService,
     LocalDeProvaService,
-    ConcursoService
+    ConcursoService,
+    SetorConcursoProvaService
   ],
   bootstrap: [AppComponent]
 })

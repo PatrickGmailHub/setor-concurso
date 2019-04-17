@@ -1,4 +1,4 @@
-import { LocalDeProva } from './../../setor/shared/local-de-prova';
+import { LocalDeProva } from './../local-de-prova';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 

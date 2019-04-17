@@ -20,7 +20,7 @@ import { SetorConcursoProvaService } from './shared/setor-concurso-prova.service
     HttpClientModule
   ],
   providers: [
-    SetorConcursoProvaService
+    // SetorConcursoProvaService
   ]
 })
 export class SetorConcursoProvaModule { }

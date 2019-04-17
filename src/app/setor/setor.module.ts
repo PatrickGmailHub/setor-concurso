@@ -7,7 +7,7 @@ import { SetorComponent } from './setor.component';
 import { SetorFormComponent } from './setor-form/setor-form.component';
 import { SetorDetalheComponent } from './setor-detalhe/setor-detalhe.component';
 
-import { SetorService } from './shared/setor.service';
+import { SetorService } from '../shared/services/setor.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormDebugComponent } from './form-debug/form-debug.component';
 import { SetorForm1Component } from './setor-form1/setor-form1.component';
@@ -28,7 +28,7 @@ import { SetorForm1Component } from './setor-form1/setor-form1.component';
     HttpClientModule
   ],
   providers: [
-    SetorService
+    // SetorService
   ]
 })
 export class SetorModule { }
