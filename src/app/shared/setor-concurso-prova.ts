@@ -1,5 +1,5 @@
-import { LocalDeProva } from '../../shared/local-de-prova';
-import { Setor } from '../../shared/setor';
+import { LocalDeProva } from './local-de-prova';
+import { Setor } from './setor';
 import { Concurso } from 'src/app/shared/concurso';
 import { EtapaProva } from 'src/app/shared/etapa-prova';
 

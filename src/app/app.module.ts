@@ -1,4 +1,4 @@
-import { SetorConcursoProvaService } from './setor-concurso-prova/shared/setor-concurso-prova.service';
+import { SetorConcursoProvaService } from './shared/services/setor-concurso-prova.service';
 import { ConcursoService } from './shared/services/concurso.service';
 import { LocalDeProvaService } from './shared/services/local-de-prova.service';
 import { BrowserModule } from '@angular/platform-browser';

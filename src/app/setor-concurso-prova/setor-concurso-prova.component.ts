@@ -1,5 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
-import { SetorConcursoProvaService } from './shared/setor-concurso-prova.service';
+import { SetorConcursoProvaService } from '../shared/services/setor-concurso-prova.service';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { Setor } from '../shared/setor';
 import { Component, OnInit } from '@angular/core';
