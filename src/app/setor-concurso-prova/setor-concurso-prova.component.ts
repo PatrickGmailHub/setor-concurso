@@ -61,4 +61,8 @@ export class SetorConcursoProvaComponent implements OnInit {
 
   }
 
+  onSubmit() {
+    
+  }
+
 }
