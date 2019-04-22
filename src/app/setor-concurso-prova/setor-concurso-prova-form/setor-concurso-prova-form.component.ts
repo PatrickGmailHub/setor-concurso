@@ -1,11 +1,17 @@
+<<<<<<< HEAD
 import { Setor } from './../../shared/setor';
+=======
+>>>>>>> 77591f37a3fc97a5abcb51a28f493d000baaa14c
 import { LocalDeProva } from './../../shared/local-de-prova';
 import { LocalDeProvaService } from './../../shared/services/local-de-prova.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { SetorService } from 'src/app/shared/services/setor.service';
 import { Location } from '@angular/common';
+<<<<<<< HEAD
 import { Observable, Subscription } from 'rxjs';
+=======
+>>>>>>> 77591f37a3fc97a5abcb51a28f493d000baaa14c
 
 @Component({
   selector: 'app-setor-concurso-prova-form',
@@ -18,12 +24,15 @@ export class SetorConcursoProvaFormComponent implements OnInit {
   locais: LocalDeProva[] = [];
   locaisDeProva: LocalDeProva[] = [];
 
+<<<<<<< HEAD
   setor: Setor;
   setores: Setor[] = [];
   setoresAux: Setor[] = [];
 
   inscricao: Subscription;
 
+=======
+>>>>>>> 77591f37a3fc97a5abcb51a28f493d000baaa14c
   constructor(
     private setorService: SetorService,
     private localDeProvaService: LocalDeProvaService,
@@ -33,6 +42,7 @@ export class SetorConcursoProvaFormComponent implements OnInit {
 
   ngOnInit() {
 
+<<<<<<< HEAD
     this.setor = new Setor();
 
     this.localDeProvaService.getAll().toPromise()
@@ -82,7 +92,32 @@ export class SetorConcursoProvaFormComponent implements OnInit {
     ).subscribe(element1 => this.setores) */
 
     // console.log(this.setores)
+=======
+    this.localDeProvaService.getAll().toPromise()
+      .then(locaisDeProva => {
+        this.locaisDeProva = locaisDeProva;
+
+        this.locaisDeProva.forEach(element => delete element['created_at'])
+        this.locaisDeProva.forEach(element => delete element['updated_at'])
+        this.locaisDeProva.forEach(element => delete element['deleted'])
+        this.locaisDeProva.forEach(element => delete element['version'])
+
+        this.locaisDeProva.forEach(element => {
+          this.local.id = element['id'];
+          this.local.nome = element['nome'];
+
+          this.locais.push(this.local);
+
+        });
+
+        // this.locaisDeProva = this.locais;
+
+        console.log(this.locais);
+      });
+>>>>>>> 77591f37a3fc97a5abcb51a28f493d000baaa14c
 
   }
+
+
 
 }

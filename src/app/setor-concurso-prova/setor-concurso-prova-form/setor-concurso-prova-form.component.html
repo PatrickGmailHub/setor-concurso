@@ -30,11 +30,19 @@
 
       <label for="localDeProva">Cidades</label>
 
+<<<<<<< HEAD
       <select id="local" class="form-control" name="local" (change)="selectSetor(local)"
         required
         [(ngModel)]="local">
         <option value="" selected>...</option>
         <option *ngFor="let local of locaisDeProva" [ngValue]="local">{{ local.nome }}</option>
+=======
+      <select id="local" class="form-control" name="local"
+        required
+        [(ngModel)]="local">
+        <option value="" selected>...</option>
+        <option *ngFor="let local of locais" [ngValue]="local">{{ local.nome }}</option>
+>>>>>>> 77591f37a3fc97a5abcb51a28f493d000baaa14c
       </select>
     
     </div>
