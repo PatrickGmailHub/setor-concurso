@@ -22,6 +22,8 @@ export class SetorConcursoProvaFormComponent implements OnInit {
   setores: Setor[] = [];
   setoresAux: Setor[] = [];
 
+  mostraTabela: boolean = false;
+
   inscricao: Subscription;
 
   constructor(
@@ -71,6 +73,7 @@ export class SetorConcursoProvaFormComponent implements OnInit {
 
           if(element.localDeProva.id == valor['id']) {
             this.setores.push(element);
+            this.mostraTabela = true;
           }
 
         });
