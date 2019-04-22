@@ -48,7 +48,7 @@ export class SetorConcursoProvaFormComponent implements OnInit {
 
         });
 
-        console.log(this.locaisDeProva);
+        // console.log(this.locaisDeProva);
       });
 
   }
