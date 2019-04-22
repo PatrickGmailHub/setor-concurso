@@ -1,9 +1,11 @@
+import { Setor } from './../../shared/setor';
 import { LocalDeProva } from './../../shared/local-de-prova';
 import { LocalDeProvaService } from './../../shared/services/local-de-prova.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { SetorService } from 'src/app/shared/services/setor.service';
 import { Location } from '@angular/common';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-setor-concurso-prova-form',
@@ -16,6 +18,12 @@ export class SetorConcursoProvaFormComponent implements OnInit {
   locais: LocalDeProva[] = [];
   locaisDeProva: LocalDeProva[] = [];
 
+  setor: Setor;
+  setores: Setor[] = [];
+  setoresAux: Setor[] = [];
+
+  inscricao: Subscription;
+
   constructor(
     private setorService: SetorService,
     private localDeProvaService: LocalDeProvaService,
@@ -25,17 +33,18 @@ export class SetorConcursoProvaFormComponent implements OnInit {
 
   ngOnInit() {
 
-    this.local = new LocalDeProva();
+    this.setor = new Setor();
 
     this.localDeProvaService.getAll().toPromise()
       .then(locaisDeProva => {
         this.locaisDeProva = locaisDeProva;
         
         this.locaisDeProva.forEach(element => {
-          delete element['version']
-          delete element['created_at']
-          delete element['updated_at']
-          delete element['deleted']
+
+          delete element['version'];
+          delete element['created_at'];
+          delete element['updated_at'];
+          delete element['deleted'];
 
         });
 
@@ -44,6 +53,36 @@ export class SetorConcursoProvaFormComponent implements OnInit {
 
   }
 
+  selectSetor(valor) {
 
+    this.setores = [];
+
+    this.setorService.getSetores().subscribe(setores => {
+        setores.filter(element => {
+
+          delete element['version'];
+          delete element['created_at'];
+          delete element['updated_at'];
+          delete element['deleted'];
+          delete element.localDeProva['version'];
+          delete element.localDeProva['created_at'];
+          delete element.localDeProva['updated_at'];
+          delete element.localDeProva['deleted'];
+
+          if(element.localDeProva.id == valor['id']) {
+            this.setores.push(element);
+          }
+
+        });
+    });
+
+    /* this.setorService.getSetores().pipe<Setor[]>(
+      // this.setores = await setores.filter(element => element.localDeProva.id == valor['id'])
+      find(element => element.localDeProva.id == valor['id'])
+    ).subscribe(element1 => this.setores) */
+
+    // console.log(this.setores)
+
+  }
 
 }
