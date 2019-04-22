@@ -13,6 +13,7 @@ export class SetorConcursoProvaService {
 
   constructor(
     private setorService: SetorService,
+    private localDeProva: LocalDeProva,
     private http: HttpClient
   ) { }
 
