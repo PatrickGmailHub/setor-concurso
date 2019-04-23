@@ -18,11 +18,11 @@ const setorRoutes: Routes = [
     },
     {
         path: 'setor/new',
-        component: SetorFormComponent
+        component: SetorForm1Component
     },
     {
         path: 'setor/:id/edit',
-        component: SetorFormComponent
+        component: SetorForm1Component
         //component: SetorDetalheComponent
     },
     {

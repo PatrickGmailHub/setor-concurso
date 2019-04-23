@@ -9,7 +9,8 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-setor-form1',
   templateUrl: './setor-form1.component.html',
-  styleUrls: ['./setor-form1.component.css']
+  styleUrls: ['./setor-form1.component.css'],
+  preserveWhitespaces: true
 })
 export class SetorForm1Component implements OnInit {
 
@@ -52,11 +53,17 @@ export class SetorForm1Component implements OnInit {
 
 
 
-        this.setorService.getLocaisDeProva().subscribe(
+        /* this.setorService.getLocaisDeProva().subscribe(
           (locaisDeProva: LocalDeProva[]) => {
             this.locaisDeProva = locaisDeProva;
 
-          });
+          }); */
+
+          this.setorService.getLocaisDeProva().toPromise()
+            .then((locaisDeProva: LocalDeProva[]) => {
+              this.locaisDeProva = locaisDeProva;
+  
+            });
 
         this.criarSetorForm(this.setor);
 
