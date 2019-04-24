@@ -56,8 +56,8 @@ export class SetorService {
     //return this.http.put<Setor>('./../api/direct_request_v2/teste/setor/atualizar', JSON.stringify(setor));
   }
 
-  deletarSetor(setor: Setor): Observable<number> {
-    return this.http.delete<number>('');
+  deletarSetor(setor: number): Observable<number> {
+    return this.http.delete<number>('./../api/direct_request_v2/gerencial/supervisor/distribuicao_salas/setor/apagar', {headers: this.headers});
   }
 
 }

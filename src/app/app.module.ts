@@ -12,6 +12,7 @@ import { RodapeComponent } from './rodape/rodape.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SetorConcursoProvaModule } from './setor-concurso-prova/setor-concurso-prova.module';
 import { SetorService } from './shared/services/setor.service';
+import { DialogService } from './shared/services/dialog.service';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { SetorService } from './shared/services/setor.service';
     SetorService,
     LocalDeProvaService,
     ConcursoService,
-    SetorConcursoProvaService
+    SetorConcursoProvaService,
+    DialogService
   ],
   bootstrap: [AppComponent]
 })
