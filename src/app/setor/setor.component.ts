@@ -1,4 +1,5 @@
-import { element } from 'protractor';
+import { ActivatedRoute } from '@angular/router';
+import { DialogService } from './../shared/services/dialog.service';
 import { LocalDeProva } from '../shared/local-de-prova';
 import { SetorService } from '../shared/services/setor.service';
 import { HttpClient } from '@angular/common/http';
@@ -13,45 +14,79 @@ import { Setor } from '../shared/setor';
 export class SetorComponent implements OnInit {
 
   setores: Setor[];
-  setoresAux: Setor[];
-  setorjson = {}[0];
+  setor: Setor;
 
   constructor(
-    private setorService: SetorService
+    private setorService: SetorService,
+    private dialogService: DialogService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
 
-
-    //this.setorService.getSetores().subscribe((setores: Setor[]) => {this.setores = setores}), () => 'Falha';
-    //this.setorService.getSetores().toPromise().then((setores: Setor[]) => {this.setores = setores});
-
-    //this.setores = [];
-    //this.setoresAux = [];
-
     this.setorService.getSetores().toPromise()
       .then((setores: Setor[]) => {
-        this.setoresAux = setores;
+        this.setores = setores;
 
-        this.setorjson = JSON.stringify(this.setoresAux);
-        this.setorjson = JSON.parse(this.setorjson);
-        
-        this.setorjson.forEach(element => delete element.version)
-        this.setorjson.forEach(element => delete element.deleted)
-        this.setorjson.forEach(element => delete element.localDeProva.version)
-        this.setorjson.forEach(element => delete element.localDeProva.deleted)
-        this.setorjson.forEach(element => delete element.localDeProva.created_at)
-        this.setorjson.forEach(element => delete element.localDeProva.updated_at)
-        this.setorjson.forEach(element => delete element.created_at)
-        this.setorjson.forEach(element => delete element.updated_at)
-      }).then(() => this.setores = this.setorjson);
+        this.setores.forEach(element => {
+
+          delete element['version'];
+          delete element['created_at'];
+          delete element['updated_at'];
+          delete element['deleted'];
+          delete element.localDeProva['version'];
+          delete element.localDeProva['created_at'];
+          delete element.localDeProva['updated_at'];
+          delete element.localDeProva['deleted'];
+
+        });
+
+      });
       
   }
 
   teste() {
-
     console.log(JSON.stringify(this.setores));
-    console.log(JSON.stringify(this.setoresAux));
+  }
+
+  async onDelete(id): Promise<void> {
+
+    let jsonId = `{"id": ${id}}`;
+
+    console.log(jsonId);
+    console.log(JSON.parse(jsonId));
+
+    this.setor = new Setor();
+
+    // this.setor = await this.setorService.getSetor(id).toPromise();
+
+    this.setor = JSON.parse(jsonId);
+
+    console.log(this.setor);
+    // JSON.parse(jsonId);
+
+    /* delete this.setor['version'];
+    delete this.setor['created_at'];
+    delete this.setor['updated_at'];
+    delete this.setor['deleted'];
+    delete this.setor.localDeProva['version'];
+    delete this.setor.localDeProva['created_at'];
+    delete this.setor.localDeProva['updated_at'];
+    delete this.setor.localDeProva['deleted']; */
+
+    // console.log(JSON.parse(jsonId));
+    // console.log(jsonId);
+    // console.log(this.setor);
+
+    this.dialogService.confirma(`Deseja deletar "${this.setor.nome}"`)
+      .then((deleta: Boolean) => {
+        if(deleta) {
+          // this.setorService.deletarSetor(JSON.parse(jsonId)).toPromise()
+          this.setorService.deletarSetor(this.setor).toPromise()
+            .then((dados) => console.log(dados))
+        }
+      });
+
   }
 
 }

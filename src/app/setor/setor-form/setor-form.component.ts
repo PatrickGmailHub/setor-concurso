@@ -1,3 +1,4 @@
+import { DialogService } from './../../shared/services/dialog.service';
 import { LocalDeProva } from '../../shared/local-de-prova';
 import { SetorService } from '../../shared/services/setor.service';
 import { Setor } from '../../shared/setor';
@@ -27,6 +28,7 @@ export class SetorFormComponent implements OnInit {
   constructor(
     private setorService: SetorService,
     private route: ActivatedRoute,
+    // private dialogService: DialogService,
     private location: Location
 
     ) { }
@@ -76,6 +78,15 @@ export class SetorFormComponent implements OnInit {
       console.log(dados);
     }
   }
+
+  /* onDelete() {
+    this.dialogService.confirma(`Deseja deletar ${this.setor.nome}`)
+      .then((deleta: Boolean) => {
+        if(deleta) {
+          this.setorService.deletarSetor(this.setor).subscribe(dados => console.log(dados));
+        }
+      });
+  } */
 
   ngOnDestroy(): void {
     this.inscricao.unsubscribe();
