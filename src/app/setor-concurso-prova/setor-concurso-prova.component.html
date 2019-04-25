@@ -8,71 +8,69 @@
 
 <div class="row mb-3">
   <div class="col-md">
-    <h2 *ngIf="!isNew" class="h2 border-left pl-2">
-      Detalhes Concurso Prova
-    </h2>
-    <h2 *ngIf="isNew" class="h2 border-left pl-2">
-      Cadastrar Novo Concurso Prova
-    </h2>
-  </div>
-
-  <div class="col-md">
-    <a routerLink="/setor/lista" class="btn btn-success float-right">+ Listar Setores</a>
-  </div>
-</div>
-
-<form (ngSubmit)="onSubmit()">
-
-  <div class="form-row">
-
-    <div class="form-group col-md-5">
-      <label for="localDeProva">Cidade</label>
-
-      <select id="localDeProva" class="form-control" name="localDeProva"
-        required
-        [(ngModel)]="setor.localDeProva">
-        <option value="" selected>...</option>
-        <option *ngFor="let cidade of locaisDeProva" >TODO: fazer lógica do bind: Setores-Concurso-Prova...</option>
-      </select>
-    </div>
-
-    <div class="form-group col-md-3">
-      <label for="cidade">Cidade</label>
-      <input type="text" class="form-control" name="cidade" placeholder="..." readonly required
-        [(ngModel)]="setor.cidade" #cidade="ngModel">
-
-    </div>
-
-    <div class="form-group col-md-4">
-      <label for="bairro">Bairro</label>
-      <input type="text" class="form-control" name="bairro" placeholder="..." readonly required
-        [(ngModel)]="setor.bairro" #bairro="ngModel">
-
-    </div>
-
-  </div>
-
-  <button type="button" class="btn btn-success">Editar</button>
-  <button type="submit">Salvar</button>
-
-</form>
-
-<!-- ################################# -->
-
-<div class="row mb-3">
-  <div class="col-md">
-    <h1 class="h2 border-left pl-2">
-      Setores Efetivados
+    <h1 *ngIf="!isNew" class="h2 border-left pl-2">
+      Detalhes do Setor/Prova
+    </h1>
+    <h1 *ngIf="isNew" class="h2 border-left pl-2">
+      Cadastrar Novo Setor/Prova
     </h1>
   </div>
 
   <div class="col-md">
-    <a routerLink="/setor/new" class="btn btn-primary float-right">+ Adicionar Setor</a>
+    <a routerLink="setor-concurso/lista" class="btn btn-success float-right">+ Listar Setores/Prova</a>
   </div>
 </div>
 
-<table class="table table-striped">
-  <thead>
+<form (ngSubmit)="onSubmit(setorProvaForm)" #setorProvaForm="ngForm">
+  
+  <!--Form em Linha-->
+  <div class="form-row">
+
+    <div class="form-group col-md-4">
+
+      <label for="localDeProva">Cidades</label>
+
+      <select id="local" class="form-control" name="local" (change)="selectSetor(local)"
+        required
+        [(ngModel)]="local">
+        <option value="" selected>...</option>
+        <option *ngFor="let local of locaisDeProva" [ngValue]="local">{{ local.nome }}</option>
+      </select>
+    
+    </div>
+
+    <!-- <div class="form-group col-md-4">
+
+      <label for="localDeProva">Setores</label>
+
+      <select id="localDeProva" class="form-control" name="setor"
+        required
+        [(ngModel)]="setor.localDeProva">
+        <option value="" selected>...</option>
+        <option *ngFor="let setor of setores" [ngValue]="setor">{{ setores.nome }}</option>
+      </select>
+
+    </div> -->
+
+    <!-- <div class="form-group col-md-4">
+
+      <label for="qtd_sala">Quantidade de Salas disponíveis</label>
+
+      <input type="text" class="form-control" name="qtd_sala" placeholder="Informe o nº de salas disponíveis"
+        required
+        [(ngModel)]="setor.qtd_sala" #qtd_sala="ngModel">
+
+    </div> -->
+    
+
+  </div>
+
+  <!-- <button type="submit" class="btn btn-primary" [disabled]="!setorProvaForm.valid">Salvar</button> -->
+
+</form>
+
+<table class="table table-striped table-sm" *ngIf="mostraTabela">
+  <thead class="thead-dark">
     <tr>
       <th scope="col">#</th>
       <th scope="col">Setor</th>
@@ -88,8 +86,7 @@
       <td>{{setor.localDeProva.nome}}</td>
       <td>{{setor.bairro}}</td>
       <td class="text-center">
-        <a [routerLink] = "['/setor/', setor.id, 'edit']" class="btn btn-success" role="button">Editar</a>&nbsp;
-        <a href="#" class="btn btn-danger" role="button">Deletar</a>
+        <a href = "#" class="btn btn-success" role="button">Editar</a>&nbsp;
       </td>
     </tr>
   </tbody>

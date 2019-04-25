@@ -1,9 +1,11 @@
-import { ActivatedRoute } from '@angular/router';
-import { SetorConcursoProvaService } from '../shared/services/setor-concurso-prova.service';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { Setor } from '../shared/setor';
+import { LocalDeProva } from '../shared/local-de-prova';
+import { LocalDeProvaService } from '../shared/services/local-de-prova.service';
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { SetorService } from 'src/app/shared/services/setor.service';
+import { Location } from '@angular/common';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-setor-concurso-prova',
@@ -12,57 +14,80 @@ import { Subscription } from 'rxjs';
 })
 export class SetorConcursoProvaComponent implements OnInit {
 
-
-  isNew: boolean = true;
+  local: LocalDeProva;
+  locais: LocalDeProva[] = [];
+  locaisDeProva: LocalDeProva[] = [];
 
   setor: Setor;
   setores: Setor[] = [];
+  setoresAux: Setor[] = [];
+
+  mostraTabela: boolean = false;
 
   inscricao: Subscription;
 
   constructor(
-    private setorConcursoProvaService: SetorConcursoProvaService,
-    private route: ActivatedRoute
+    private setorService: SetorService,
+    private localDeProvaService: LocalDeProvaService,
+    private route: ActivatedRoute,
+    private location: Location
   ) { }
 
   ngOnInit() {
 
-    this.inscricao = this.route.params.subscribe(async ({id}) => {
-      
-      try {
+    this.setor = new Setor();
 
-        console.time("setor");
-
-        // const id: number = params['id'];
+    this.localDeProvaService.getAll().toPromise()
+      .then(locaisDeProva => {
+        this.locaisDeProva = locaisDeProva;
         
-        this.setores = await this.setorConcursoProvaService.getAll().toPromise();
+        this.locaisDeProva.forEach(element => {
 
-        if (id) {
+          delete element['version'];
+          delete element['created_at'];
+          delete element['updated_at'];
+          delete element['deleted'];
 
-          this.isNew = false;
-          
-          this.setor = await this.setorConcursoProvaService.getById(id).toPromise();
+        });
 
-          /* this.setor.localDeProva = this.locaisDeProva.find((localDeProva) => localDeProva.id == this.setor.localDeProva.id); */
-          
-          // TODO: Forma com destruct do Javascript. Doc: https://basarat.gitbooks.io/typescript/docs/destructuring.html 
-          // const {id: localDeProvaId} = this.setor.localDeProva;
-          // this.setor.localDeProva = this.locaisDeProva.find(({id}) => id == localDeProvaId) as LocalDeProva;
-          
-        }
+        // console.log(this.locaisDeProva);
+      });
 
-      } catch (error) {
-        console.log(error);
-      } finally {
-        console.timeEnd("setor");
-      }
+  }
 
+  selectSetor(valor) {
+
+    this.setores = [];
+
+    this.setorService.getSetores().subscribe(setores => {
+        setores.filter(element => {
+
+          delete element['version'];
+          delete element['created_at'];
+          delete element['updated_at'];
+          delete element['deleted'];
+          delete element.localDeProva['version'];
+          delete element.localDeProva['created_at'];
+          delete element.localDeProva['updated_at'];
+          delete element.localDeProva['deleted'];
+
+          if(element.localDeProva.id == valor['id']) {
+            this.setores.push(element);
+            this.mostraTabela = true;
+          }
+
+        });
     });
 
+    /* this.setorService.getSetores().pipe<Setor[]>(
+      // this.setores = await setores.filter(element => element.localDeProva.id == valor['id'])
+      find(element => element.localDeProva.id == valor['id'])
+    ).subscribe(element1 => this.setores) */
+
+    // console.log(this.setores)
+
   }
 
-  onSubmit() {
-    
-  }
+
 
 }
