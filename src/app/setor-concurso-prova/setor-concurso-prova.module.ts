@@ -1,3 +1,4 @@
+import { SetorConcursoProvaListaComponent } from './setor-concurso-prova-lista/setor-concurso-prova-lista.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -11,6 +12,7 @@ import { SetorConcursoProvaService } from '../shared/services/setor-concurso-pro
 @NgModule({
   declarations: [
     SetorConcursoProvaComponent,
+    SetorConcursoProvaListaComponent,
     SetorConcursoProvaFormComponent
   ],
   imports: [
