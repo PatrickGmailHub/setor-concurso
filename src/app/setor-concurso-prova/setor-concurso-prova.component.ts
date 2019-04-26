@@ -23,6 +23,9 @@ export class SetorConcursoProvaComponent implements OnInit {
   setoresAux: Setor[] = [];
 
   mostraTabela: boolean = false;
+  mostraForm: boolean = false;
+
+  localTemp: any;
 
   inscricao: Subscription;
 
@@ -58,6 +61,8 @@ export class SetorConcursoProvaComponent implements OnInit {
   selectSetor(valor) {
 
     this.setores = [];
+    // this.localTemp = valor
+    this.mostraForm = false;
 
     this.setorService.getSetores().subscribe(setores => {
         setores.filter(element => {
@@ -89,5 +94,14 @@ export class SetorConcursoProvaComponent implements OnInit {
   }
 
 
+  preencherForm(localSel) {
+    this.mostraForm = true;
+    this.localTemp = localSel.nome;
+    console.log(this.localTemp);
+  }
+
+  onVoltar() {
+    this.mostraForm = false;
+  }
 
 }
