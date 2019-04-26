@@ -94,9 +94,9 @@ export class SetorConcursoProvaComponent implements OnInit {
   }
 
 
-  preencherForm(localSel) {
+  preencherForm(localSel: Setor) {
     this.mostraForm = true;
-    this.localTemp = localSel.nome;
+    this.localTemp = localSel;
     console.log(this.localTemp);
   }
 
