@@ -21,73 +21,197 @@
   </div>
 </div>
 
-<form (ngSubmit)="onSubmit(setorProvaForm)" #setorProvaForm="ngForm">
+
+<div class="form-row"> <!-- Seleção do ComboBox -->
+
+  <div class="form-group col-md-4">
+
+    <label for="localDeProva">Cidades</label>
+
+    <select id="local" class="form-control" name="local" (change)="selectSetor(local)"
+      required
+      [(ngModel)]="local"
+      >
+      <option value="" selected>...</option>
+      <option *ngFor="let local of locaisDeProva" [ngValue]="local">{{ local.nome }}</option>
+    </select>
   
-  <!--Form em Linha-->
-  <div class="form-row">
-
-    <div class="form-group col-md-4">
-
-      <label for="localDeProva">Cidades</label>
-
-      <select id="local" class="form-control" name="local" (change)="selectSetor(local)"
-        required
-        [(ngModel)]="local">
-        <option value="" selected>...</option>
-        <option *ngFor="let local of locaisDeProva" [ngValue]="local">{{ local.nome }}</option>
-      </select>
-    
-    </div>
-
-    <!-- <div class="form-group col-md-4">
-
-      <label for="localDeProva">Setores</label>
-
-      <select id="localDeProva" class="form-control" name="setor"
-        required
-        [(ngModel)]="setor.localDeProva">
-        <option value="" selected>...</option>
-        <option *ngFor="let setor of setores" [ngValue]="setor">{{ setores.nome }}</option>
-      </select>
-
-    </div> -->
-
-    <!-- <div class="form-group col-md-4">
-
-      <label for="qtd_sala">Quantidade de Salas disponíveis</label>
-
-      <input type="text" class="form-control" name="qtd_sala" placeholder="Informe o nº de salas disponíveis"
-        required
-        [(ngModel)]="setor.qtd_sala" #qtd_sala="ngModel">
-
-    </div> -->
-    
-
   </div>
 
-  <!-- <button type="submit" class="btn btn-primary" [disabled]="!setorProvaForm.valid">Salvar</button> -->
+  <!-- <div class="form-group col-md-4">
 
-</form>
+    <label for="localDeProva">Setores</label>
 
-<table class="table table-striped table-sm" *ngIf="mostraTabela">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Setor</th>
-      <th scope="col">Cidade</th>
-      <th scope="col">Bairro</th>
-      <th scope="col" class="text-center">Ações</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let setor of setores">
-      <th scope="row">{{setor.id}}</th>
-      <td>{{setor.nome}}</td>
-      <td>{{setor.localDeProva.nome}}</td>
-      <td>{{setor.bairro}}</td>
-      <td class="text-center">
-        <a href = "#" class="btn btn-success" role="button">Editar</a>&nbsp;
-      </td>
-    </tr>
-  </tbody>
-</table>
+    <select id="localDeProva" class="form-control" name="setor"
+      required
+      [(ngModel)]="setor.localDeProva">
+      <option value="" selected>...</option>
+      <option *ngFor="let setor of setores" [ngValue]="setor">{{ setores.nome }}</option>
+    </select>
+
+  </div> -->
+
+  <!-- <div class="form-group col-md-4">
+
+    <label for="qtd_sala">Quantidade de Salas disponíveis</label>
+
+    <input type="text" class="form-control" name="qtd_sala" placeholder="Informe o nº de salas disponíveis"
+      required
+      [(ngModel)]="setor.qtd_sala" #qtd_sala="ngModel">
+
+  </div> -->
+  
+
+</div> <!-- Fim Seleção do ComboBox -->
+
+<!--form (ngSubmit)="onSubmit(setorProvaForm)" #setorProvaForm="ngForm">
+  
+  <!-Form em Linha-->
+  
+
+  <!-- <button type="submit" class="btn btn-primary" [disabled]="!setorProvaForm.valid">Salvar</button> 
+
+</form-->
+
+<div class="row">
+
+  <div class="col"> <!-- Tabela -->
+
+
+    <table class="table table-striped table-sm">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Setor</th>
+          <th scope="col">Cidade</th>
+          <th scope="col">Bairro</th>
+          <th scope="col" class="text-center">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let setor of setores">
+          <th scope="row">{{setor.id}}</th>
+          <td>{{setor.nome}}</td>
+          <td>{{setor.localDeProva.nome}}</td>
+          <td>{{setor.bairro}}</td>
+          <td class="text-center">
+            <!-- <button class="btn btn-info" role="button" (click)="preencherForm(setor)">Organizar</button> -->
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap" (click)="preencherForm(setor)">Organizar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div> <!-- Fim Tabela -->
+
+  <!-- Formulário Toogle -->
+  <!--div class="col" *ngIf="mostraForm"> 
+
+    <p>{{ localTemp }}</p>
+
+    <div class="form-row">
+
+      <div class="form-group col-md-4">
+        <label for="localDeProva">Concurso</label>
+
+        <select id="local" class="form-control" name="local" (change)="selectConcurso(concurso)"
+          required
+          [(ngModel)]="concurso">
+          <option value="" selected>...</option>
+          <option *ngFor="let concurso of concursos" [ngValue]="concurso">{{ concurso?.nome }}</option>
+        </select>
+      </div>
+
+      <div class="form-group col-md-4">
+        <label for="salas">Qtd. de Salas</label>
+
+        <input class="form-control" type="text" [name]="salas" id="salas" value="0"
+          [(ngModel)]="qtd_sala"
+          #salas="ngModel"
+        >
+      </div>
+
+      <div class="form-group col-md-4">
+          <label for="iniSalas">Sala Início</label>
+
+          <input class="form-control" type="text" [name]="iniSalas" id="iniSalas" value="0"
+            [(ngModel)]="sala_inicial"
+            #iniSalas="ngModel"
+          >
+      </div>
+
+    </div>
+
+    <button class="btn btn-warning" (click)="onVoltar()">Cancelar</button>
+
+  </div--> 
+  <!-- Fim Formulário Toogle -->
+
+</div>
+
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Open modal for @mdo</button> -->
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">Open modal for @fat</button> -->
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Open modal for @getbootstrap</button> -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{ localTemp }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+              <label for="concurso">Concurso</label>
+      
+              <select id="concurso" class="form-control" name="local" (change)="selectConcurso(concurso)"
+                required
+                [(ngModel)]="concurso">
+                <option value="" selected>...</option>
+                <option *ngFor="let concurso of concursos" [ngValue]="concurso">{{ concurso?.nome }}</option>
+              </select>
+          </div>
+
+          <div class="form-row">
+            
+            <div class="form-group col-md-4">
+              <label for="salas">Qtd. Salas</label>
+      
+              <input class="form-control" type="text" [name]="salas" id="salas" value="0"
+                [(ngModel)]="qtd_sala"
+                #salas="ngModel"
+              > 
+            </div>
+            
+            <div class="form-group col-md-4">
+              <label for="iniSalas">Sala Início</label>
+    
+              <input class="form-control" type="text" [name]="iniSalas" id="iniSalas" value="0"
+                [(ngModel)]="sala_inicial"
+                #iniSalas="ngModel"
+              > 
+            </div>
+
+            <div class="form-group col-md-4">
+              <label for="carteiras">Qtd. Carteiras</label>
+    
+              <input class="form-control" type="text" [name]="carteiras" id="carteiras" value="0"
+                [(ngModel)]="qtd_carteiras"
+                #carteiras="ngModel"
+              >
+            </div>
+
+          </div>
+          
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Send message</button>
+      </div>
+    </div>
+  </div>
+</div>
