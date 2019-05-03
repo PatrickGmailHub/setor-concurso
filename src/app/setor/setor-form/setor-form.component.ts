@@ -28,7 +28,7 @@ export class SetorFormComponent implements OnInit {
   constructor(
     private setorService: SetorService,
     private route: ActivatedRoute,
-    // private dialogService: DialogService,
+    private dialogService: DialogService,
     private location: Location
 
     ) { }
@@ -79,14 +79,26 @@ export class SetorFormComponent implements OnInit {
     }
   }
 
-  /* onDelete() {
+  onDelete() {
     this.dialogService.confirma(`Deseja deletar ${this.setor.nome}`)
       .then((deleta: Boolean) => {
+
+        let teste: any = {}
+
         if(deleta) {
-          this.setorService.deletarSetor(this.setor).subscribe(dados => console.log(dados));
+
+          teste = {
+            "id": this.setor.id
+          }
+
+          teste = JSON.parse(teste);
+
+          console.log(teste);
+
+          this.setorService.deletarSetor(teste).subscribe(dados => console.log(dados));
         }
       });
-  } */
+  }
 
   ngOnDestroy(): void {
     this.inscricao.unsubscribe();

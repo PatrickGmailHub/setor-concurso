@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ConcursoService } from './concurso.service';
+import { EtapaProvaService } from './etapa-prova.service';
 
-describe('ConcursoService', () => {
+describe('EtapaProvaService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: ConcursoService = TestBed.get(ConcursoService);
+    const service: EtapaProvaService = TestBed.get(EtapaProvaService);
     expect(service).toBeTruthy();
   });
 });

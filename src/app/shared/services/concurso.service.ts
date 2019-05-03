@@ -17,6 +17,15 @@ export class ConcursoService {
     return this.http.get<Concurso[]>('./../api/direct_request_v2/concursos/cadastrados');
   }
 
+  getAllVestibular() {
+    return this.getAll().toPromise()
+      .then(result => {
+        result.filter((ok) => {
+          ok.tipoConcurso == 2
+        });
+      });
+  }
+
   getById(id: number) {
     return this.http.get<Concurso>(`./../api/direct_request_v2/concursos/${id}`);
   }

@@ -9,7 +9,7 @@
 <div class="row mb-3">
   <div class="col-md">
     <h1 *ngIf="!isNew" class="h2 border-left pl-2">
-      Detalhes do Setor/Prova
+      Organização Setor/Prova
     </h1>
     <h1 *ngIf="isNew" class="h2 border-left pl-2">
       Cadastrar Novo Setor/Prova
@@ -17,7 +17,7 @@
   </div>
 
   <div class="col-md">
-    <a routerLink="setor-concurso/lista" class="btn btn-success float-right">+ Listar Setores/Prova</a>
+    <a routerLink="/setor-concurso/lista" class="btn btn-success float-right">+ Listar Setores/Prova</a>
   </div>
 </div>
 
@@ -113,16 +113,35 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
-          <div class="form-group">
-              <label for="concurso">Concurso</label>
-      
-              <select id="concurso" class="form-control" name="local" (change)="selectConcurso(concurso)"
-                required
-                [(ngModel)]="concurso">
-                <option value="" selected>...</option>
-                <option *ngFor="let concurso of concursos" [ngValue]="concurso">{{ concurso?.nome }}</option>
-              </select>
+        <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+
+          <div class="form-row">
+
+            <div class="form-group col-md-6">
+                <label for="concurso">Concurso</label>
+        
+                <!-- <select id="concurso" class="form-control" name="local" (change)="selectConcurso(concurso)" -->
+                <select id="concurso" class="form-control" name="concurso"
+                  required
+                  [(ngModel)]="setorConcursoProva.concurso"
+                >
+                  <option value="" selected>...</option>
+                  <option *ngFor="let concurso of concursos" [ngValue]="concurso">{{ concurso?.descricao }}</option>
+                </select>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="etapaProva">Etapa da Prova</label>
+        
+                <!-- <select id="etapaProva" class="form-control" name="etapaProva" (change)="selectEtapaProva(etapaProva)" -->
+                <select id="etapaProva" class="form-control" name="etapaProva"
+                  required
+                  [(ngModel)]="setorConcursoProva.etapaProva">
+                  <option value="" selected>...</option>
+                  <option *ngFor="let etapaProva of etapaProvas" [ngValue]="etapaProva">{{ etapaProva?.nome }}</option>
+                </select>
+            </div>
+
           </div>
 
           <div class="form-row">
@@ -130,8 +149,8 @@
             <div class="form-group col-md-4">
               <label for="salas">Qtd. Salas</label>
       
-              <input class="form-control" type="text" [name]="salas" id="salas" value="0"
-                [(ngModel)]="qtd_sala"
+              <input class="form-control" type="text" name="salas" id="salas" value="0" required
+                [(ngModel)]="setorConcursoProva.qtdSalaProva"
                 #salas="ngModel"
               > 
             </div>
@@ -139,8 +158,8 @@
             <div class="form-group col-md-4">
               <label for="iniSalas">Sala Início</label>
     
-              <input class="form-control" type="text" [name]="iniSalas" id="iniSalas" value="0"
-                [(ngModel)]="sala_inicial"
+              <input class="form-control" type="text" name="iniSalas" id="iniSalas" value="0" required
+                [(ngModel)]="setorConcursoProva.salaInicio"
                 #iniSalas="ngModel"
               > 
             </div>
@@ -148,20 +167,23 @@
             <div class="form-group col-md-4">
               <label for="carteiras">Qtd. Carteiras</label>
     
-              <input class="form-control" type="text" [name]="carteiras" id="carteiras" value="0"
-                [(ngModel)]="qtd_carteiras"
+              <input class="form-control" type="text" name="carteiras" id="carteiras" value="0" required
+                [(ngModel)]="setorConcursoProva.qtdCarteiraSala"
                 #carteiras="ngModel"
               >
             </div>
 
           </div>
+
+          <!-- <button type="submit" class="btn btn-primary">Salvar</button> -->
           
-        </form>
-      </div>
+        <!-- </form> -->
+      <!-- </div> -->
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Send message</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Salvar</button>
       </div>
+    </form>
     </div>
   </div>
 </div>

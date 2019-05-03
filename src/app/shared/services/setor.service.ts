@@ -1,6 +1,7 @@
+import { Params } from '@angular/router';
 import { LocalDeProva } from '../local-de-prova';
 import { Setor } from '../setor';
-import { HttpClient, HttpHeaders, HttpHeaderResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpHeaderResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { LocalDeProvaService } from '../services/local-de-prova.service';
@@ -15,7 +16,8 @@ export class SetorService {
 
   localDeProva: LocalDeProva;
 
-  private headers: HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'})
+  private headers: HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+  // private params: HttpParams = new HttpParams({});
 
   constructor(
     private http: HttpClient,
@@ -56,10 +58,12 @@ export class SetorService {
     //return this.http.put<Setor>('./../api/direct_request_v2/teste/setor/atualizar', JSON.stringify(setor));
   }
 
-  deletarSetor(id: Setor): Observable<Setor> {
+  deletarSetor(id: any): Observable<any> {
     // return this.http.delete<Setor>('./../api/direct_request_v2/gerencial/supervisor/distribuicao_salas/setor/apagar', {headers: this.headers});
-    // return this.http.delete<Setor>('./../api/direct_request_v2/gerencial/supervisor/distribuicao_salas/setor/apagar');
-    return this.http.request<Setor>('delete', './../api/direct_request_v2/gerencial/supervisor/distribuicao_salas/setor/apagar', {headers: this.headers, body: id });
+    // return this.http.delete<any>('./../api/direct_request_v2/gerencial/supervisor/distribuicao_salas/setor/apagar', id);
+    // return this.http.request<any>('delete', './../api/direct_request_v2/gerencial/supervisor/distribuicao_salas/setor/apagar', {headers: this.headers, body: `{"id": ${id}}`});
+    return this.http.request<any>('delete', './../api/direct_request_v2/gerencial/supervisor/distribuicao_salas/setor/apagar', {headers: this.headers, body: id});
+    // return this.http.request<any>('delete', './../api/direct_request_v2/gerencial/supervisor/distribuicao_salas/setor/apagar', {body: id});
   }
 
 }

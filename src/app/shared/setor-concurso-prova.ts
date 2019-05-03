@@ -1,4 +1,3 @@
-import { LocalDeProva } from './local-de-prova';
 import { Setor } from './setor';
 import { Concurso } from 'src/app/shared/concurso';
 import { EtapaProva } from 'src/app/shared/etapa-prova';
@@ -6,14 +5,13 @@ import { EtapaProva } from 'src/app/shared/etapa-prova';
 export class SetorConcursoProva {
 
     constructor(
-        id?: number,
-        qtdSalaProva?: number,
-        qtdCarteiraSala?: number,
-        salaInicio?: number,
-        setor?: Setor,
-        concurso?: Concurso,
-        etapaProva?: EtapaProva,
-        localDeProva?: LocalDeProva
+        public id?: number,
+        public qtdSalaProva?: number,
+        public qtdCarteiraSala?: number,
+        public salaInicio?: number,
+        public setor?: Setor,
+        public concurso?: Concurso,
+        public etapaProva?: EtapaProva,
     ) {}
 
 }

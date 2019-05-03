@@ -1,11 +1,18 @@
+import { SetorConcursoProvaService } from './../shared/services/setor-concurso-prova.service';
+import { SetorConcursoProva } from './../shared/setor-concurso-prova';
+import { EtapaProvaService } from './../shared/services/etapa-prova.service';
+import { Concurso } from 'src/app/shared/concurso';
 import { Setor } from '../shared/setor';
 import { LocalDeProva } from '../shared/local-de-prova';
 import { LocalDeProvaService } from '../shared/services/local-de-prova.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { SetorService } from 'src/app/shared/services/setor.service';
 import { Location } from '@angular/common';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, pipe, Subscriber } from 'rxjs';
+import { ConcursoService } from '../shared/services/concurso.service';
+import { EtapaProva } from '../shared/etapa-prova';
+import { routerNgProbeToken } from '@angular/router/src/router_module';
 
 @Component({
   selector: 'app-setor-concurso-prova',
@@ -13,6 +20,10 @@ import { Observable, Subscription } from 'rxjs';
   styleUrls: ['./setor-concurso-prova.component.css']
 })
 export class SetorConcursoProvaComponent implements OnInit {
+
+  setorConcursoProva: SetorConcursoProva;
+
+  modal: string;
 
   local: LocalDeProva;
   locais: LocalDeProva[] = [];
@@ -22,6 +33,12 @@ export class SetorConcursoProvaComponent implements OnInit {
   setores: Setor[] = [];
   setoresAux: Setor[] = [];
 
+  concursos: Concurso[] = [];
+  concursoAtivo: Concurso;
+
+  etapaProvas: EtapaProva[] = [];
+  etapa: EtapaProva;
+  
   mostraTabela: boolean = false;
   mostraForm: boolean = false;
 
@@ -32,13 +49,20 @@ export class SetorConcursoProvaComponent implements OnInit {
   constructor(
     private setorService: SetorService,
     private localDeProvaService: LocalDeProvaService,
+    private concursoService: ConcursoService,
+    private etapaProvaService: EtapaProvaService,
+    private setorConcursoProvaService: SetorConcursoProvaService,
     private route: ActivatedRoute,
+    private router: Router,
     private location: Location
   ) { }
 
   ngOnInit() {
 
+    this.modal = ""
     this.setor = new Setor();
+
+    this.setorConcursoProva = new SetorConcursoProva();
 
     this.localDeProvaService.getAll().toPromise()
       .then(locaisDeProva => {
@@ -97,11 +121,53 @@ export class SetorConcursoProvaComponent implements OnInit {
   preencherForm(localSel: Setor) {
     this.mostraForm = true;
     this.localTemp = localSel;
-    console.log(this.localTemp);
+
+
+
+    this.setorConcursoProva.setor = localSel;
+
+    this.concursoService.getAll().toPromise()
+      .then(result => this.concursos = result.filter(result => result.tipoConcurso.id == 2))
+      .then(result => this.setorConcursoProva.concurso = result[0])
+
+    this.etapaProvaService.getAll().toPromise()
+      .then((result) => this.etapaProvas = result);
+
   }
 
   onVoltar() {
     this.mostraForm = false;
+  }
+
+  async onSubmit(f) {
+
+    console.log(this.setorConcursoProva);
+
+
+    let teste: any = {};
+
+    teste = {
+      "setor": {
+        "id": this.setorConcursoProva.setor.id
+      },
+      "concurso": {
+        "id": this.setorConcursoProva.concurso.id
+      },
+      "etapaProva": {
+        "id": this.setorConcursoProva.etapaProva.id
+      },
+      "qtdCarteiraSala": this.setorConcursoProva.qtdCarteiraSala,
+      "qtdSalaProva": this.setorConcursoProva.qtdSalaProva,
+      "salaInicio": this.setorConcursoProva.salaInicio
+    }
+
+    const dados = await this.setorConcursoProvaService.create(teste).toPromise()
+      .then(() => console.log(dados));
+
+    this.modal = "modal"  
+
+    this.router.navigate['/setor-concurso/lista'];
+    
   }
 
 }

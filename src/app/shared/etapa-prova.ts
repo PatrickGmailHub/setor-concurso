@@ -1,7 +1,7 @@
 export class EtapaProva {
 
     constructor(
-        public id_etapa_prova?: number,
+        public id?: number,
         public nome?: string,
     ){}
 
