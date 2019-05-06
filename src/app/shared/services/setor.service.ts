@@ -58,11 +58,11 @@ export class SetorService {
     //return this.http.put<Setor>('./../api/direct_request_v2/teste/setor/atualizar', JSON.stringify(setor));
   }
 
-  deletarSetor(id: any): Observable<any> {
+  deletarSetor(id: number): Observable<number> {
     // return this.http.delete<Setor>('./../api/direct_request_v2/gerencial/supervisor/distribuicao_salas/setor/apagar', {headers: this.headers});
-    // return this.http.delete<any>('./../api/direct_request_v2/gerencial/supervisor/distribuicao_salas/setor/apagar', id);
+    return this.http.delete<number>(`./../api/direct_request_v2/gerencial/supervisor/distribuicao_salas/setor/apagar/${id}`, {headers: this.headers});
     // return this.http.request<any>('delete', './../api/direct_request_v2/gerencial/supervisor/distribuicao_salas/setor/apagar', {headers: this.headers, body: `{"id": ${id}}`});
-    return this.http.request<any>('delete', './../api/direct_request_v2/gerencial/supervisor/distribuicao_salas/setor/apagar', {headers: this.headers, body: id});
+    // return this.http.request<any>('delete', './../api/direct_request_v2/gerencial/supervisor/distribuicao_salas/setor/apagar', {headers: this.headers, body: id});
     // return this.http.request<any>('delete', './../api/direct_request_v2/gerencial/supervisor/distribuicao_salas/setor/apagar', {body: id});
   }
 

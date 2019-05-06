@@ -1,3 +1,4 @@
+import { SetorConcursoProvaOrgComponent } from './setor-concurso-prova-org/setor-concurso-prova-org.component';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -9,6 +10,10 @@ const setorConcursoProvaRoutes: Routes = [
       path: 'setor-concurso/lista',
       component: SetorConcursoProvaComponent
   },
+  {
+    path: 'setor-concurso/edit',
+    component: SetorConcursoProvaOrgComponent
+  },
   /* {
       path: 'setor-concurso/new',
       component: SetorConcursoProvaListaComponent
@@ -16,7 +21,8 @@ const setorConcursoProvaRoutes: Routes = [
   {
       path: 'setor-concurso/:id/edit',
       component: SetorConcursoProvaFormComponent
-  }
+  },
+  
 
 ]
 

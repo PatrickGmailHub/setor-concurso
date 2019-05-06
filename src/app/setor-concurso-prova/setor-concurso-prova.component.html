@@ -1,7 +1,7 @@
 <nav class="mb-4">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-    <li class="breadcrumb-item active" *ngIf="!isNew">Detalhes</li>
+    <li class="breadcrumb-item active" *ngIf="!isNew">Organizar</li>
     <li class="breadcrumb-item active" *ngIf="isNew">Salvar</li>
   </ol>
 </nav>
@@ -11,23 +11,22 @@
     <h1 *ngIf="!isNew" class="h2 border-left pl-2">
       Organização Setor/Prova
     </h1>
-    <h1 *ngIf="isNew" class="h2 border-left pl-2">
+    <!-- <h1 *ngIf="isNew" class="h2 border-left pl-2">
       Cadastrar Novo Setor/Prova
-    </h1>
+    </h1> -->
   </div>
 
   <div class="col-md">
-    <a routerLink="/setor-concurso/lista" class="btn btn-success float-right">+ Listar Setores/Prova</a>
+    <a routerLink="/setor-concurso/edit" class="btn btn-success float-right">+ Listar Setores/Prova</a>
   </div>
 </div>
 
 
-<div class="form-row"> <!-- Seleção do ComboBox -->
+<div class="form-row"> <!-- Form In-Line -->
 
-  <div class="form-group col-md-4">
+  <div class="form-group col-md-5"> <!-- Começo do 1º Form-Group -->
 
     <label for="localDeProva">Cidades</label>
-
     <select id="local" class="form-control" name="local" (change)="selectSetor(local)"
       required
       [(ngModel)]="local"
@@ -35,14 +34,22 @@
       <option value="" selected>...</option>
       <option *ngFor="let local of locaisDeProva" [ngValue]="local">{{ local.nome }}</option>
     </select>
+  </div> <!-- Fim do 1º Form-Group -->
   
-  </div>
+  <div class="form-group col-md-4 ml-4 pt-5"> <!-- Começo do 2º Form-Group -->
+    <!-- Início dos CheckBoxs -->
+    <!-- <legend class="col-form-label">Selecione por categorias</legend> -->
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+      <label class="form-check-label" for="defaultCheck1">
+        Distribuídos
+      </label>
+    </div>
+    <!-- FIm dos checkBoxs -->
 
-  
-  
-
-</div> <!-- Fim Seleção do ComboBox -->
-
+  </div><!-- Fim do 2º Form-Group -->
+</div> <!-- Fim do Form In-Line -->
+<hr>
     <table class="table table-striped table-sm">
       <thead class="thead-dark">
         <tr>

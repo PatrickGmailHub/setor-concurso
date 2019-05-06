@@ -7,11 +7,13 @@ import { SetorConcursoProvaRoutingModule } from './setor-concurso-prova-routing.
 import { SetorConcursoProvaComponent } from './setor-concurso-prova.component';
 import { SetorConcursoProvaFormComponent } from './setor-concurso-prova-form/setor-concurso-prova-form.component';
 import { SetorConcursoProvaService } from '../shared/services/setor-concurso-prova.service';
+import { SetorConcursoProvaOrgComponent } from './setor-concurso-prova-org/setor-concurso-prova-org.component';
 
 @NgModule({
   declarations: [
     SetorConcursoProvaComponent,
-    SetorConcursoProvaFormComponent
+    SetorConcursoProvaFormComponent,
+    SetorConcursoProvaOrgComponent
   ],
   imports: [
     CommonModule,

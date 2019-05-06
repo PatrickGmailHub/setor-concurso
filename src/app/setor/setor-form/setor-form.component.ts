@@ -83,19 +83,19 @@ export class SetorFormComponent implements OnInit {
     this.dialogService.confirma(`Deseja deletar ${this.setor.nome}`)
       .then((deleta: Boolean) => {
 
-        let teste: any = {}
+        // let teste: any = {}
 
         if(deleta) {
 
-          teste = {
+          /* teste = {
             "id": this.setor.id
-          }
+          } */
 
-          teste = JSON.parse(teste);
+          // teste = JSON.parse(teste);
 
-          console.log(teste);
+          // console.log(teste);
 
-          this.setorService.deletarSetor(teste).subscribe(dados => console.log(dados));
+          this.setorService.deletarSetor(this.setor.id).subscribe(dados => console.log(dados));
         }
       });
   }
