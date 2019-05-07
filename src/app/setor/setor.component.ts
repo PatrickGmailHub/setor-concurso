@@ -58,6 +58,20 @@ export class SetorComponent implements OnInit {
 
     this.setor = await this.setorService.getSetor(id).toPromise();
 
+<<<<<<< HEAD
+=======
+    delete this.setor['version'];
+    delete this.setor['created_at'];
+    delete this.setor['updated_at'];
+    delete this.setor['deleted'];
+    delete this.setor.localDeProva['version'];
+    delete this.setor.localDeProva['created_at'];
+    delete this.setor.localDeProva['updated_at'];
+    delete this.setor.localDeProva['deleted'];
+
+    console.log(this.setor);
+
+>>>>>>> d714a9bf99a6f6cb562c47aaff06c3a2c9473220
     this.dialogService.confirma(`Deseja deletar "${this.setor.nome}"`)
       .then((deleta: Boolean) => {
 
