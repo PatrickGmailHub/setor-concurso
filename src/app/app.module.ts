@@ -14,7 +14,6 @@ import { SetorConcursoProvaModule } from './setor-concurso-prova/setor-concurso-
 import { SetorService } from './shared/services/setor.service';
 import { DialogService } from './shared/services/dialog.service';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +25,7 @@ import { DialogService } from './shared/services/dialog.service';
     SetorModule,
     SetorConcursoProvaModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [
     SetorService,

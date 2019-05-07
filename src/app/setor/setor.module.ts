@@ -12,6 +12,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormDebugComponent } from './form-debug/form-debug.component';
 import { SetorForm1Component } from './setor-form1/setor-form1.component';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
   declarations: [
     SetorComponent,
@@ -25,8 +27,10 @@ import { SetorForm1Component } from './setor-form1/setor-form1.component';
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
+  exports: [SetorComponent],
   providers: [
     // SetorService
   ]

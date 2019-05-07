@@ -28,7 +28,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let setor of setores">
+    <tr *ngFor="let setor of setoresPag">
       <th scope="row">{{setor.id}}</th>
       <td>{{setor.nome}}</td>
       <td>{{setor.localDeProva.nome}}</td>
@@ -40,3 +40,17 @@
     </tr>
   </tbody>
 </table>
+
+<div class="row">
+  <div class="col-md">
+    <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [maxSize]="5" [pageSize]="pageSize" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+  </div>
+
+  <div class="col-md">
+    <select class="custom-select float-right" style="width: auto" [(ngModel)]="pageSize">
+      <option [ngValue]="5">5 items por página</option>
+      <option [ngValue]="10">10 items por página</option>
+      <option [ngValue]="15">15 items por página</option>
+    </select>
+  </div>
+</div>
