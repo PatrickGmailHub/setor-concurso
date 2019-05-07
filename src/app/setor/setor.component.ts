@@ -2,7 +2,6 @@ import { ActivatedRoute } from '@angular/router';
 import { DialogService } from './../shared/services/dialog.service';
 import { LocalDeProva } from '../shared/local-de-prova';
 import { SetorService } from '../shared/services/setor.service';
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Setor } from '../shared/setor';
 
@@ -15,6 +14,10 @@ export class SetorComponent implements OnInit {
 
   setores: Setor[];
   setor: Setor;
+
+  page: number = 1;
+  pageSize: number = 5;
+  collectionSize: number;
 
   constructor(
     private setorService: SetorService,
@@ -41,8 +44,10 @@ export class SetorComponent implements OnInit {
 
         });
 
-      });
-      
+        this.collectionSize = this.setores.length;
+        
+      }).then(() => this.setoresPag);
+
   }
 
   teste() {
@@ -60,11 +65,6 @@ export class SetorComponent implements OnInit {
 
     this.setor = await this.setorService.getSetor(id).toPromise();
 
-    // this.setor = JSON.parse(jsonId);
-
-    // console.log(this.setor);
-    // JSON.parse(jsonId);
-
     delete this.setor['version'];
     delete this.setor['created_at'];
     delete this.setor['updated_at'];
@@ -74,31 +74,23 @@ export class SetorComponent implements OnInit {
     delete this.setor.localDeProva['updated_at'];
     delete this.setor.localDeProva['deleted'];
 
-    // console.log(JSON.parse(jsonId));
-    // console.log(jsonId);
     console.log(this.setor);
 
     this.dialogService.confirma(`Deseja deletar "${this.setor.nome}"`)
       .then((deleta: Boolean) => {
 
-        // let teste: any = {}
-
         if(deleta) {
 
-          /* teste = {
-            "id": this.setor.id
-          } */
-
-          // teste = JSON.parse(teste)
-
-          // console.log(teste);
-          
-          // this.setorService.deletarSetor(JSON.parse(jsonId)).toPromise()
           this.setorService.deletarSetor(this.setor.id).toPromise()
             .then((dados) => console.log(dados))
         }
       });
 
+  }
+
+  get setoresPag() {
+    return this.setores
+      .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
   }
 
 }
