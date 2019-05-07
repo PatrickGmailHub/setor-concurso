@@ -13,6 +13,9 @@ import { Observable, Subscription, pipe, Subscriber } from 'rxjs';
 import { ConcursoService } from '../shared/services/concurso.service';
 import { EtapaProva } from '../shared/etapa-prova';
 import { routerNgProbeToken } from '@angular/router/src/router_module';
+import * as $ from './../../../node_modules/jquery/';
+
+declare var $: any;
 
 @Component({
   selector: 'app-setor-concurso-prova',
@@ -24,6 +27,8 @@ export class SetorConcursoProvaComponent implements OnInit {
   setorConcursoProva: SetorConcursoProva;
 
   modal: string;
+
+  distribuidos: boolean = false;
 
   local: LocalDeProva;
   locais: LocalDeProva[] = [];
@@ -105,6 +110,12 @@ export class SetorConcursoProvaComponent implements OnInit {
             this.mostraTabela = true;
           }
 
+          //Implementar lógica do checkBox
+          if (this.distribuidos) {
+
+          }
+
+
         });
     });
 
@@ -139,10 +150,14 @@ export class SetorConcursoProvaComponent implements OnInit {
     this.mostraForm = false;
   }
 
+  buscaDist(valor) {
+    
+    console.log(valor);
+  }
+
   async onSubmit(f) {
 
     console.log(this.setorConcursoProva);
-
 
     let teste: any = {};
 
@@ -162,7 +177,10 @@ export class SetorConcursoProvaComponent implements OnInit {
     }
 
     const dados = await this.setorConcursoProvaService.create(teste).toPromise()
-      .then(() => console.log(dados));
+      .then(() => {
+        console.log(dados)
+        $('#exampleModal').modal('hide');
+      });
 
     this.modal = "modal"  
 

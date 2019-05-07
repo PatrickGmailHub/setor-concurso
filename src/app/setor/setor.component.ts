@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DialogService } from './../shared/services/dialog.service';
 import { LocalDeProva } from '../shared/local-de-prova';
 import { SetorService } from '../shared/services/setor.service';
@@ -22,7 +22,8 @@ export class SetorComponent implements OnInit {
   constructor(
     private setorService: SetorService,
     private dialogService: DialogService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -67,6 +68,9 @@ export class SetorComponent implements OnInit {
             .then((dados) => console.log(dados))
         }
       });
+
+      // this.router.navigate['/setor/lista'];
+      window.location.reload();
 
   }
 

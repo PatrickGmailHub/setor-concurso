@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-setor-form',
@@ -34,6 +35,10 @@ export class SetorFormComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+
+    $(document).ready(function(){
+      $('#cep').mask('00000-000');
+    });
 
     this.setor = new Setor();
 
@@ -68,14 +73,20 @@ export class SetorFormComponent implements OnInit {
     });
   }
 
+  cepMask(valor) {
+    console.log(valor);
+    this.setor.cep = $('#cep').mask('00000-000');
+  }
+
   async onSubmit(form): Promise<void> {
 
     if(this.isNew) {
       const dados = await this.setorService.salvarSetor(this.setor).toPromise();
-      console.log(dados);
+      // console.log(dados);
     } else {
       const dados = await this.setorService.atualizarSetor(this.setor).toPromise();
-      console.log(dados);
+      // $('#btn').modal('show');
+      // console.log(dados);
     }
   }
 
@@ -83,20 +94,10 @@ export class SetorFormComponent implements OnInit {
     this.dialogService.confirma(`Deseja deletar ${this.setor.nome}`)
       .then((deleta: Boolean) => {
 
-        // let teste: any = {}
-
         if(deleta) {
-
-          /* teste = {
-            "id": this.setor.id
-          } */
-
-          // teste = JSON.parse(teste);
-
-          // console.log(teste);
-
           this.setorService.deletarSetor(this.setor.id).subscribe(dados => console.log(dados));
         }
+
       });
   }
 

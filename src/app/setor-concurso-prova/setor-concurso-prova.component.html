@@ -40,7 +40,7 @@
     <!-- Início dos CheckBoxs -->
     <!-- <legend class="col-form-label">Selecione por categorias</legend> -->
     <div class="form-check form-check-inline">
-      <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+      <input class="form-check-input" type="checkbox"  name="distribuidos" [(ngModel)]="distribuidos" (change)="buscaDist(distribuidos)" value="" id="defaultCheck1">
       <label class="form-check-label" for="defaultCheck1">
         Distribuídos
       </label>
@@ -123,6 +123,7 @@
               <label for="salas">Qtd. Salas</label>
       
               <input class="form-control" type="text" name="salas" id="salas" value="0" required
+                pattern="^\d*$"
                 [(ngModel)]="setorConcursoProva.qtdSalaProva"
                 #salas="ngModel"
               > 
@@ -132,6 +133,7 @@
               <label for="iniSalas">Sala Início</label>
     
               <input class="form-control" type="text" name="iniSalas" id="iniSalas" value="0" required
+                pattern="^\d*$"
                 [(ngModel)]="setorConcursoProva.salaInicio"
                 #iniSalas="ngModel"
               > 
@@ -141,6 +143,7 @@
               <label for="carteiras">Qtd. Carteiras</label>
     
               <input class="form-control" type="text" name="carteiras" id="carteiras" value="0" required
+                pattern="^\d*$"
                 [(ngModel)]="setorConcursoProva.qtdCarteiraSala"
                 #carteiras="ngModel"
               >

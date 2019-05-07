@@ -85,6 +85,7 @@
         <input type="text" class="form-control"
           name="cep" id="cep" placeholder="C.E.P do setor"
           required
+          (input)="cepMask($event.target.value)"
           [(ngModel)]="setor.cep"
           #cep="ngModel"
         >
@@ -125,7 +126,7 @@
     <div class="form-group col-md-2">
       <label for="salas">Qtd. de salas</label>
 
-      <input class="form-control" type="text" name="salas" [value]=0 required
+      <input class="form-control" type="text" name="salas" id="salas" [value]=0 required
         [(ngModel)]="setor.qtd_sala"
         #salas="ngModel">
 
@@ -135,12 +136,14 @@
       <label for="latitude">Latitude</label>
 
       <input type="text" class="form-control" name="latitude" placeholder="Digite a latitude"
+        pattern="^\d*$"
         [(ngModel)]="setor.latitude" #latitude="ngModel">
     </div>
 
     <div class="form-group col-md-5">
       <label for="longitude">Longitude</label>
       <input type="text" class="form-control" name="longitude" placeholder="Digite a longitude"
+        pattern="^\d*$"
         [(ngModel)]="setor.longitude" #longitude="ngModel">
 
     </div>
