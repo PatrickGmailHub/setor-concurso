@@ -27,7 +27,8 @@
   <div class="form-group col-md-5"> <!-- Começo do 1º Form-Group -->
 
     <label for="localDeProva">Cidades</label>
-    <select id="local" class="form-control" name="local" (change)="selectSetor(local)"
+    <!-- <select id="local" class="form-control" name="local" (change)="selectSetor(localInput)" #localInput -->
+    <select id="local" class="form-control" name="local" (change)="selectSetor(local)" #localInput
       required
       [(ngModel)]="local"
       >
@@ -40,7 +41,7 @@
     <!-- Início dos CheckBoxs -->
     <!-- <legend class="col-form-label">Selecione por categorias</legend> -->
     <div class="form-check form-check-inline">
-      <input class="form-check-input" type="checkbox"  name="distribuidos" [(ngModel)]="distribuidos" (change)="buscaDist(distribuidos)" value="" id="defaultCheck1">
+      <input class="form-check-input" type="checkbox"  name="distribuidos" [(ngModel)]="distribuidos" id="distribuidos" (change)="buscaDist(localInput.value)">
       <label class="form-check-label" for="defaultCheck1">
         Distribuídos
       </label>
@@ -66,8 +67,11 @@
           <td>{{setor.nome}}</td>
           <td>{{setor.localDeProva.nome}}</td>
           <td>{{setor.bairro}}</td>
-          <td class="text-center">
+          <td class="text-center" *ngIf="!distribuidos">
             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap" (click)="preencherForm(setor)">Organizar</button>
+          </td>
+          <td class="text-center" *ngIf="distribuidos">
+            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap" (click)="preencherForm(setor)">Editar</button>
           </td>
         </tr>
       </tbody>

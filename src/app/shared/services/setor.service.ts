@@ -17,6 +17,7 @@ export class SetorService {
   localDeProva: LocalDeProva;
 
   private headers: HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+  private params: HttpParams = new HttpParams();
   // private params: HttpParams = new HttpParams({});
 
   constructor(
@@ -31,6 +32,10 @@ export class SetorService {
   getSetoresP(): Promise<Setor[]> {
     return this.http.get('./../api/direct_request_v2/gerencial/supervisor/distribuicao_salas/setor/buscar').toPromise()
       .then(response => response as Setor[]);
+  }
+
+  getAllByLocalProva(idLocalProva: number): Observable<Setor[]> {
+    return this.http.get<Setor[]>('./../api/direct_request_v2/gerencial/supervisor/distribuicao_salas/setor/buscar_setor_por_local_prova', {params: this.params.set('idLocalDeProva',`${idLocalProva}`)});
   }
 
   getSetor(id: number): Observable<Setor> {
