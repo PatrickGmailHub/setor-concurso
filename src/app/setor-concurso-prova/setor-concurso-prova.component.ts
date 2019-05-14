@@ -26,12 +26,8 @@ export class SetorConcursoProvaComponent implements OnInit {
 
   setorConcursoProva: SetorConcursoProva;
 
-  modal: string;
+  distribuidos: boolean = true;
 
-  distribuidos: boolean = false;
-
-  local: LocalDeProva;
-  locais: LocalDeProva[] = [];
   locaisDeProva: LocalDeProva[] = [];
 
   setor: Setor;
@@ -44,9 +40,6 @@ export class SetorConcursoProvaComponent implements OnInit {
   etapaProvas: EtapaProva[] = [];
   etapa: EtapaProva;
   
-  mostraTabela: boolean = false;
-  mostraForm: boolean = false;
-
   localTemp: any;
 
   inscricao: Subscription;
@@ -64,7 +57,6 @@ export class SetorConcursoProvaComponent implements OnInit {
 
   ngOnInit() {
 
-    this.modal = ""
     this.setor = new Setor();
 
     this.setorConcursoProva = new SetorConcursoProva();
@@ -81,19 +73,56 @@ export class SetorConcursoProvaComponent implements OnInit {
           delete element['deleted'];
 
         });
-
-        // console.log(this.locaisDeProva);
       });
+  }
 
+  extrairSetorDistribuido (item, index) {
+    //TODO
+    this.setoresAux.forEach(element => {
+      if(this.setores[index].id == element.id) {
+        this.setores.splice(index,1)
+      }
+    })
   }
 
   selectSetor(valor) {
 
-    this.setores = [];
-    // this.localTemp = valor
-    this.mostraForm = false;
+    this.setores = new Array();
+    this.setoresAux = new Array();
 
-    this.setorService.getSetores().subscribe(setores => {
+    if(this.distribuidos) {
+      this.setorConcursoProvaService.getAllByLocalProva(valor['id']).subscribe(element => {
+        element.forEach(element => {
+          this.setores.push(element.setor)
+        });
+      });
+    } else {
+      this.setorConcursoProvaService.getAllByLocalProva(valor['id']).toPromise()
+        .then(element => {
+          element.forEach(element => {
+            this.setoresAux.push(element.setor);
+          });
+        })
+        .then(() => {
+          this.setorService.getAllByLocalProva(valor['id']).toPromise()
+            .then(element => {
+              this.setores = element;
+            })
+            .then(() => {
+              this.setoresAux.forEach(element => {
+                let index = 0;
+                this.setores.forEach(el => {
+                  if(el.id == element.id) {
+                    this.setores.splice(index,1);
+                  }
+                  index++;
+                });
+              });
+            });
+        });
+    }
+
+    /* this.setorService.getSetores().subscribe(setores => {
         setores.filter(element => {
 
           delete element['version'];
@@ -110,30 +139,19 @@ export class SetorConcursoProvaComponent implements OnInit {
             this.mostraTabela = true;
           }
 
-          //Implementar lógica do checkBox
-          if (this.distribuidos) {
-
-          }
-
-
         });
-    });
 
-    /* this.setorService.getSetores().pipe<Setor[]>(
-      // this.setores = await setores.filter(element => element.localDeProva.id == valor['id'])
-      find(element => element.localDeProva.id == valor['id'])
-    ).subscribe(element1 => this.setores) */
+        //Implementar lógica do checkBox checked...
+        if (this.distribuidos) {
+          console.log(this.buscaDist(valor['id']))
+        }
 
-    // console.log(this.setores)
+    }); */
 
   }
 
-
   preencherForm(localSel: Setor) {
-    this.mostraForm = true;
     this.localTemp = localSel;
-
-
 
     this.setorConcursoProva.setor = localSel;
 
@@ -146,13 +164,19 @@ export class SetorConcursoProvaComponent implements OnInit {
 
   }
 
-  onVoltar() {
-    this.mostraForm = false;
-  }
+  buscaDist(valor: any) {
 
-  buscaDist(valor) {
-    
-    console.log(valor);
+    valor = JSON.stringify(valor);
+    let valorString: string = valor;
+
+    valor = valorString.substr(1, valorString.indexOf(':')-1)
+
+    var valorEnviar = {
+      "id": valor
+    }
+
+    this.selectSetor(valorEnviar);
+
   }
 
   async onSubmit(f) {
@@ -181,8 +205,6 @@ export class SetorConcursoProvaComponent implements OnInit {
         console.log(dados)
         $('#exampleModal').modal('hide');
       });
-
-    this.modal = "modal"  
 
     this.router.navigate['/setor-concurso/lista'];
     
