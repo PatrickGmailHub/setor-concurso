@@ -14,6 +14,7 @@ import { ConcursoService } from '../shared/services/concurso.service';
 import { EtapaProva } from '../shared/etapa-prova';
 import { routerNgProbeToken } from '@angular/router/src/router_module';
 import * as $ from './../../../node_modules/jquery/';
+import { element } from '@angular/core/src/render3';
 
 declare var $: any;
 
@@ -34,7 +35,7 @@ export class SetorConcursoProvaComponent implements OnInit {
   setores: Setor[] = [];
   setoresAux: Setor[] = [];
 
-  concursos: Concurso[] = [];
+  concurso: Concurso;
   concursoAtivo: Concurso;
 
   etapaProvas: EtapaProva[] = [];
@@ -97,10 +98,11 @@ export class SetorConcursoProvaComponent implements OnInit {
         });
       });
     } else {
+
       this.setorConcursoProvaService.getAllByLocalProva(valor['id']).toPromise()
         .then(element => {
-          element.forEach(element => {
-            this.setoresAux.push(element.setor);
+          element.forEach(el => {
+            this.setoresAux.push(el.setor);
           });
         })
         .then(() => {
@@ -151,18 +153,103 @@ export class SetorConcursoProvaComponent implements OnInit {
   }
 
   preencherForm(localSel: Setor) {
-    this.localTemp = localSel;
 
-    this.setorConcursoProva.setor = localSel;
+    // console.log(localSel.id)
+
+    this.concursoService.getAll().forEach(element => {
+      this.concurso = element.find(el => el.tipoConcurso.id == 2)
+      console.log(this.concurso)
+    })
+      .then(() => {
+        this.etapaProvaService.getAll().toPromise()
+        .then((result) => this.etapaProvas = result);
+      })
+      .then(() => {
+          //TODO - implementar lógica de Organizar o setor ou editar que já foi organizado...
+          if(this.distribuidos) {
+            this.setorConcursoProvaService.getAllByLocalProva(localSel.localDeProva.id).forEach(element => {
+              this.setorConcursoProva = element.find(el => el.setor.id == localSel.id)
+              console.log(this.setorConcursoProva);
+            });
+            this.setorConcursoProva.concurso = this.concurso;
+            
+          } else {
+            this.setorConcursoProva.qtdCarteiraSala = null;
+            this.setorConcursoProva.qtdSalaProva = null;
+            this.setorConcursoProva.salaInicio = null;
+            this.setorConcursoProva.id = null;
+          }
+      });
+      
+  }
+
+  // V1
+  /* preencherForm(localSel: Setor) {
+
+    console.log(localSel.id)
 
     this.concursoService.getAll().toPromise()
       .then(result => this.concursos = result.filter(result => result.tipoConcurso.id == 2))
-      .then(result => this.setorConcursoProva.concurso = result[0])
+      .then(result => {
+        this.setorConcursoProva.concurso = result[0]
+      })
+      .then(() => {
+        this.etapaProvaService.getAll().toPromise()
+        .then((result) => this.etapaProvas = result);
+      }).then(() => {
+          //TODO - implementar lógica de Organizar o setor ou editar que já foi organizado...
+          if(this.distribuidos) {
+            this.setorConcursoProvaService.getAllByLocalProva(localSel.localDeProva.id).forEach(element => {
+              this.setorConcursoProva = element.find(el => el.setor.id == localSel.id)
+              console.log(this.setorConcursoProva);
+            });
+          } else {
+            this.setorConcursoProva.qtdCarteiraSala = null;
+            this.setorConcursoProva.qtdSalaProva = null;
+            this.setorConcursoProva.salaInicio = null;
+            this.setorConcursoProva.id = null;
+          }
+      });
+      
+  } */
+
+  // V2
+  /* preencherForm(localSel: Setor) {
+    // this.localTemp = localSel;
+
+    this.setorConcursoProva.setor = localSel;
+
+    this.setorConcursoProva.qtdCarteiraSala = null;
+    this.setorConcursoProva.qtdSalaProva = null;
+    this.setorConcursoProva.salaInicio = null;
+    this.setorConcursoProva.id = null;
+    this.setorConcursoProva.etapaProva = null;
+    
+    this.concursoService.getAll().toPromise()
+      .then(result => this.concursos = result.filter(result => result.tipoConcurso.id == 2))
+      .then(result => this.setorConcursoProva.concurso = result[0]);
 
     this.etapaProvaService.getAll().toPromise()
       .then((result) => this.etapaProvas = result);
 
-  }
+    //TODO - implementar lógica de Organizar o setor ou editar que já foi organizado...
+    if(this.distribuidos) {
+      this.setorConcursoProvaService.getAllByLocalProva(localSel.localDeProva.id).forEach(element => {
+        element.filter(el => {
+          el.setor.id == localSel.id;
+        });
+        this.setorConcursoProva = element[0];
+        this.setorConcursoProva.etapaProva = element[0].etapaProva;
+        console.log(this.setorConcursoProva);
+      });
+    } else {
+      this.setorConcursoProva.qtdCarteiraSala = null;
+      this.setorConcursoProva.qtdSalaProva = null;
+      this.setorConcursoProva.salaInicio = null;
+      this.setorConcursoProva.id = null;
+    }
+
+  } */
 
   buscaDist(valor: any) {
 
@@ -178,35 +265,69 @@ export class SetorConcursoProvaComponent implements OnInit {
     this.selectSetor(valorEnviar);
 
   }
+  
+  /* resetarModal() {
+    this.setorConcursoProva = null;
+  } */
 
   async onSubmit(f) {
 
-    console.log(this.setorConcursoProva);
+    if(this.distribuidos) {
+      //TODO
+      console.log('Atualizar')
 
-    let teste: any = {};
+      let teste = {
+        "id": this.setorConcursoProva.id,
+        "setor": {
+          "id": this.setorConcursoProva.setor.id
+        },
+        "concurso": {
+          "id": this.setorConcursoProva.concurso.id
+        },
+        "etapaProva": {
+          "id": this.setorConcursoProva.etapaProva.id
+        },
+        "qtdCarteiraSala": this.setorConcursoProva.qtdCarteiraSala,
+        "qtdSalaProva": this.setorConcursoProva.qtdSalaProva,
+        "salaInicio": this.setorConcursoProva.salaInicio
+      }
 
-    teste = {
-      "setor": {
-        "id": this.setorConcursoProva.setor.id
-      },
-      "concurso": {
-        "id": this.setorConcursoProva.concurso.id
-      },
-      "etapaProva": {
-        "id": this.setorConcursoProva.etapaProva.id
-      },
-      "qtdCarteiraSala": this.setorConcursoProva.qtdCarteiraSala,
-      "qtdSalaProva": this.setorConcursoProva.qtdSalaProva,
-      "salaInicio": this.setorConcursoProva.salaInicio
+      const dados = await this.setorConcursoProvaService.update(teste).toPromise()
+        .then(() => {
+          console.log(dados)
+          $('#exampleModal').modal('hide');
+        });
+  
+      this.router.navigate['/setor-concurso/lista'];
+
+    } else {
+      console.log(this.setorConcursoProva);
+
+      let teste: any = {};
+  
+      teste = {
+        "setor": {
+          "id": this.setorConcursoProva.setor.id
+        },
+        "concurso": {
+          "id": this.setorConcursoProva.concurso.id
+        },
+        "etapaProva": {
+          "id": this.setorConcursoProva.etapaProva.id
+        },
+        "qtdCarteiraSala": this.setorConcursoProva.qtdCarteiraSala,
+        "qtdSalaProva": this.setorConcursoProva.qtdSalaProva,
+        "salaInicio": this.setorConcursoProva.salaInicio
+      }
+  
+      const dados = await this.setorConcursoProvaService.create(teste).toPromise()
+        .then(() => {
+          console.log(dados)
+          $('#exampleModal').modal('hide');
+        });
+  
+      this.router.navigate['/setor-concurso/lista'];
     }
-
-    const dados = await this.setorConcursoProvaService.create(teste).toPromise()
-      .then(() => {
-        console.log(dados)
-        $('#exampleModal').modal('hide');
-      });
-
-    this.router.navigate['/setor-concurso/lista'];
     
   }
 

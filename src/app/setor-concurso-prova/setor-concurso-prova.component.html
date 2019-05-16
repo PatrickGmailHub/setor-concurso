@@ -9,7 +9,7 @@
 <div class="row mb-3">
   <div class="col-md">
     <h1 *ngIf="!isNew" class="h2 border-left pl-2">
-      Organização Setor/Prova
+      Organizar Setor/Prova
     </h1>
     <!-- <h1 *ngIf="isNew" class="h2 border-left pl-2">
       Cadastrar Novo Setor/Prova
@@ -68,10 +68,10 @@
           <td>{{setor.localDeProva.nome}}</td>
           <td>{{setor.bairro}}</td>
           <td class="text-center" *ngIf="!distribuidos">
-            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap" (click)="preencherForm(setor)">Organizar</button>
+            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap" (click)="preencherForm(setor)">Organizar</button>
           </td>
           <td class="text-center" *ngIf="distribuidos">
-            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap" (click)="preencherForm(setor)">Editar</button>
+            <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap" (click)="preencherForm(setor)">Editar</button>
           </td>
         </tr>
       </tbody>
@@ -156,8 +156,9 @@
           </div>
 
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Salvar</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button> <!-- (click)="resetarModal()" -->
+            <button type="submit" class="btn btn-primary" [disabled]="!f.valid" *ngIf="distribuidos">Editar</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!f.valid" *ngIf="!distribuidos">Salvar</button>
           </div>
         </form>
     </div>
