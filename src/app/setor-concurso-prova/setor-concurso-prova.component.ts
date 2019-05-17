@@ -35,6 +35,7 @@ export class SetorConcursoProvaComponent implements OnInit {
   setores: Setor[] = [];
   setoresAux: Setor[] = [];
 
+  concursos: Concurso[] = [];
   concurso: Concurso;
   concursoAtivo: Concurso;
 
@@ -124,132 +125,34 @@ export class SetorConcursoProvaComponent implements OnInit {
         });
     }
 
-    /* this.setorService.getSetores().subscribe(setores => {
-        setores.filter(element => {
-
-          delete element['version'];
-          delete element['created_at'];
-          delete element['updated_at'];
-          delete element['deleted'];
-          delete element.localDeProva['version'];
-          delete element.localDeProva['created_at'];
-          delete element.localDeProva['updated_at'];
-          delete element.localDeProva['deleted'];
-
-          if(element.localDeProva.id == valor['id']) {
-            this.setores.push(element);
-            this.mostraTabela = true;
-          }
-
-        });
-
-        //Implementar lógica do checkBox checked...
-        if (this.distribuidos) {
-          console.log(this.buscaDist(valor['id']))
-        }
-
-    }); */
-
   }
 
   preencherForm(localSel: Setor) {
 
-    // console.log(localSel.id)
+    this.setorConcursoProva = new SetorConcursoProva();
 
-    this.concursoService.getAll().forEach(element => {
-      this.concurso = element.find(el => el.tipoConcurso.id == 2)
-      console.log(this.concurso)
-    })
+    this.concursoService.getAll().toPromise()
+      .then(result => this.concursos = result.filter(result => result.tipoConcurso.id == 2))
+      .then(result => this.concurso = result[0])
+      
       .then(() => {
         this.etapaProvaService.getAll().toPromise()
-        .then((result) => this.etapaProvas = result);
-      })
-      .then(() => {
-          //TODO - implementar lógica de Organizar o setor ou editar que já foi organizado...
+        .then((result) => this.etapaProvas = result)
+        .then(() => {
           if(this.distribuidos) {
             this.setorConcursoProvaService.getAllByLocalProva(localSel.localDeProva.id).forEach(element => {
-              this.setorConcursoProva = element.find(el => el.setor.id == localSel.id)
+              this.setorConcursoProva = element.find(el => el.setor.id == localSel.id);
+              //Processo abaixo sempre precisa ser feito para preencher os objetos internos...
+              this.setorConcursoProva.concurso = this.concursos.find((concurso) => concurso.id === this.setorConcursoProva.concurso.id);
+              this.setorConcursoProva.etapaProva = this.etapaProvas.find((etapaProva) => etapaProva.id === this.setorConcursoProva.etapaProva.id);
               console.log(this.setorConcursoProva);
             });
-            this.setorConcursoProva.concurso = this.concurso;
-            
-          } else {
-            this.setorConcursoProva.qtdCarteiraSala = null;
-            this.setorConcursoProva.qtdSalaProva = null;
-            this.setorConcursoProva.salaInicio = null;
-            this.setorConcursoProva.id = null;
-          }
+          } 
+        });
       });
+      
       
   }
-
-  // V1
-  /* preencherForm(localSel: Setor) {
-
-    console.log(localSel.id)
-
-    this.concursoService.getAll().toPromise()
-      .then(result => this.concursos = result.filter(result => result.tipoConcurso.id == 2))
-      .then(result => {
-        this.setorConcursoProva.concurso = result[0]
-      })
-      .then(() => {
-        this.etapaProvaService.getAll().toPromise()
-        .then((result) => this.etapaProvas = result);
-      }).then(() => {
-          //TODO - implementar lógica de Organizar o setor ou editar que já foi organizado...
-          if(this.distribuidos) {
-            this.setorConcursoProvaService.getAllByLocalProva(localSel.localDeProva.id).forEach(element => {
-              this.setorConcursoProva = element.find(el => el.setor.id == localSel.id)
-              console.log(this.setorConcursoProva);
-            });
-          } else {
-            this.setorConcursoProva.qtdCarteiraSala = null;
-            this.setorConcursoProva.qtdSalaProva = null;
-            this.setorConcursoProva.salaInicio = null;
-            this.setorConcursoProva.id = null;
-          }
-      });
-      
-  } */
-
-  // V2
-  /* preencherForm(localSel: Setor) {
-    // this.localTemp = localSel;
-
-    this.setorConcursoProva.setor = localSel;
-
-    this.setorConcursoProva.qtdCarteiraSala = null;
-    this.setorConcursoProva.qtdSalaProva = null;
-    this.setorConcursoProva.salaInicio = null;
-    this.setorConcursoProva.id = null;
-    this.setorConcursoProva.etapaProva = null;
-    
-    this.concursoService.getAll().toPromise()
-      .then(result => this.concursos = result.filter(result => result.tipoConcurso.id == 2))
-      .then(result => this.setorConcursoProva.concurso = result[0]);
-
-    this.etapaProvaService.getAll().toPromise()
-      .then((result) => this.etapaProvas = result);
-
-    //TODO - implementar lógica de Organizar o setor ou editar que já foi organizado...
-    if(this.distribuidos) {
-      this.setorConcursoProvaService.getAllByLocalProva(localSel.localDeProva.id).forEach(element => {
-        element.filter(el => {
-          el.setor.id == localSel.id;
-        });
-        this.setorConcursoProva = element[0];
-        this.setorConcursoProva.etapaProva = element[0].etapaProva;
-        console.log(this.setorConcursoProva);
-      });
-    } else {
-      this.setorConcursoProva.qtdCarteiraSala = null;
-      this.setorConcursoProva.qtdSalaProva = null;
-      this.setorConcursoProva.salaInicio = null;
-      this.setorConcursoProva.id = null;
-    }
-
-  } */
 
   buscaDist(valor: any) {
 
@@ -265,10 +168,6 @@ export class SetorConcursoProvaComponent implements OnInit {
     this.selectSetor(valorEnviar);
 
   }
-  
-  /* resetarModal() {
-    this.setorConcursoProva = null;
-  } */
 
   async onSubmit(f) {
 
@@ -276,7 +175,9 @@ export class SetorConcursoProvaComponent implements OnInit {
       //TODO
       console.log('Atualizar')
 
-      let teste = {
+      let teste: any = {};
+
+      teste = {
         "id": this.setorConcursoProva.id,
         "setor": {
           "id": this.setorConcursoProva.setor.id

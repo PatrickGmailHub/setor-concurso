@@ -4,7 +4,7 @@ import { SetorService } from '../../shared/services/setor.service';
 import { Setor } from '../../shared/setor';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import * as $ from 'jquery';
 
@@ -30,6 +30,7 @@ export class SetorFormComponent implements OnInit {
     private setorService: SetorService,
     private route: ActivatedRoute,
     private dialogService: DialogService,
+    private router: Router,
     private location: Location
 
     ) { }
@@ -82,9 +83,11 @@ export class SetorFormComponent implements OnInit {
 
     if(this.isNew) {
       const dados = await this.setorService.salvarSetor(this.setor).toPromise();
+      this.router.navigate['/setor/lista'];
       // console.log(dados);
     } else {
       const dados = await this.setorService.atualizarSetor(this.setor).toPromise();
+      this.router.navigate['/setor/lista'];
       // $('#btn').modal('show');
       // console.log(dados);
     }

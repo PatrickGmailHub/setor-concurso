@@ -57,7 +57,7 @@
         required
         [(ngModel)]="setor.localDeProva">
         <option value="" selected>...</option>
-        <option *ngFor="let cidade of locaisDeProva" [ngValue]="cidade">{{ cidade.nome }}</option>
+        <option *ngFor="let cidade of locaisDeProva" [ngValue]="cidade">{{ cidade?.nome }}</option>
       </select>
     </div>
 

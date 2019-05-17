@@ -104,7 +104,7 @@
                   [(ngModel)]="setorConcursoProva.concurso"
                 >
                   <option value="" selected>...</option>
-                  <option *ngFor="let concurso of concursos" [ngValue]="concurso">{{ concurso?.descricao }}</option>
+                  <option *ngFor="let c of concursos" [ngValue]="c">{{ c?.descricao }}</option>
                 </select>
             </div>
 
@@ -115,7 +115,7 @@
                   required
                   [(ngModel)]="setorConcursoProva.etapaProva">
                   <option value="" selected>...</option>
-                  <option *ngFor="let etapaProva of etapaProvas" [ngValue]="etapaProva">{{ etapaProva?.nome }}</option>
+                  <option *ngFor="let etProva of etapaProvas" [ngValue]="etProva">{{ etProva?.nome }}</option>
                 </select>
             </div>
 
@@ -156,7 +156,7 @@
           </div>
 
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button> <!-- (click)="resetarModal()" -->
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
             <button type="submit" class="btn btn-primary" [disabled]="!f.valid" *ngIf="distribuidos">Editar</button>
             <button type="submit" class="btn btn-primary" [disabled]="!f.valid" *ngIf="!distribuidos">Salvar</button>
           </div>
