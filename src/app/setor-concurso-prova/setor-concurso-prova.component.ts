@@ -28,6 +28,7 @@ export class SetorConcursoProvaComponent implements OnInit {
   setorConcursoProva: SetorConcursoProva;
 
   distribuidos: boolean = true;
+  reeditDistribuidos: boolean = false;
 
   locaisDeProva: LocalDeProva[] = [];
 

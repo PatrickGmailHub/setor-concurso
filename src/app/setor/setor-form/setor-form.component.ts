@@ -83,14 +83,10 @@ export class SetorFormComponent implements OnInit {
 
     if(this.isNew) {
       const dados = await this.setorService.salvarSetor(this.setor).toPromise();
-      this.router.navigate['/setor/lista'];
-      // console.log(dados);
     } else {
       const dados = await this.setorService.atualizarSetor(this.setor).toPromise();
-      this.router.navigate['/setor/lista'];
-      // $('#btn').modal('show');
-      // console.log(dados);
     }
+    this.router.navigate['/setor/lista'];
   }
 
   onDelete() {
