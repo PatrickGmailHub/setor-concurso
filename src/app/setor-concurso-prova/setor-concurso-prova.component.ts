@@ -28,7 +28,6 @@ export class SetorConcursoProvaComponent implements OnInit {
   setorConcursoProva: SetorConcursoProva;
 
   distribuidos: boolean = true;
-  reeditDistribuidos: boolean = false;
 
   locaisDeProva: LocalDeProva[] = [];
 
@@ -43,8 +42,6 @@ export class SetorConcursoProvaComponent implements OnInit {
   etapaProvas: EtapaProva[] = [];
   etapa: EtapaProva;
   
-  localTemp: any;
-
   inscricao: Subscription;
 
   constructor(

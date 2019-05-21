@@ -1,3 +1,102 @@
-<p>
-  definicao-sala-prova works!
-</p>
+<nav class="mb-4">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+    <li class="breadcrumb-item active">Definir Qtd. Carteiras</li>
+  </ol>
+</nav>
+
+<div class="row mb-3">
+  <div class="col-md">
+    <h1 class="h3 border-left pl-2">
+      Definir Sala/Prova
+    </h1>
+    <!-- <h1 *ngIf="isNew" class="h2 border-left pl-2">
+      Cadastrar Novo Setor/Prova
+    </h1> -->
+  </div>
+</div>  
+
+<div class="form-row"> <!-- Form In-Line -->
+
+  <div class="form-group col-md-6"> <!-- Começo do 1º Form-Group -->
+
+    <label for="localDeProva">Cidades</label>
+    <!-- <select id="local" class="form-control" name="local" (change)="selectSetor(localInput)" #localInput -->
+    <select id="local" class="form-control" name="local" (change)="selectSetor(local)" #localInput
+      required
+      [(ngModel)]="local"
+      >
+      <option value="" selected>...</option>
+      <option *ngFor="let local of locaisDeProva" [ngValue]="local">{{ local?.nome }}</option>
+    </select>
+  </div> <!-- Fim do 1º Form-Group -->
+
+  <div class="form-group col-md-3">
+      <label for="concurso">Concurso</label>
+        
+      <select id="concurso" class="form-control" name="concurso"
+        required
+        [(ngModel)]="setorConcursoProva.concurso"
+      >
+        <option value="" selected>...</option>
+        <option *ngFor="let c of concursos" [ngValue]="c">{{ c?.descricao }}</option>
+      </select>
+  </div>
+
+  <div class="form-group col-md-3">
+      <label for="etapaProva">Etapa da Prova</label>
+        
+      <select id="etapaProva" class="form-control" name="etapaProva"
+        required
+        [(ngModel)]="setorConcursoProva.etapaProva">
+        <option value="" selected>...</option>
+        <option *ngFor="let etProva of etapaProvas" [ngValue]="etProva">{{ etProva?.nome }}</option>
+      </select>
+  </div>
+
+</div>
+
+<hr>
+
+  <table class="table table-striped table-sm">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Setor</th>
+        <th scope="col">Cidade</th>
+        <th scope="col">Bairro</th>
+        <th scope="col" class="text-center">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let setor of setores">
+        <th scope="row">{{setor?.id}}</th>
+        <td>{{setor?.nome}}</td>
+        <td>{{setor?.localDeProva.nome}}</td>
+        <td>{{setor?.bairro}}</td>
+        <td class="text-center">
+          <button class="btn btn-success" (click)="editarCarteiras(setor)" role="button">Editar Carteiras</button>&nbsp;
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+<div *ngIf="definicaoSalaProva.length > 0">
+  <hr>
+  <p><strong>| {{ setor?.nome }} |</strong></p>
+  <div class="row">
+    <div *ngFor="let dSP of definicaoSalaProva" class="col-1 pb-1">
+          <label for="carteiras" class="text-center">{{ dSP?.numeroSala }}</label>
+          <input class="form-control" type="text" name="carteiras" value="0" required
+            pattern="^\d*$"
+            [(ngModel)]="dSP.qtdCarteira"
+          >
+    </div>
+  </div> 
+
+  <div class="row mt-3">
+    <div class="col">
+      <button class="btn btn-primary" (click)="testandoCampos()">Salvar</button>
+    </div>
+  </div>       
+</div>

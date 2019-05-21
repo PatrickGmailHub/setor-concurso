@@ -1,3 +1,4 @@
+import { DefinicaoSalaProvaModule } from './definicao-sala-prova/definicao-sala-prova.module';
 import { SetorConcursoProvaService } from './shared/services/setor-concurso-prova.service';
 import { ConcursoService } from './shared/services/concurso.service';
 import { LocalDeProvaService } from './shared/services/local-de-prova.service';
@@ -24,6 +25,7 @@ import { DialogService } from './shared/services/dialog.service';
     BrowserModule,
     SetorModule,
     SetorConcursoProvaModule,
+    DefinicaoSalaProvaModule,
     ReactiveFormsModule,
     AppRoutingModule,
   ],

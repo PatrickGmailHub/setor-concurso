@@ -8,7 +8,7 @@
 
 <div class="row mb-3">
   <div class="col-md">
-    <h1 *ngIf="!isNew" class="h2 border-left pl-2">
+    <h1 *ngIf="!isNew" class="h3 border-left pl-2">
       Organizar Setor/Prova
     </h1>
     <!-- <h1 *ngIf="isNew" class="h2 border-left pl-2">
@@ -16,9 +16,9 @@
     </h1> -->
   </div>
 
-  <div class="col-md">
+  <!-- <div class="col-md">
     <a routerLink="/setor-concurso/edit" class="btn btn-success float-right">+ Listar Setores/Prova</a>
-  </div>
+  </div> -->
 </div>
 
 
@@ -33,7 +33,7 @@
       [(ngModel)]="local"
       >
       <option value="" selected>...</option>
-      <option *ngFor="let local of locaisDeProva" [ngValue]="local">{{ local.nome }}</option>
+      <option *ngFor="let local of locaisDeProva" [ngValue]="local">{{ local?.nome }}</option>
     </select>
   </div> <!-- Fim do 1º Form-Group -->
   
