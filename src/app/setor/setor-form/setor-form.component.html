@@ -8,10 +8,10 @@
 
 <div class="row mb-3">
   <div class="col-md">
-    <h1 *ngIf="!isNew" class="h2 border-left pl-2">
+    <h1 *ngIf="!isNew" class="h3 border-left pl-2">
       Detalhes do Setor
     </h1>
-    <h1 *ngIf="isNew" class="h2 border-left pl-2">
+    <h1 *ngIf="isNew" class="h3 border-left pl-2">
       Cadastrar Novo Setor
     </h1>
   </div>
@@ -86,7 +86,8 @@
         <input type="text" class="form-control"
         name="cep" id="cep" placeholder="C.E.P do setor"
           required
-          [textMask]="{mask: maskCep}"
+          [textMask]="{mask: maskCep, cleanup: cleanup}"
+          pattern="\d{5}-\d{3}"
           [(ngModel)]="setor.cep"
           #cep="ngModel"
         >
@@ -111,23 +112,33 @@
       <label for="email">Email</label>
 
       <input type="email" class="form-control" name="email" placeholder="E-mail do responsável"
-        pattern="^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" required
-        [(ngModel)]="setor.email_responsavel" #email="ngModel">
+        pattern="^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"
+        required
+        [(ngModel)]="setor.email_responsavel"
+        #email="ngModel">
     </div>
     <div class="form-group col-md-2">
       <label for="celular">Celular</label>
 
 
       <input type="text" class="form-control" name="celular" placeholder="Celular do resposnsável"
-        [(ngModel)]="setor.celular_responsavel" #celular="ngModel">
+        [textMask]="{mask: maskTel, cleanup: cleanup}"
+        pattern="\(\d{2}\)\s\d{5}-\d{4}"
+        required
+        [(ngModel)]="setor.celular_responsavel" 
+        #celular="ngModel">
     </div>
   </div>
 
   <div class="form-row">
     <div class="form-group col-md-2">
       <label for="salas">Qtd. de salas</label>
-
-      <input class="form-control" type="text" name="salas" id="salas" [value]=0 required
+      
+      <!-- [textMask]="{mask: maskQtdSl}" -->
+      <input class="form-control" type="text" name="salas" id="salas" [value]=0
+        required
+        maxlength="3"
+        pattern="^[1-9]\d{0,2}$"
         [(ngModel)]="setor.qtd_sala"
         #salas="ngModel">
 

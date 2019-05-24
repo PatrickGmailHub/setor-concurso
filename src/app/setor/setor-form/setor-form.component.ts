@@ -26,7 +26,9 @@ export class SetorFormComponent implements OnInit {
 
   inscricao: Subscription;
 
-  maskCep = [/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/]
+  maskCep = [/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/];
+  maskTel = ['(',/\d/, /\d/, ')', ' ',/\d/ ,/\d/, /\d/, /\d/, /\d/, '-',/\d/, /\d/, /\d/, /\d/];
+  maskQtdSl = [/([1-9])/,/([0-9]+)/];
   // mask = /[/\d]{5}-[/\d]{3}/
 
   constructor(
@@ -77,19 +79,34 @@ export class SetorFormComponent implements OnInit {
     });
   }
 
-  cepMask(valor) {
-    console.log(valor);
-    this.setor.cep = $('#cep').mask('00000-000');
+  // cepMask(valor) {
+  //   console.log(valor);
+  //   this.setor.cep = $('#cep').mask('00000-000');
+  // }
+
+  cleanup(maskedData) {
+    return maskedData.replace(/\D+/g, "");
   }
 
   async onSubmit(form): Promise<void> {
 
+    console.log(this.setor)
+    let setorValidado: Setor = this.setor;
+    setorValidado.cep = setorValidado.cep.replace(/\D+/g,"");
+    setorValidado.celular_responsavel = setorValidado.celular_responsavel.replace(/\D+/g,"");
+    console.log(setorValidado);
+
     if(this.isNew) {
-      const dados = await this.setorService.salvarSetor(this.setor).toPromise();
+      //const dados = await this.setorService.salvarSetor(setorValidado).toPromise();
+      this.setor = new Setor;
+      this.router.navigate['setor/lista'];
     } else {
-      const dados = await this.setorService.atualizarSetor(this.setor).toPromise();
+      //const dados = await this.setorService.atualizarSetor(setorValidado).toPromise();
+      this.setor = new Setor;
+      this.router.navigate['setor/lista'];
     }
-    this.router.navigate['/setor/lista'];
+    // location.reload();
+    // this.router.navigate['/setor/lista'];
   }
 
   onDelete() {

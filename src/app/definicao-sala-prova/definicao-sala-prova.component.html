@@ -81,14 +81,16 @@
     </tbody>
   </table>
 
-<div *ngIf="abrir">
+<div *ngIf="definicaoSalaProva.length > 0 && abrir">
   <hr>
   <p><strong>| {{ setor?.nome }} |</strong></p>
   <div class="row">
-    <div *ngFor="let dSP of definicaoSalaProva" class="col-1 pb-1">
+    <div *ngFor="let dSP of definicaoSalaProva" class="col-1 pb-2 m-1 border-right border-bottom">
           <label for="carteiras" class="text-center">{{ dSP?.numeroSala }}</label>
-          <input class="form-control" type="text" name="carteiras" value="0" required
-            pattern="^\d*$"
+          <input class="form-control form-control-sm" type="text" name="carteiras" value="0"
+            maxlength="3"
+            required
+            pattern="^[1-9]\d{0,2}$"
             [(ngModel)]="dSP.qtdCarteira"
           >
     </div>
@@ -96,7 +98,7 @@
 
   <div class="row mt-3">
     <div class="col">
-      <button class="btn btn-primary" (click)="testandoCampos()">Salvar</button>
+      <button class="btn btn-primary" (click)="onSubmit()">Salvar</button>
     </div>
   </div>       
 </div>

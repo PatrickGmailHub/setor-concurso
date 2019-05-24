@@ -96,29 +96,22 @@ export class DefinicaoSalaProvaComponent implements OnInit {
 
     this.definicaoSalaProvaService.getAllByIdSetor(valor.id).toPromise()
       .then(element => this.definicaoSalaProva = element)
-      .then(() => console.log(this.definicaoSalaProva));
+      // .then(() => console.log(this.definicaoSalaProva));
 
   }
 
-  testandoCampos() {
-
-    let teste: DefinicaoSalaProva = {};
-    let testeArray: DefinicaoSalaProva[] = [];
-
-    // console.log(this.definicaoSalaProva);
-
-    // console.log(testeArray);
+  onSubmit() {
 
     this.definicaoSalaProvaService.updateAll(this.definicaoSalaProva.map((definicaoSalaProva) => {
-      
       return {
         "id": definicaoSalaProva.id,
         "qtdCarteira": definicaoSalaProva.qtdCarteira,
       };
-
     })).toPromise()
-      .then(() => this.router.navigate['/definicao-sala-prova/lista']);
-  
+      .then(() => this.definicaoSalaProva = [])
+      .then(() => this.abrir = false)
+      // .then(() => location.reload())
+      // .then(() => this.router.navigate['/definicao-sala-prova/lista']);
   }
 
 }

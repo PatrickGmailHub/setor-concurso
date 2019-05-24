@@ -65,13 +65,10 @@ export class SetorComponent implements OnInit {
         if(deleta) {
 
           this.setorService.deletarSetor(this.setor.id).toPromise()
-            .then((dados) => console.log(dados))
+            .then(() => location.reload());
         }
       });
-
       // this.router.navigate['/setor/lista'];
-      window.location.reload();
-
   }
 
   get setoresPag() {
