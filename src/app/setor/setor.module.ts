@@ -13,6 +13,7 @@ import { FormDebugComponent } from './form-debug/form-debug.component';
 import { SetorForm1Component } from './setor-form1/setor-form1.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TextMaskModule } from 'angular2-text-mask';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SetorFormComponent,
     SetorDetalheComponent,
     FormDebugComponent,
-    SetorForm1Component,
+    SetorForm1Component
   ],
   imports: [
     SetorRoutingModule,
@@ -28,7 +29,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     CommonModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    TextMaskModule
   ],
   exports: [SetorComponent],
   providers: [

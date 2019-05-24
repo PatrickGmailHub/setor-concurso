@@ -26,6 +26,9 @@ export class SetorFormComponent implements OnInit {
 
   inscricao: Subscription;
 
+  maskCep = [/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/]
+  // mask = /[/\d]{5}-[/\d]{3}/
+
   constructor(
     private setorService: SetorService,
     private route: ActivatedRoute,
@@ -37,9 +40,9 @@ export class SetorFormComponent implements OnInit {
 
   ngOnInit() {
 
-    $(document).ready(function(){
+    /* $(document).ready(function(){
       $('#cep').mask('00000-000');
-    });
+    }); */
 
     this.setor = new Setor();
 

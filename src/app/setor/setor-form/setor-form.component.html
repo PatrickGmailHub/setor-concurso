@@ -79,13 +79,14 @@
       </div> -->
 
 
+      <!-- (input)="cepMask($event.target.value)" -->
       <div class="form-group col-md-2">
         <label for="cep">C.E.P.</label>
 
         <input type="text" class="form-control"
-          name="cep" id="cep" placeholder="C.E.P do setor"
+        name="cep" id="cep" placeholder="C.E.P do setor"
           required
-          (input)="cepMask($event.target.value)"
+          [textMask]="{mask: maskCep}"
           [(ngModel)]="setor.cep"
           #cep="ngModel"
         >
