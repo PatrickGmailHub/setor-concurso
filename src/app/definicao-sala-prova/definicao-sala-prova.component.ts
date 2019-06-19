@@ -42,6 +42,7 @@ export class DefinicaoSalaProvaComponent implements OnInit {
   inscricao: Subscription;
 
   abrir: boolean = false;
+  mesmoId: number;
 
   constructor(
     private definicaoSalaProvaService: DefinicaoSalaProvaService,
@@ -90,9 +91,17 @@ export class DefinicaoSalaProvaComponent implements OnInit {
 
   editarCarteiras(valor: Setor) {
 
-    this.abrir = !this.abrir;
+    if(valor.id == this.mesmoId){// || this.mesmoId == 0
+      this.abrir = !this.abrir;
+    } else {
+      this.abrir = true;
+    }
+    
+    // this.abrir = !this.abrir;
 
     this.setor = valor;
+    
+    this.mesmoId = valor.id;
 
     this.definicaoSalaProvaService.getAllByIdSetor(valor.id).toPromise()
       .then(element => this.definicaoSalaProva = element)
