@@ -97,13 +97,13 @@ export class SetorFormComponent implements OnInit {
     console.log(setorValidado);
 
     if(this.isNew) {
-      //const dados = await this.setorService.salvarSetor(setorValidado).toPromise();
+      const dados = await this.setorService.salvarSetor(setorValidado).toPromise();
       this.setor = new Setor;
-      this.router.navigate['setor/lista'];
+      this.router.navigate['/setor/lista'];
     } else {
-      //const dados = await this.setorService.atualizarSetor(setorValidado).toPromise();
+      const dados = await this.setorService.atualizarSetor(setorValidado).toPromise();
       this.setor = new Setor;
-      this.router.navigate['setor/lista'];
+      this.router.navigate['/setor/lista'];
     }
     // location.reload();
     // this.router.navigate['/setor/lista'];

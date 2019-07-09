@@ -1,3 +1,4 @@
+import { DistribuicaoSalaProvaModule } from './distribuicao-sala-prova/distribuicao-sala-prova.module';
 import { DefinicaoSalaProvaModule } from './definicao-sala-prova/definicao-sala-prova.module';
 import { SetorConcursoProvaService } from './shared/services/setor-concurso-prova.service';
 import { ConcursoService } from './shared/services/concurso.service';
@@ -27,6 +28,7 @@ import { TextMaskModule } from 'angular2-text-mask';
     SetorModule,
     SetorConcursoProvaModule,
     DefinicaoSalaProvaModule,
+    DistribuicaoSalaProvaModule,
     ReactiveFormsModule,
     AppRoutingModule,
     TextMaskModule

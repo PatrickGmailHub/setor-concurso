@@ -1,5 +1,5 @@
-import { DefinicaoSalaProvaModule } from './definicao-sala-prova/definicao-sala-prova.module';
-import { DefinicaoSalaProva } from './shared/definicao-sala-prova';
+// import { DefinicaoSalaProvaModule } from './definicao-sala-prova/definicao-sala-prova.module';
+// import { DefinicaoSalaProva } from './shared/definicao-sala-prova';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -20,6 +20,10 @@ const routes: Routes = [
   {
     path: 'definicao-sala-prova',
     loadChildren: './definicao-sala-prova/definicao-sala-prova.module#DefinicaoSalaProvaModule'
+  },
+  {
+    path: 'distribuicao-sala-prova',
+    loadChildren: './distribuicao-sala-prova/distribuicao-sala-prova.module#DistribuicaoSalaProvaModule'
   }
 ];
 
