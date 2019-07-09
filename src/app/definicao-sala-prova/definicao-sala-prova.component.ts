@@ -78,6 +78,8 @@ export class DefinicaoSalaProvaComponent implements OnInit {
 
   selectSetor(valor) {
 
+    this.abrir = false;
+
     this.setores = new Array();
     this.setoresAux = new Array();
 

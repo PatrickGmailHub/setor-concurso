@@ -1,3 +1,4 @@
+import { SetorService } from 'src/app/shared/services/setor.service';
 import { Concurso } from 'src/app/shared/concurso';
 import { SetorConcursoProva } from './../shared/setor-concurso-prova';
 import { LocalDeProva } from './../shared/local-de-prova';
@@ -34,6 +35,7 @@ export class DistribuicaoSalaProvaComponent implements OnInit {
   collectionSize: number;
 
   constructor(
+    private setorService: SetorService,
     private localDeProvaService: LocalDeProvaService,
     private setorConcursoProvaService: SetorConcursoProvaService,
   ) { }
@@ -42,7 +44,36 @@ export class DistribuicaoSalaProvaComponent implements OnInit {
     this.setor = new Setor();
 
     this.setorConcursoProva = new SetorConcursoProva();
+    
+    this.buscarLocalidade;
 
+    this.buscarSetor;
+  }
+
+  selectSetor(valor) {
+    
+    this.setores = new Array();
+    this.setoresAux = new Array();
+
+    if(valor) {
+      this.setorConcursoProvaService.getAllByLocalProva(valor['id']).subscribe(element => {
+        element.forEach(element => {
+          this.setores.push(element.setor)
+        });
+        this.collectionSize = this.setores.length;
+      });
+    } else {
+      this.buscarSetor;
+    }
+    
+  } 
+
+  get setoresPag() {
+    return this.setores
+      .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+  }
+
+  get buscarLocalidade() {
     this.localDeProvaService.getAll().toPromise()
       .then(locaisDeProva => {
         this.locaisDeProva = locaisDeProva;
@@ -54,28 +85,34 @@ export class DistribuicaoSalaProvaComponent implements OnInit {
           delete element['deleted'];
         });
 
-        this.collectionSize = this.setores.length;
-
-      })
-      .then(() => this.setoresPag);
-  }
-
-  selectSetor(valor) {
-
-    this.setores = new Array();
-    this.setoresAux = new Array();
-
-    this.setorConcursoProvaService.getAllByLocalProva(valor['id']).subscribe(element => {
-      element.forEach(element => {
-        this.setores.push(element.setor)
       });
-    });
 
+      return null;
   }
 
-  get setoresPag() {
-    return this.setores
-      .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+  get buscarSetor() {
+    this.setorService.getSetores().toPromise()
+    .then((setores: Setor[]) => {
+      this.setores = setores;
+
+      this.setores.forEach(element => {
+
+        delete element['version'];
+        delete element['created_at'];
+        delete element['updated_at'];
+        delete element['deleted'];
+        delete element.localDeProva['version'];
+        delete element.localDeProva['created_at'];
+        delete element.localDeProva['updated_at'];
+        delete element.localDeProva['deleted'];
+
+      });
+
+      this.collectionSize = this.setores.length;
+      
+    }).then(() => this.setoresPag);
+
+    return null;
   }
 
 }
