@@ -63,6 +63,7 @@ export class DistribuicaoSalaProvaComponent implements OnInit {
     
   }
 
+  // Traz setores por localidade.
   selectSetor(valor) {
     
     this.setores = new Array();
@@ -74,6 +75,7 @@ export class DistribuicaoSalaProvaComponent implements OnInit {
           this.setores.push(element.setor)
         });
         this.collectionSize = this.setores.length;
+        this.setoresPag;
       });
     } else {
       this.buscarSetor;
