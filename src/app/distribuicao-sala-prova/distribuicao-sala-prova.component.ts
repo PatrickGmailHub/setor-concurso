@@ -1,12 +1,16 @@
+import { element } from '@angular/core/src/render3';
+import { DefinicaoSalaProvaService } from './../shared/services/definicao-sala-prova.service';
 import { SetorService } from 'src/app/shared/services/setor.service';
 import { Concurso } from 'src/app/shared/concurso';
 import { SetorConcursoProva } from './../shared/setor-concurso-prova';
 import { LocalDeProva } from './../shared/local-de-prova';
+import { DefinicaoSalaProva } from './../shared/definicao-sala-prova';
 import { Component, OnInit } from '@angular/core';
 import { EtapaProva } from './../shared/etapa-prova';
 import { Setor } from '../shared/setor';
 import { LocalDeProvaService } from '../shared/services/local-de-prova.service';
 import { SetorConcursoProvaService } from '../shared/services/setor-concurso-prova.service';
+import { Inscricao } from '../shared/inscricao';
 
 @Component({
   selector: 'app-distribuicao-sala-prova',
@@ -19,6 +23,8 @@ export class DistribuicaoSalaProvaComponent implements OnInit {
   setor: Setor;
   setoresAux: Setor[] = [];
 
+  definicaoSalaProva: DefinicaoSalaProva[] = [];
+
   etapaProvas: EtapaProva[] = [];
   etapa: EtapaProva;
 
@@ -30,6 +36,10 @@ export class DistribuicaoSalaProvaComponent implements OnInit {
 
   setorConcursoProva: SetorConcursoProva;
 
+  inscrito: Inscricao;
+  inscritosPg: Inscricao[] = [];
+  inscritosIst: Inscricao[] = [];
+
   page: number = 1;
   pageSize: number = 5;
   collectionSize: number;
@@ -37,10 +47,12 @@ export class DistribuicaoSalaProvaComponent implements OnInit {
   constructor(
     private setorService: SetorService,
     private localDeProvaService: LocalDeProvaService,
+    private definicaoSalaProvaService: DefinicaoSalaProvaService,
     private setorConcursoProvaService: SetorConcursoProvaService,
   ) { }
 
   ngOnInit() {
+
     this.setor = new Setor();
 
     this.setorConcursoProva = new SetorConcursoProva();
@@ -48,6 +60,7 @@ export class DistribuicaoSalaProvaComponent implements OnInit {
     this.buscarLocalidade;
 
     this.buscarSetor;
+    
   }
 
   selectSetor(valor) {
@@ -91,28 +104,24 @@ export class DistribuicaoSalaProvaComponent implements OnInit {
   }
 
   get buscarSetor() {
-    this.setorService.getSetores().toPromise()
-    .then((setores: Setor[]) => {
-      this.setores = setores;
 
-      this.setores.forEach(element => {
-
-        delete element['version'];
-        delete element['created_at'];
-        delete element['updated_at'];
-        delete element['deleted'];
-        delete element.localDeProva['version'];
-        delete element.localDeProva['created_at'];
-        delete element.localDeProva['updated_at'];
-        delete element.localDeProva['deleted'];
-
+    this.setorConcursoProvaService.getAll().subscribe(setorConcursoProvas => {
+      setorConcursoProvas.forEach(setorConcursoProva => {
+        this.setores.push(setorConcursoProva.setor)
       });
 
       this.collectionSize = this.setores.length;
-      
-    }).then(() => this.setoresPag);
+
+      this.setoresPag;
+
+    });
 
     return null;
+    
+  }
+
+  distCandidatos() {
+
   }
 
 }

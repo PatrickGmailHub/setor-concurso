@@ -1,7 +1,7 @@
+import { DefinicaoSalaProva } from './../definicao-sala-prova';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { DefinicaoSalaProva } from '../definicao-sala-prova';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +14,10 @@ export class DefinicaoSalaProvaService {
   constructor(
     private http: HttpClient
   ) { }
+
+  getAll(): Observable<DefinicaoSalaProva[]> {
+    return this.http.get<DefinicaoSalaProva[]>(`./../api/direct_request_v2/gerencial/supervisor/distribuicao_salas/definicao_salas/listar`);
+  }
 
   getAllByIdSetor(idSetor):Observable<DefinicaoSalaProva[]> {
     return this.http.get<DefinicaoSalaProva[]>(`./../api/direct_request_v2/gerencial/supervisor/distribuicao_salas/definicao_salas/buscar_por_setor`, {params: this.params.set('idSetor', `${idSetor}`)});

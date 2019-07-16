@@ -44,6 +44,10 @@ export class DefinicaoSalaProvaComponent implements OnInit {
   abrir: boolean = false;
   mesmoId: number;
 
+  page: number = 1;
+  pageSize: number = 5;
+  collectionSize: number;
+
   constructor(
     private definicaoSalaProvaService: DefinicaoSalaProvaService,
     private setorService: SetorService,
@@ -83,9 +87,9 @@ export class DefinicaoSalaProvaComponent implements OnInit {
     this.setores = new Array();
     this.setoresAux = new Array();
 
-    this.setorConcursoProvaService.getAllByLocalProva(valor['id']).subscribe(element => {
-      element.forEach(element => {
-        this.setores.push(element.setor)
+    this.setorConcursoProvaService.getAllByLocalProva(valor['id']).subscribe(setorConcursoProvas => {
+      setorConcursoProvas.forEach(setorConcursoProva => {
+        this.setores.push(setorConcursoProva.setor)
       });
     });
 
