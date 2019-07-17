@@ -1,4 +1,4 @@
-import { element } from '@angular/core/src/render3';
+import { InscricaoService } from './../shared/services/inscricao.service';
 import { DefinicaoSalaProvaService } from './../shared/services/definicao-sala-prova.service';
 import { SetorService } from 'src/app/shared/services/setor.service';
 import { Concurso } from 'src/app/shared/concurso';
@@ -23,7 +23,7 @@ export class DistribuicaoSalaProvaComponent implements OnInit {
   setor: Setor;
   setoresAux: Setor[] = [];
 
-  definicaoSalaProva: DefinicaoSalaProva[] = [];
+  definicaoSalaProvas: DefinicaoSalaProva[] = [];
 
   etapaProvas: EtapaProva[] = [];
   etapa: EtapaProva;
@@ -37,6 +37,7 @@ export class DistribuicaoSalaProvaComponent implements OnInit {
   setorConcursoProva: SetorConcursoProva;
 
   inscrito: Inscricao;
+  inscritos: Inscricao[];
   inscritosPg: Inscricao[] = [];
   inscritosIst: Inscricao[] = [];
 
@@ -45,6 +46,7 @@ export class DistribuicaoSalaProvaComponent implements OnInit {
   collectionSize: number;
 
   constructor(
+    private inscricaoService: InscricaoService,
     private setorService: SetorService,
     private localDeProvaService: LocalDeProvaService,
     private definicaoSalaProvaService: DefinicaoSalaProvaService,
@@ -122,8 +124,25 @@ export class DistribuicaoSalaProvaComponent implements OnInit {
     
   }
 
-  distCandidatos() {
+  distCandidatos(setor: Setor) {
+    var qtdCart: number = 0;
+    this.definicaoSalaProvaService.getAllByIdSetor(setor.id).toPromise()
+      .then(definicaoSalaProva => this.definicaoSalaProvas = definicaoSalaProva)
+      .then(() => {
+        this.definicaoSalaProvas.forEach(e => {
+          qtdCart += e.qtdCarteira;
+        })
+      })
+      .then(() => {
+        console.log(`${qtdCart} Vagas do setor: ${setor.nome} com Id: ${setor.id}`);
+        this.inscricaoService.getAllInscritosValidosSemSalasSetorPorLocalPorQtd(setor.id, qtdCart).toPromise()
+        .then((inscricoes) => this.inscritos = inscricoes)
+        .then(() => console.log(`${qtdCart} Vagas do setor: ${setor.nome} com Id: ${setor.id}`))
+        .then(() => console.log(this.inscritos))
+      })
+      .then(()=>console.log(`${qtdCart} Vagas do setor: ${setor.nome} com Id: ${setor.id}`))
 
+      
   }
 
 }

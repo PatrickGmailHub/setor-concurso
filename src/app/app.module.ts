@@ -1,3 +1,5 @@
+import { DistribuicaoSalaProvaService } from './shared/services/distribuicao-sala-prova.service';
+import { InscricaoService } from './shared/services/inscricao.service';
 import { DistribuicaoSalaProvaModule } from './distribuicao-sala-prova/distribuicao-sala-prova.module';
 import { DefinicaoSalaProvaModule } from './definicao-sala-prova/definicao-sala-prova.module';
 import { SetorConcursoProvaService } from './shared/services/setor-concurso-prova.service';
@@ -38,6 +40,8 @@ import { TextMaskModule } from 'angular2-text-mask';
     LocalDeProvaService,
     ConcursoService,
     SetorConcursoProvaService,
+    InscricaoService,
+    DistribuicaoSalaProvaService,
     DialogService
   ],
   bootstrap: [AppComponent]

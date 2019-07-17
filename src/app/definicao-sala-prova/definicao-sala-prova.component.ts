@@ -111,8 +111,6 @@ export class DefinicaoSalaProvaComponent implements OnInit {
 
     this.definicaoSalaProvaService.getAllByIdSetor(valor.id).toPromise()
       .then(element => this.definicaoSalaProva = element)
-      // .then(() => console.log(this.definicaoSalaProva));
-
   }
 
   onSubmit() {

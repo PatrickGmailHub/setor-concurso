@@ -76,7 +76,7 @@
       <td>{{setor.localDeProva.nome}}</td>
       <td>{{setor.bairro}}</td>
       <td class="text-center">
-        <a [routerLink] = "['/setor/', setor.id, 'edit']" class="btn btn-success" role="button">Distribuir</a>
+        <button class="btn btn-success" (click)="distCandidatos(setor)" role="button">Distribuir</button>
       </td>
     </tr>
   </tbody>
