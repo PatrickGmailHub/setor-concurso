@@ -143,6 +143,7 @@ export class DistribuicaoSalaProvaComponent implements OnInit {
               }
             });
           });
+<<<<<<< HEAD
           this.collectionSize = this.setores.length;
 
           this.setoresPag;
@@ -151,6 +152,13 @@ export class DistribuicaoSalaProvaComponent implements OnInit {
         // this.collectionSize = this.setores.length;
   
         // this.setoresPag;
+=======
+        });
+        
+        this.collectionSize = this.setores.length;
+  
+        this.setoresPag;
+>>>>>>> cca8773a1caa6df3f6878921900f81e8d03728ae
         
       });
   
