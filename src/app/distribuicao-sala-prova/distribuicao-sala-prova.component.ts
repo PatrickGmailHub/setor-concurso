@@ -42,6 +42,7 @@ export class DistribuicaoSalaProvaComponent implements OnInit {
   locaisDeProva: LocalDeProva[] = [];
 
   setorConcursoProva: SetorConcursoProva;
+  setorConcursoProvas: SetorConcursoProva[] = [];
 
   inscrito: Inscricao;
   inscritos: Inscricao[];
@@ -75,56 +76,99 @@ export class DistribuicaoSalaProvaComponent implements OnInit {
   }
 
   // Traz todos os setores
-  get buscarSetor() {
+    // get buscarSetorV1() {
 
-    // this.setorConcursoProvaService.getAll().subscribe(setorConcursoProvas => {
-    this.setorConcursoProvaService.getAll().toPromise()
-    .then(setorConcursoProvas => {
-      setorConcursoProvas.forEach(setorConcursoProva => {
-        this.setores.push(setorConcursoProva.setor);
-      });
-    })
-    .then(() => {
-      this.inscricaoService.getAllSetoresNaoDistribuidos().toPromise()
-      .then((setoresIds) => {
-        this.setoresId = setoresIds;
+    //   this.setores = [];
+    //   this.setoresAux = [];
+    //   this.setorConcursoProvas = [];
+  
+    //   // this.setorConcursoProvaService.getAll().subscribe(setorConcursoProvas => {
+    //   this.setorConcursoProvaService.getAll().toPromise()
+    //   .then(setorConcursoProvas => {
+    //     setorConcursoProvas.forEach(setorConcursoProva => {
+    //       this.setores.push(setorConcursoProva.setor);
+    //     });
+    //   })
+    //   .then(() => {
+    //     this.inscricaoService.getAllSetoresNaoDistribuidos().toPromise()
+    //     .then((setoresIds) => {
+    //       this.setoresId = setoresIds;
+    //       console.log(this.setoresId);
+    //     })
+    //     .then(() => {
+    //       let index = 0
+    //       this.setoresId.forEach(el => {
+    //         this.setores.forEach(e => {
+    //           if(e['id_setor'] == el ){
+    //             // this.setores.splice(index,1);
+    //             this.setores.splice(index,1);
+    //           }
+    //           index++;
+    //         })
+    //         index = 0;
+    //       })
+    //       console.log(this.setores)
+    //     })
+        
+    //     this.collectionSize = this.setores.length;
+  
+    //     this.setoresPag;
+        
+    //   });
+  
+    //   return null;
+  
+    // }
+
+    get buscarSetor() {
+      this.setores = [];
+      this.setoresAux = [];
+      this.setorConcursoProvas = [];
+  
+      // this.setorConcursoProvaService.getAll().subscribe(setorConcursoProvas => {
+      this.setorConcursoProvaService.getAll().toPromise()
+      .then(setorConcursoProvas => {
+        this.setorConcursoProvas = setorConcursoProvas;
       })
       .then(() => {
-        let index = 0
-        this.setoresId.forEach(el => {
-          this.setores.forEach(e => {
-            if(e.id == el ){
-              this.setores.splice(index,1);
-            }
-            index++;
-          })
-          index = 0;
+        this.inscricaoService.getAllSetoresNaoDistribuidos().toPromise()
+        .then((setoresIds) => {
+          this.setoresId = setoresIds;
         })
-      })
-      
-      this.collectionSize = this.setores.length;
+        .then(() => {
+          this.setoresId.forEach(el => {
+            this.setorConcursoProvas.forEach(setorConcurso => {
+              if(el['id_setor'] == setorConcurso.setor.id) {
+                this.setores.push(setorConcurso.setor)
+              }
+            });
+          });
+          this.collectionSize = this.setores.length;
 
-      this.setoresPag;
-      
-    });
-
-    return null;
-
+          this.setoresPag;
+        });
+        
+        // this.collectionSize = this.setores.length;
+  
+        // this.setoresPag;
+        
+      });
+  
+      return null;
+    
     }
 
   // Traz setores por localidade.
   selectSetor(valor) {
-    
-    this.setores = new Array();
-    this.setoresAux = new Array();
+    this.setores = [];
+    this.setoresAux = [];
+    this.setorConcursoProvas = [];
 
     if(valor) {
       // this.setorConcursoProvaService.getAllByLocalProva(valor['id']).subscribe(element => {
       this.setorConcursoProvaService.getAllByLocalProva(valor['id']).toPromise()
-      .then(element => {
-        element.forEach(element => {
-          this.setores.push(element.setor);
-        })
+      .then(setorConcursoProvas => {
+        this.setorConcursoProvas = setorConcursoProvas;
       })
       .then(() => {
         this.inscricaoService.getAllSetoresNaoDistribuidosPorLocal(valor['id']).toPromise()
@@ -132,28 +176,70 @@ export class DistribuicaoSalaProvaComponent implements OnInit {
           this.setoresId = setoresIds;
         })
         .then(() => {
-          let index = 0
           this.setoresId.forEach(el => {
-            this.setores.forEach(e => {
-              if(e.id == el ){
-                this.setores.splice(index,1);
+            this.setorConcursoProvas.forEach(setorConcurso => {
+              if(el['id_setor'] == setorConcurso.setor.id) {
+                this.setores.push(setorConcurso.setor)
               }
-              index++;
             });
-            index = 0;
           });
+          this.collectionSize = this.setores.length;
+
+          this.setoresPag;
         });
       
-      this.collectionSize = this.setores.length;
+      // this.collectionSize = this.setores.length;
 
-      this.setoresPag;
+      // this.setoresPag;
 
       });
     } else {
       this.buscarSetor;
     }
     
-  } 
+  }
+
+  // selectSetorV1(valor) {
+  //   this.setores = [];
+  //   this.setoresAux = [];
+  //   this.setorConcursoProvas = [];
+
+  //   if(valor) {
+  //     // this.setorConcursoProvaService.getAllByLocalProva(valor['id']).subscribe(element => {
+  //     this.setorConcursoProvaService.getAllByLocalProva(valor['id']).toPromise()
+  //     .then(element => {
+  //       element.forEach(element => {
+  //         this.setores.push(element.setor);
+  //       })
+  //     })
+  //     .then(() => {
+  //       this.inscricaoService.getAllSetoresNaoDistribuidosPorLocal(valor['id']).toPromise()
+  //       .then((setoresIds) => {
+  //         this.setoresId = setoresIds;
+  //       })
+  //       .then(() => {
+  //         let index = 0
+  //         this.setoresId.forEach(el => {
+  //           this.setores.forEach(e => {
+  //             if(e.id == el ){
+  //               this.setores.splice(index,1);
+  //             }
+  //             index++;
+  //           });
+  //           index = 0;
+  //         });
+  //       });
+      
+  //     this.collectionSize = this.setores.length;
+
+  //     this.setoresPag;
+
+  //     });
+  //   } else {
+  //     this.buscarSetor;
+  //   }
+    
+  // } 
 
   get setoresPag() {
     return this.setores
