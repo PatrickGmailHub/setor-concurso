@@ -14,7 +14,10 @@ import { LocalDeProvaService } from '../shared/services/local-de-prova.service';
 import { SetorConcursoProvaService } from '../shared/services/setor-concurso-prova.service';
 import { Inscricao } from '../shared/inscricao';
 import { element } from '@angular/core/src/render3';
+<<<<<<< HEAD
 import { Router } from '@angular/router';
+=======
+>>>>>>> 358d453f1e26945ad0fa8c4a66bd2d815a88f0b2
 
 @Component({
   selector: 'app-distribuicao-sala-prova',
@@ -174,7 +177,7 @@ export class DistribuicaoSalaProvaComponent implements OnInit {
   }
 
   get buscarLocalidade() {
-    this.localDeProvaService.getAll().toPromise()
+    /* this.localDeProvaService.getAll().toPromise()
       .then(locaisDeProva => {
         this.locaisDeProva = locaisDeProva;
         
@@ -185,7 +188,7 @@ export class DistribuicaoSalaProvaComponent implements OnInit {
           delete element['deleted'];
         });
 
-      });
+      }); */
 
       return null;
   }
