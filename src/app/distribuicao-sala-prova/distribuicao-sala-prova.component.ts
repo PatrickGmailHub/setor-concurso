@@ -13,7 +13,6 @@ import { Setor } from '../shared/setor';
 import { LocalDeProvaService } from '../shared/services/local-de-prova.service';
 import { SetorConcursoProvaService } from '../shared/services/setor-concurso-prova.service';
 import { Inscricao } from '../shared/inscricao';
-import { element } from '@angular/core/src/render3';
 import { Router } from '@angular/router';
 
 @Component({
