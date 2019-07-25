@@ -1,3 +1,4 @@
+import { DistribuicaoSalaProva } from './../distribuicao-sala-prova';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpHeaderResponse, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -32,8 +33,8 @@ export class DistribuicaoSalaProvaService {
     return this.http.get<SetorConcursoProva>(`./../api/direct_request_v2/gerencial/supervisor/distribuicao_salas/setor_concurso_prova/buscar/${id}`);
   }
 
-  create() {
-
+  create(distribuicaoSalaProvas: DistribuicaoSalaProva[]): Observable<DistribuicaoSalaProva[]> {
+    return this.http.post<DistribuicaoSalaProva[]>('./../api/direct_request_v2/gerencial/supervisor/distribuicao_salas/distribuicao/salvar', distribuicaoSalaProvas, {headers: this.headers});
   }
 
   update() {

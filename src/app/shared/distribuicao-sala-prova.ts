@@ -3,10 +3,10 @@ import { DefinicaoSalaProva } from './definicao-sala-prova';
 
 export class DistribuicaoSalaProva {
     constructor(
-        id?: number,
-        ordemSalaProva?: number,
-        presenca?: boolean,
-        definicaoSalaProva?: DefinicaoSalaProva,
-        inscricao?: Inscricao
+        public id?: number,
+        public ordemSalaProva?: number,
+        public presenca?: boolean,
+        public definicaoSalaProva?: DefinicaoSalaProva,
+        public inscricao?: Inscricao
     ){}
 }

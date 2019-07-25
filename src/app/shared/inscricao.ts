@@ -1,11 +1,11 @@
 export class Inscricao {
     constructor(
-        id?: number,
-        pessoa?: string,
-        pagamentoEfetuato?: boolean,
-        isento?: boolean,
-        necessitaTratamentoDiferenciado?: boolean,
-        numeroInscricao?: string,
-        status?: boolean,
+        public id?: number,
+        public pessoa?: string,
+        public pagamentoEfetuato?: boolean,
+        public isento?: boolean,
+        public necessitaTratamentoDiferenciado?: boolean,
+        public numeroInscricao?: string,
+        public status?: boolean,
     ){}
 }

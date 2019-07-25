@@ -1,3 +1,5 @@
+import { DistribuicaoSalaProvaService } from './../shared/services/distribuicao-sala-prova.service';
+import { DistribuicaoSalaProva } from './../shared/distribuicao-sala-prova';
 import { InscricaoService } from './../shared/services/inscricao.service';
 import { DefinicaoSalaProvaService } from './../shared/services/definicao-sala-prova.service';
 import { SetorService } from 'src/app/shared/services/setor.service';
@@ -12,6 +14,7 @@ import { LocalDeProvaService } from '../shared/services/local-de-prova.service';
 import { SetorConcursoProvaService } from '../shared/services/setor-concurso-prova.service';
 import { Inscricao } from '../shared/inscricao';
 import { element } from '@angular/core/src/render3';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-distribuicao-sala-prova',
@@ -19,6 +22,9 @@ import { element } from '@angular/core/src/render3';
   styleUrls: ['./distribuicao-sala-prova.component.css']
 })
 export class DistribuicaoSalaProvaComponent implements OnInit {
+
+  distribuicaoSalaProvas: DistribuicaoSalaProva[] = [];
+  distribuicaoSalaProva: DistribuicaoSalaProva;
 
   setores: Setor[] = [];
   setor: Setor;
@@ -48,11 +54,13 @@ export class DistribuicaoSalaProvaComponent implements OnInit {
   collectionSize: number;
 
   constructor(
+    private distribuicaoSalaProvaService: DistribuicaoSalaProvaService,
     private inscricaoService: InscricaoService,
     private setorService: SetorService,
     private localDeProvaService: LocalDeProvaService,
     private definicaoSalaProvaService: DefinicaoSalaProvaService,
     private setorConcursoProvaService: SetorConcursoProvaService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -128,8 +136,8 @@ export class DistribuicaoSalaProvaComponent implements OnInit {
         element.forEach(element => {
           this.setores.push(element.setor);
         })
-        this.collectionSize = this.setores.length;
-        this.setoresPag;
+        // this.collectionSize = this.setores.length;
+        // this.setoresPag;
       })
       .then(() => {
         this.inscricaoService.getAllSetoresNaoDistribuidosPorLocal(valor['id']).toPromise()
@@ -182,26 +190,77 @@ export class DistribuicaoSalaProvaComponent implements OnInit {
       return null;
   }
 
-  
-
   distCandidatos(setor: Setor) {
+    this.distribuicaoSalaProva = new DistribuicaoSalaProva();
     var qtdCart: number = 0;
     this.definicaoSalaProvaService.getAllByIdSetor(setor.id).toPromise()
       .then(definicaoSalaProva => this.definicaoSalaProvas = definicaoSalaProva)
       .then(() => {
         this.definicaoSalaProvas.forEach(e => {
           qtdCart += e.qtdCarteira;
-        })
+        });
       })
       .then(() => {
-        console.log(`${qtdCart} Vagas do setor: ${setor.nome} com Id: ${setor.id}`);
+        let aux: any ={}
+        // console.log(`${qtdCart} Vagas do setor: ${setor.nome} com Id: ${setor.id}`);
         this.inscricaoService.getAllInscritosValidosSemSalasSetorPorLocalPorQtd(setor.id, qtdCart).toPromise()
         .then((inscricoes) => this.inscritos = inscricoes)
-        .then(() => console.log(`${qtdCart} Vagas do setor: ${setor.nome} com Id: ${setor.id}`))
-        .then(() => console.log(this.inscritos))
-      })
-      .then(()=>console.log(`${qtdCart} Vagas do setor: ${setor.nome} com Id: ${setor.id}`))
+        // .then(() => console.log(`${qtdCart} Vagas do setor: ${setor.nome} com Id: ${setor.id}`))
+        // .then(() => console.log(this.inscritos))
+        .then(() => {
+          //TODO
+          // console.log(this.inscritos)
+          let cont: number = 0;
+          this.definicaoSalaProvas.forEach(dsp => {
+            for(let i=0; i < dsp.qtdCarteira; i++) {
+              // Montando Objeto distribuicaoSalaProva
+              aux = {
+                "definicaoSalaProva": {
+                  "id": dsp.id
+                },
+                "inscricao": {
+                  "id": this.inscritos[cont]['id_inscricao']
+                }
+              }
+
+              /* this.distribuicaoSalaProva.definicaoSalaProva.id = dsp.id;
+              this.distribuicaoSalaProva.inscricao.id = this.inscritos[cont]['id_inscricao']; */
+  
+              // Adcionando no Array distribuicaoSalaProvas
+              this.distribuicaoSalaProvas.push(aux);
+              cont++;
+            }
+          });
+          // console.log(this.distribuicaoSalaProvas);
+          this.distribuicaoSalaProvaService.create(this.distribuicaoSalaProvas).toPromise()
+            .then(() => location.reload())
+            // .then(() => this.router.navigate['/setor-concurso/lista'])
+        });
+
+      });
       
+      // .then(()=>console.log(`${qtdCart} Vagas do setor: ${setor.nome} com Id: ${setor.id}`))
+      
+  }
+
+  onSubmit(f) {
+    let teste: any = {};
+
+      teste = {
+        "id": this.setorConcursoProva.id,
+        "setor": {
+          "id": this.setorConcursoProva.setor.id
+        },
+        "concurso": {
+          "id": this.setorConcursoProva.concurso.id
+        },
+        "etapaProva": {
+          "id": this.setorConcursoProva.etapaProva.id
+        },
+        "qtdCarteiraSala": this.setorConcursoProva.qtdCarteiraSala,
+        "qtdSalaProva": this.setorConcursoProva.qtdSalaProva,
+        "salaInicio": this.setorConcursoProva.salaInicio
+      }
   }
 
 }
