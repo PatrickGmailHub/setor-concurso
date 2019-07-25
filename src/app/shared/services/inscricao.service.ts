@@ -37,11 +37,8 @@ export class InscricaoService {
     return this.http.get<number[]>(`./../api/direct_request_v2/inscricao/setores_sem_inscritos`);
   }
 
-<<<<<<< HEAD
   getAllSetoresNaoDistribuidosPorLocal(idLocal: number): Observable<number[]> {
     return this.http.get<number[]>(`./../api/direct_request_v2/inscricao/setores_sem_inscritos_por_local_prova`, {params: this.params.set('idLocalDeProva', `${idLocal}`)});
   }
 
-=======
->>>>>>> 358d453f1e26945ad0fa8c4a66bd2d815a88f0b2
 }
