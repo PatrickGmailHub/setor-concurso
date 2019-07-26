@@ -68,11 +68,11 @@ export class DistribuicaoSalaProvaComponent implements OnInit {
     this.setor = new Setor();
 
     this.setorConcursoProva = new SetorConcursoProva();
-    
+
     this.buscarLocalidade;
 
     this.buscarSetor;
-    
+
   }
 
   // Traz todos os setores
@@ -81,7 +81,7 @@ export class DistribuicaoSalaProvaComponent implements OnInit {
     //   this.setores = [];
     //   this.setoresAux = [];
     //   this.setorConcursoProvas = [];
-  
+
     //   // this.setorConcursoProvaService.getAll().subscribe(setorConcursoProvas => {
     //   this.setorConcursoProvaService.getAll().toPromise()
     //   .then(setorConcursoProvas => {
@@ -109,22 +109,22 @@ export class DistribuicaoSalaProvaComponent implements OnInit {
     //       })
     //       console.log(this.setores)
     //     })
-        
+
     //     this.collectionSize = this.setores.length;
-  
+
     //     this.setoresPag;
-        
+
     //   });
-  
+
     //   return null;
-  
+
     // }
 
     get buscarSetor() {
       this.setores = [];
       this.setoresAux = [];
       this.setorConcursoProvas = [];
-  
+
       // this.setorConcursoProvaService.getAll().subscribe(setorConcursoProvas => {
       this.setorConcursoProvaService.getAll().toPromise()
       .then(setorConcursoProvas => {
@@ -143,33 +143,20 @@ export class DistribuicaoSalaProvaComponent implements OnInit {
               }
             });
           });
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 179d76b0dc0d6929049753a45f98c85fc416b03d
+
           this.collectionSize = this.setores.length;
 
           this.setoresPag;
         });
-        
+
         // this.collectionSize = this.setores.length;
-  
+
         // this.setoresPag;
-<<<<<<< HEAD
-=======
-=======
-        });
-        
-        this.collectionSize = this.setores.length;
-  
-        this.setoresPag;
->>>>>>> cca8773a1caa6df3f6878921900f81e8d03728ae
->>>>>>> 179d76b0dc0d6929049753a45f98c85fc416b03d
-        
+
       });
-  
+
       return null;
-    
+
     }
 
   // Traz setores por localidade.
@@ -201,7 +188,7 @@ export class DistribuicaoSalaProvaComponent implements OnInit {
 
           this.setoresPag;
         });
-      
+
       // this.collectionSize = this.setores.length;
 
       // this.setoresPag;
@@ -210,7 +197,7 @@ export class DistribuicaoSalaProvaComponent implements OnInit {
     } else {
       this.buscarSetor;
     }
-    
+
   }
 
   // selectSetorV1(valor) {
@@ -243,7 +230,7 @@ export class DistribuicaoSalaProvaComponent implements OnInit {
   //           index = 0;
   //         });
   //       });
-      
+
   //     this.collectionSize = this.setores.length;
 
   //     this.setoresPag;
@@ -252,8 +239,8 @@ export class DistribuicaoSalaProvaComponent implements OnInit {
   //   } else {
   //     this.buscarSetor;
   //   }
-    
-  // } 
+
+  // }
 
   get setoresPag() {
     return this.setores
@@ -264,7 +251,7 @@ export class DistribuicaoSalaProvaComponent implements OnInit {
     this.localDeProvaService.getAll().toPromise()
       .then(locaisDeProva => {
         this.locaisDeProva = locaisDeProva;
-        
+
         this.locaisDeProva.forEach(element => {
           delete element['version'];
           delete element['created_at'];
@@ -304,7 +291,7 @@ export class DistribuicaoSalaProvaComponent implements OnInit {
                   "id": this.inscritos[cont]['id_inscricao']
                 }
               }
-              
+
               this.distribuicaoSalaProvas.push(aux);
               cont++;
             }
